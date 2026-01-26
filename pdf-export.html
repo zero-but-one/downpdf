@@ -146,6 +146,7 @@
             <p>✨ 已根据您的设置生成高清网格</p>
             <p>📱 点击"下载PDF"直接保存到设备</p>
             <p>👀 点击"预览PDF"在新标签页查看</p>
+            <p id="configInfo" style="font-size: 12px; color: #9ca3af; margin-top: 10px;"></p>
         </div>
     </div>
     
@@ -170,8 +171,8 @@
         const A4_WIDTH = 2480;
         const A4_HEIGHT = 3508;
         
-        // 小程序预览基准宽度（屏幕宽度的85%，约320px）
-        const BASE_PREVIEW_WIDTH = 320;
+        // 小程序预览基准宽度（从 URL 参数获取，默认320px）
+        const BASE_PREVIEW_WIDTH = parseFloat(urlParams.get('basePreviewWidth')) || 320;
         
         // 计算缩放比例：导出尺寸 / 预览基准尺寸
         const SCALE_FACTOR = A4_WIDTH / BASE_PREVIEW_WIDTH;
@@ -606,12 +607,18 @@
             
             try {
                 const { jsPDF } = window.jspdf;
+                // A4纸张尺寸：210mm x 297mm，换算为点(pt)：595.28 x 841.89
                 const doc = new jsPDF('p', 'pt', 'a4');
                 
                 const canvas = document.getElementById('gridCanvas');
                 const imgData = canvas.toDataURL('image/png');
                 
-                doc.addImage(imgData, 'PNG', 0, 0, A4_WIDTH, A4_HEIGHT);
+                // jsPDF的A4尺寸（单位：pt）
+                const pdfWidth = 595.28;
+                const pdfHeight = 841.89;
+                
+                // 将高清图片填充整个A4页面
+                doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 
                 const filename = `网格纸_${config.type}_${Date.now()}.pdf`;
                 doc.save(filename);
@@ -638,7 +645,12 @@
                 const canvas = document.getElementById('gridCanvas');
                 const imgData = canvas.toDataURL('image/png');
                 
-                doc.addImage(imgData, 'PNG', 0, 0, A4_WIDTH, A4_HEIGHT);
+                // jsPDF的A4尺寸（单位：pt）
+                const pdfWidth = 595.28;
+                const pdfHeight = 841.89;
+                
+                // 将高清图片填充整个A4页面
+                doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 
                 const pdfBlob = doc.output('blob');
                 const pdfUrl = URL.createObjectURL(pdfBlob);
@@ -655,6 +667,10 @@
         // 页面加载时绘制网格
         window.onload = function() {
             drawGrid();
+            
+            // 显示配置信息用于调试
+            const configText = `类型:${config.type} | 间距:${config.spacing} | 线宽:${config.lineWidth} | 边距:${config.margin} | 基准宽:${BASE_PREVIEW_WIDTH.toFixed(1)}px | 缩放:${SCALE_FACTOR.toFixed(2)}x`;
+            document.getElementById('configInfo').textContent = configText;
         };
     </script>
 </body>
