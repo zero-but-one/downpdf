@@ -154,111 +154,47 @@
         // 从 URL获取配置参数
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Base64解码函数（与小程序端完全一致）
-        function base64Decode(str) {
+        // 解析颜色
+        const parseColor = (val, defaultVal) => {
+            if (!val) return defaultVal;
             try {
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-                
-                // Base64解码
-                let utf8 = '';
-                let i = 0;
-                while (i < str.length) {
-                    const n1 = chars.indexOf(str.charAt(i++));
-                    const n2 = i < str.length ? chars.indexOf(str.charAt(i++)) : 0;
-                    const n3 = i < str.length ? chars.indexOf(str.charAt(i++)) : -1;
-                    const n4 = i < str.length ? chars.indexOf(str.charAt(i++)) : -1;
-                    
-                    utf8 += String.fromCharCode((n1 << 2) | (n2 >> 4));
-                    if (n3 >= 0) utf8 += String.fromCharCode(((n2 & 15) << 4) | (n3 >> 2));
-                    if (n4 >= 0) utf8 += String.fromCharCode(((n3 & 3) << 6) | n4);
-                }
-                
-                // UTF-8解码
-                let result = '';
-                i = 0;
-                while (i < utf8.length) {
-                    const c = utf8.charCodeAt(i);
-                    if (c < 128) {
-                        result += String.fromCharCode(c);
-                        i++;
-                    } else if (c >= 192 && c < 224) {
-                        result += String.fromCharCode(((c & 31) << 6) | (utf8.charCodeAt(i + 1) & 63));
-                        i += 2;
-                    } else {
-                        result += String.fromCharCode(((c & 15) << 12) | ((utf8.charCodeAt(i + 1) & 63) << 6) | (utf8.charCodeAt(i + 2) & 63));
-                        i += 3;
-                    }
-                }
-                return result;
-            } catch (e) {
-                console.error('Base64 decode error:', e);
-                return null;
+                val = decodeURIComponent(val);
+            } catch(e) {}
+            return val.startsWith('#') ? val : '#' + val;
+        };
+        
+        // 解析文本
+        const parseText = (val) => {
+            if (!val) return '';
+            try {
+                return decodeURIComponent(val);
+            } catch(e) {
+                return val;
             }
-        }
+        };
         
         // 解析配置
-        let config;
-        const encodedData = urlParams.get('d');
-        
-        if (encodedData) {
-            // 新版本：Base64编码的JSON
-            try {
-                const jsonStr = base64Decode(encodedData);
-                const d = JSON.parse(jsonStr);
-                config = {
-                    type: d.t || 'lines',
-                    spacing: d.s || 18,
-                    lineWidth: d.lw || 0.5,
-                    lineColor: d.lc || '#000000',
-                    margin: d.m !== undefined ? d.m : 5,
-                    bgColor: d.bg || '#ffffff',
-                    enableTitle: d.et === 1,
-                    titleText: d.tt || '',
-                    titleSize: d.ts || 16,
-                    titleMarginTop: d.tmt !== undefined ? d.tmt : 10,
-                    titleMarginBottom: d.tmb !== undefined ? d.tmb : 1,
-                    tianzigeRowGap: d.trg !== undefined ? d.trg : 3,
-                    enableWatermark: d.ew === 1,
-                    watermarkText: d.wt || '',
-                    watermarkSize: d.ws || 12,
-                    watermarkColor: d.wc || '#999999',
-                    watermarkOpacity: d.wo !== undefined ? d.wo : 20,
-                    watermarkPosition: d.wp || 'tile',
-                    basePreviewWidth: d.bw || 320
-                };
-            } catch (e) {
-                console.error('Config parse error:', e);
-                config = { type: 'lines', spacing: 18, lineWidth: 0.5, lineColor: '#000000', margin: 5, bgColor: '#ffffff' };
-            }
-        } else {
-            // 兼容旧版本参数格式
-            const parseColor = (val, defaultVal) => {
-                if (!val) return defaultVal;
-                val = decodeURIComponent(val);
-                return val.startsWith('#') ? val : '#' + val;
-            };
-            config = {
-                type: urlParams.get('t') || urlParams.get('type') || 'lines',
-                spacing: parseFloat(urlParams.get('s') || urlParams.get('spacing')) || 18,
-                lineWidth: parseFloat(urlParams.get('lw') || urlParams.get('lineWidth')) || 0.5,
-                lineColor: parseColor(urlParams.get('lc') || urlParams.get('lineColor'), '#000000'),
-                margin: parseFloat(urlParams.get('m') || urlParams.get('margin')) || 5,
-                bgColor: parseColor(urlParams.get('bg') || urlParams.get('bgColor'), '#ffffff'),
-                enableTitle: urlParams.get('et') === '1' || urlParams.get('enableTitle') === 'true',
-                titleText: decodeURIComponent(urlParams.get('tt') || urlParams.get('titleText') || ''),
-                titleSize: parseFloat(urlParams.get('ts') || urlParams.get('titleSize')) || 16,
-                titleMarginTop: parseFloat(urlParams.get('tmt') || urlParams.get('titleMarginTop')) || 10,
-                titleMarginBottom: parseFloat(urlParams.get('tmb') || urlParams.get('titleMarginBottom')) || 1,
-                tianzigeRowGap: parseFloat(urlParams.get('trg') || urlParams.get('tianzigeRowGap')) || 3,
-                enableWatermark: urlParams.get('ew') === '1' || urlParams.get('enableWatermark') === 'true',
-                watermarkText: decodeURIComponent(urlParams.get('wt') || urlParams.get('watermarkText') || ''),
-                watermarkSize: parseFloat(urlParams.get('ws') || urlParams.get('watermarkSize')) || 12,
-                watermarkColor: parseColor(urlParams.get('wc') || urlParams.get('watermarkColor'), '#999999'),
-                watermarkOpacity: parseFloat(urlParams.get('wo') || urlParams.get('watermarkOpacity')) || 20,
-                watermarkPosition: urlParams.get('wp') || urlParams.get('watermarkPosition') || 'tile',
-                basePreviewWidth: parseFloat(urlParams.get('bw') || urlParams.get('basePreviewWidth')) || 320
-            };
-        }
+        const config = {
+            type: urlParams.get('t') || 'lines',
+            spacing: parseFloat(urlParams.get('s')) || 18,
+            lineWidth: parseFloat(urlParams.get('lw')) || 0.5,
+            lineColor: parseColor(urlParams.get('lc'), '#000000'),
+            margin: parseFloat(urlParams.get('m')) || 5,
+            bgColor: parseColor(urlParams.get('bg'), '#ffffff'),
+            enableTitle: urlParams.get('et') === '1',
+            titleText: parseText(urlParams.get('tt')),
+            titleSize: parseFloat(urlParams.get('ts')) || 16,
+            titleMarginTop: parseFloat(urlParams.get('tmt')) || 10,
+            titleMarginBottom: parseFloat(urlParams.get('tmb')) || 1,
+            tianzigeRowGap: parseFloat(urlParams.get('trg')) || 3,
+            enableWatermark: urlParams.get('ew') === '1',
+            watermarkText: parseText(urlParams.get('wt')),
+            watermarkSize: parseFloat(urlParams.get('ws')) || 12,
+            watermarkColor: parseColor(urlParams.get('wc'), '#999999'),
+            watermarkOpacity: parseFloat(urlParams.get('wo')) || 20,
+            watermarkPosition: urlParams.get('wp') || 'tile',
+            basePreviewWidth: parseFloat(urlParams.get('bw')) || 320
+        };
         
         // A4尺寸 (300dpi 高清)
         const A4_WIDTH = 2480;
