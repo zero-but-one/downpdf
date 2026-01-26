@@ -154,10 +154,9 @@
         // 从 URL获取配置参数
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Base64解码函数（与小程序端完全匹配，支持UTF-8中文）
+        // Base64解码函数（与小程序端完全一致）
         function base64Decode(str) {
             try {
-                // URL安全的Base64字符集
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
                 
                 // 解码为字节数组
@@ -165,32 +164,27 @@
                 for (let i = 0; i < str.length; i += 4) {
                     const a = chars.indexOf(str[i]);
                     const b = str[i + 1] ? chars.indexOf(str[i + 1]) : 0;
-                    const c = str[i + 2] ? chars.indexOf(str[i + 2]) : 0;
-                    const d = str[i + 3] ? chars.indexOf(str[i + 3]) : 0;
+                    const c = str[i + 2] ? chars.indexOf(str[i + 2]) : -1;
+                    const d = str[i + 3] ? chars.indexOf(str[i + 3]) : -1;
                     
-                    if (a >= 0 && b >= 0) bytes.push((a << 2) | (b >> 4));
-                    if (str[i + 2] && c >= 0) bytes.push(((b & 15) << 4) | (c >> 2));
-                    if (str[i + 3] && d >= 0) bytes.push(((c & 3) << 6) | d);
+                    bytes.push((a << 2) | (b >> 4));
+                    if (c !== -1) bytes.push(((b & 15) << 4) | (c >> 2));
+                    if (d !== -1) bytes.push(((c & 3) << 6) | d);
                 }
                 
-                // 使用TextDecoder解码UTF-8（现代浏览器都支持）
-                if (typeof TextDecoder !== 'undefined') {
-                    return new TextDecoder('utf-8').decode(new Uint8Array(bytes));
-                }
-                
-                // 回退方案：手动解码UTF-8
+                // UTF-8解码
                 let result = '';
                 for (let i = 0; i < bytes.length; i++) {
-                    const byte = bytes[i];
-                    if (byte < 128) {
-                        result += String.fromCharCode(byte);
-                    } else if (byte >= 192 && byte < 224) {
-                        result += String.fromCharCode(((byte & 31) << 6) | (bytes[++i] & 63));
-                    } else if (byte >= 224 && byte < 240) {
-                        result += String.fromCharCode(((byte & 15) << 12) | ((bytes[++i] & 63) << 6) | (bytes[++i] & 63));
-                    } else if (byte >= 240) {
-                        const codePoint = ((byte & 7) << 18) | ((bytes[++i] & 63) << 12) | ((bytes[++i] & 63) << 6) | (bytes[++i] & 63);
-                        result += String.fromCodePoint(codePoint);
+                    const b = bytes[i];
+                    if (b < 0x80) {
+                        result += String.fromCharCode(b);
+                    } else if (b >= 0xC0 && b < 0xE0) {
+                        result += String.fromCharCode(((b & 0x1F) << 6) | (bytes[++i] & 0x3F));
+                    } else if (b >= 0xE0 && b < 0xF0) {
+                        result += String.fromCharCode(((b & 0x0F) << 12) | ((bytes[++i] & 0x3F) << 6) | (bytes[++i] & 0x3F));
+                    } else if (b >= 0xF0) {
+                        const cp = ((b & 0x07) << 18) | ((bytes[++i] & 0x3F) << 12) | ((bytes[++i] & 0x3F) << 6) | (bytes[++i] & 0x3F);
+                        result += String.fromCodePoint(cp);
                     }
                 }
                 return result;
