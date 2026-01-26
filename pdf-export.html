@@ -153,34 +153,91 @@
     <script>
         // 从 URL获取配置参数
         const urlParams = new URLSearchParams(window.location.search);
-        const config = {
-            type: urlParams.get('type') || 'lines',
-            spacing: parseFloat(urlParams.get('spacing')) || 18,
-            lineWidth: parseFloat(urlParams.get('lineWidth')) || 0.5,
-            lineColor: urlParams.get('lineColor') || '#000000',
-            margin: parseFloat(urlParams.get('margin')) || 5,
-            bgColor: decodeURIComponent(urlParams.get('bgColor') || '#ffffff'),
-            enableTitle: urlParams.get('enableTitle') === 'true',
-            titleText: decodeURIComponent(urlParams.get('titleText') || ''),
-            titleSize: parseFloat(urlParams.get('titleSize')) || 16,
-            titleMarginTop: parseFloat(urlParams.get('titleMarginTop')) || 10,
-            titleMarginBottom: parseFloat(urlParams.get('titleMarginBottom')) || 1,
-            tianzigeRowGap: parseFloat(urlParams.get('tianzigeRowGap')) || 3,
-            // 水印配置
-            enableWatermark: urlParams.get('enableWatermark') === 'true',
-            watermarkText: decodeURIComponent(urlParams.get('watermarkText') || ''),
-            watermarkSize: parseFloat(urlParams.get('watermarkSize')) || 12,
-            watermarkColor: decodeURIComponent(urlParams.get('watermarkColor') || '#999999'),
-            watermarkOpacity: parseFloat(urlParams.get('watermarkOpacity')) || 20,
-            watermarkPosition: urlParams.get('watermarkPosition') || 'tile'
-        };
+        
+        // Base64解码函数
+        function base64Decode(str) {
+            try {
+                // URL安全的Base64转换回标准Base64
+                str = str.replace(/-/g, '+').replace(/_/g, '/');
+                // 添加填充
+                while (str.length % 4) str += '=';
+                return decodeURIComponent(escape(atob(str)));
+            } catch (e) {
+                console.error('Base64 decode error:', e);
+                return null;
+            }
+        }
+        
+        // 解析配置
+        let config;
+        const encodedData = urlParams.get('d');
+        
+        if (encodedData) {
+            // 新版本：Base64编码的JSON
+            try {
+                const jsonStr = base64Decode(encodedData);
+                const d = JSON.parse(jsonStr);
+                config = {
+                    type: d.t || 'lines',
+                    spacing: d.s || 18,
+                    lineWidth: d.lw || 0.5,
+                    lineColor: d.lc || '#000000',
+                    margin: d.m !== undefined ? d.m : 5,
+                    bgColor: d.bg || '#ffffff',
+                    enableTitle: d.et === 1,
+                    titleText: d.tt || '',
+                    titleSize: d.ts || 16,
+                    titleMarginTop: d.tmt !== undefined ? d.tmt : 10,
+                    titleMarginBottom: d.tmb !== undefined ? d.tmb : 1,
+                    tianzigeRowGap: d.trg !== undefined ? d.trg : 3,
+                    enableWatermark: d.ew === 1,
+                    watermarkText: d.wt || '',
+                    watermarkSize: d.ws || 12,
+                    watermarkColor: d.wc || '#999999',
+                    watermarkOpacity: d.wo !== undefined ? d.wo : 20,
+                    watermarkPosition: d.wp || 'tile',
+                    basePreviewWidth: d.bw || 320
+                };
+            } catch (e) {
+                console.error('Config parse error:', e);
+                config = { type: 'lines', spacing: 18, lineWidth: 0.5, lineColor: '#000000', margin: 5, bgColor: '#ffffff' };
+            }
+        } else {
+            // 兼容旧版本参数格式
+            const parseColor = (val, defaultVal) => {
+                if (!val) return defaultVal;
+                val = decodeURIComponent(val);
+                return val.startsWith('#') ? val : '#' + val;
+            };
+            config = {
+                type: urlParams.get('t') || urlParams.get('type') || 'lines',
+                spacing: parseFloat(urlParams.get('s') || urlParams.get('spacing')) || 18,
+                lineWidth: parseFloat(urlParams.get('lw') || urlParams.get('lineWidth')) || 0.5,
+                lineColor: parseColor(urlParams.get('lc') || urlParams.get('lineColor'), '#000000'),
+                margin: parseFloat(urlParams.get('m') || urlParams.get('margin')) || 5,
+                bgColor: parseColor(urlParams.get('bg') || urlParams.get('bgColor'), '#ffffff'),
+                enableTitle: urlParams.get('et') === '1' || urlParams.get('enableTitle') === 'true',
+                titleText: decodeURIComponent(urlParams.get('tt') || urlParams.get('titleText') || ''),
+                titleSize: parseFloat(urlParams.get('ts') || urlParams.get('titleSize')) || 16,
+                titleMarginTop: parseFloat(urlParams.get('tmt') || urlParams.get('titleMarginTop')) || 10,
+                titleMarginBottom: parseFloat(urlParams.get('tmb') || urlParams.get('titleMarginBottom')) || 1,
+                tianzigeRowGap: parseFloat(urlParams.get('trg') || urlParams.get('tianzigeRowGap')) || 3,
+                enableWatermark: urlParams.get('ew') === '1' || urlParams.get('enableWatermark') === 'true',
+                watermarkText: decodeURIComponent(urlParams.get('wt') || urlParams.get('watermarkText') || ''),
+                watermarkSize: parseFloat(urlParams.get('ws') || urlParams.get('watermarkSize')) || 12,
+                watermarkColor: parseColor(urlParams.get('wc') || urlParams.get('watermarkColor'), '#999999'),
+                watermarkOpacity: parseFloat(urlParams.get('wo') || urlParams.get('watermarkOpacity')) || 20,
+                watermarkPosition: urlParams.get('wp') || urlParams.get('watermarkPosition') || 'tile',
+                basePreviewWidth: parseFloat(urlParams.get('bw') || urlParams.get('basePreviewWidth')) || 320
+            };
+        }
         
         // A4尺寸 (300dpi 高清)
         const A4_WIDTH = 2480;
         const A4_HEIGHT = 3508;
         
-        // 小程序预览基准宽度（从 URL 参数获取，默认320px）
-        const BASE_PREVIEW_WIDTH = parseFloat(urlParams.get('basePreviewWidth')) || 320;
+        // 小程序预览基准宽度
+        const BASE_PREVIEW_WIDTH = config.basePreviewWidth || 320;
         
         // 计算缩放比例：导出尺寸 / 预览基准尺寸
         const SCALE_FACTOR = A4_WIDTH / BASE_PREVIEW_WIDTH;
@@ -618,7 +675,8 @@
                     // 右下角水印
                     ctx.textAlign = 'right';
                     ctx.textBaseline = 'bottom';
-                    const padding = watermarkSize * 2;
+                    // 使用页边距作为基准，确保水印在可见区域内
+                    const padding = this.margin || 40;
                     ctx.fillText(watermarkText, width - padding, height - padding);
                 }
                 
