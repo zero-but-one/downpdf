@@ -162,7 +162,8 @@
             titleText: decodeURIComponent(urlParams.get('titleText') || ''),
             titleSize: parseFloat(urlParams.get('titleSize')) || 16,
             titleMarginTop: parseFloat(urlParams.get('titleMarginTop')) || 10,
-            titleMarginBottom: parseFloat(urlParams.get('titleMarginBottom')) || 1
+            titleMarginBottom: parseFloat(urlParams.get('titleMarginBottom')) || 1,
+            tianzigeRowGap: parseFloat(urlParams.get('tianzigeRowGap')) || 3
         };
         
         // A4尺寸 (300dpi 高清)
@@ -175,66 +176,427 @@
         // 计算缩放比例：导出尺寸 / 预览基准尺寸
         const SCALE_FACTOR = A4_WIDTH / BASE_PREVIEW_WIDTH;
         
+        // GridPainter 类 - 与小程序完全一致的绘制逻辑
+        class GridPainter {
+            constructor(ctx, width, height, cfg) {
+                this.ctx = ctx;
+                this.width = width;
+                this.height = height;
+                this.config = cfg;
+                
+                this.spacing = cfg.spacing || 30;
+                this.lineWidth = cfg.lineWidth || 1;
+                this.lineColor = cfg.lineColor || '#dddddd';
+                this.margin = cfg.margin || 20;
+                
+                this.enableTitle = cfg.enableTitle || false;
+                this.titleText = cfg.titleText || '';
+                this.titleSize = cfg.titleSize || 24;
+                this.titleMarginTop = cfg.titleMarginTop || 20;
+                this.titleMarginBottom = cfg.titleMarginBottom || 15;
+                
+                this.titleAreaHeight = 0;
+                if (this.enableTitle && this.titleText) {
+                    this.titleAreaHeight = this.titleMarginTop + this.titleSize + this.titleMarginBottom;
+                }
+            }
+            
+            clear() {
+                this.ctx.fillStyle = '#ffffff';
+                this.ctx.fillRect(0, 0, this.width, this.height);
+            }
+            
+            drawTitle() {
+                if (!this.enableTitle || !this.titleText) return;
+                
+                const { ctx, width, titleText, titleSize, titleMarginTop, lineColor } = this;
+                
+                ctx.save();
+                ctx.fillStyle = lineColor;
+                ctx.font = `bold ${titleSize}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                
+                const titleY = titleMarginTop;
+                ctx.fillText(titleText, width / 2, titleY);
+                ctx.restore();
+            }
+            
+            getGridStartY() {
+                if (this.enableTitle && this.titleText) {
+                    return this.titleMarginTop + this.titleSize + this.titleMarginBottom;
+                }
+                return this.margin;
+            }
+            
+            setStyle() {
+                this.ctx.strokeStyle = this.lineColor;
+                this.ctx.fillStyle = this.lineColor;
+                this.ctx.lineWidth = this.lineWidth;
+                this.ctx.lineCap = 'round';
+                this.ctx.lineJoin = 'round';
+            }
+            
+            // 1. 横线
+            drawLines() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing } = this;
+                const startY = this.getGridStartY();
+                
+                const availableHeight = height - margin - startY;
+                const rows = Math.floor(availableHeight / spacing);
+                
+                const actualHeight = rows * spacing;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartY = startY + offsetY;
+                
+                ctx.beginPath();
+                for (let i = 0; i <= rows; i++) {
+                    const y = gridStartY + i * spacing;
+                    ctx.moveTo(margin, y);
+                    ctx.lineTo(width - margin, y);
+                }
+                ctx.stroke();
+            }
+            
+            // 2. 方格
+            drawGrid() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing } = this;
+                const startY = this.getGridStartY();
+                
+                const availableHeight = height - margin - startY;
+                const availableWidth = width - margin * 2;
+                const rows = Math.floor(availableHeight / spacing);
+                const cols = Math.floor(availableWidth / spacing);
+                
+                const actualWidth = cols * spacing;
+                const actualHeight = rows * spacing;
+                const offsetX = (availableWidth - actualWidth) / 2;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartX = margin + offsetX;
+                const gridStartY = startY + offsetY;
+                
+                ctx.beginPath();
+                for (let i = 0; i <= rows; i++) {
+                    const y = gridStartY + i * spacing;
+                    ctx.moveTo(gridStartX, y);
+                    ctx.lineTo(gridStartX + actualWidth, y);
+                }
+                for (let i = 0; i <= cols; i++) {
+                    const x = gridStartX + i * spacing;
+                    ctx.moveTo(x, gridStartY);
+                    ctx.lineTo(x, gridStartY + actualHeight);
+                }
+                ctx.stroke();
+            }
+            
+            // 3. 点阵
+            drawDots() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing, lineWidth } = this;
+                const startY = this.getGridStartY();
+                
+                const availableHeight = height - margin - startY;
+                const availableWidth = width - margin * 2;
+                const rows = Math.floor(availableHeight / spacing);
+                const cols = Math.floor(availableWidth / spacing);
+                
+                const actualWidth = cols * spacing;
+                const actualHeight = rows * spacing;
+                const offsetX = (availableWidth - actualWidth) / 2;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartX = margin + offsetX;
+                const gridStartY = startY + offsetY;
+                
+                const radius = lineWidth;
+                
+                for (let row = 0; row <= rows; row++) {
+                    for (let col = 0; col <= cols; col++) {
+                        const x = gridStartX + col * spacing;
+                        const y = gridStartY + row * spacing;
+                        ctx.beginPath();
+                        ctx.arc(x, y, radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+            
+            // 4. 五线谱
+            drawMusic() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing } = this;
+                const startY = this.getGridStartY();
+                
+                const lineGap = spacing / 2;
+                const groupGap = lineGap * 2;
+                const singleGroupHeight = 4 * lineGap;
+                const groupHeight = singleGroupHeight + groupGap;
+                
+                const availableHeight = height - margin - startY;
+                const groups = Math.floor((availableHeight + groupGap) / groupHeight);
+                
+                const actualHeight = groups * singleGroupHeight + (groups - 1) * groupGap;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartY = startY + offsetY;
+                
+                ctx.beginPath();
+                for (let g = 0; g < groups; g++) {
+                    const groupStartY = gridStartY + g * groupHeight;
+                    for (let i = 0; i < 5; i++) {
+                        const y = groupStartY + i * lineGap;
+                        ctx.moveTo(margin, y);
+                        ctx.lineTo(width - margin, y);
+                    }
+                }
+                ctx.stroke();
+            }
+            
+            // 5. 六边形蜂巢
+            drawHexagon() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing } = this;
+                const startY = this.getGridStartY();
+                
+                const r = spacing;
+                const h = Math.sqrt(3) * r;
+                
+                const availableHeight = height - margin - startY;
+                const availableWidth = width - margin * 2;
+                const rows = Math.floor((availableHeight - r) / (h / 2));
+                const cols = Math.floor((availableWidth - r) / (r * 3));
+                
+                const actualHeight = r + rows * (h / 2);
+                const actualWidth = r * 2 + cols * r * 3;
+                const offsetX = (availableWidth - actualWidth) / 2;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartX = margin + offsetX;
+                const gridStartY = startY + offsetY;
+                
+                const drawHex = (x, y) => {
+                    ctx.moveTo(x + r, y);
+                    ctx.lineTo(x + r/2, y + h/2);
+                    ctx.lineTo(x - r/2, y + h/2);
+                    ctx.lineTo(x - r, y);
+                    ctx.lineTo(x - r/2, y - h/2);
+                    ctx.lineTo(x + r/2, y - h/2);
+                    ctx.closePath();
+                };
+                
+                ctx.beginPath();
+                for (let row = 0; row <= rows; row++) {
+                    const y = gridStartY + r + row * (h / 2);
+                    const rowStartX = (row % 2 === 0) ? gridStartX + r : gridStartX + r * 2.5;
+                    for (let col = 0; col <= cols; col++) {
+                        const x = rowStartX + col * r * 3;
+                        if (x + r <= gridStartX + actualWidth + margin) {
+                            drawHex(x, y);
+                        }
+                    }
+                }
+                ctx.stroke();
+            }
+            
+            // 6. 三角形网格
+            drawTriangle() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing } = this;
+                const startY = this.getGridStartY();
+                
+                const side = spacing;
+                const isoHeight = side * Math.sin(Math.PI / 3);
+                const patternWidth = side;
+                const patternHeight = isoHeight * 2;
+                
+                const availableHeight = height - margin - startY;
+                const availableWidth = width - margin * 2;
+                const cols = Math.floor(availableWidth / patternWidth);
+                const rows = Math.floor(availableHeight / patternHeight);
+                
+                const actualWidth = cols * patternWidth;
+                const actualHeight = rows * patternHeight;
+                const offsetX = (availableWidth - actualWidth) / 2;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartX = margin + offsetX;
+                const gridStartY = startY + offsetY;
+                
+                const drawPatternUnit = (x, y) => {
+                    ctx.beginPath();
+                    ctx.moveTo(x, y + isoHeight * 2);
+                    ctx.lineTo(x + side / 2, y + isoHeight);
+                    ctx.lineTo(x + side, y + isoHeight * 2);
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + side / 2, y + isoHeight);
+                    ctx.lineTo(x + side, y);
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + side, y);
+                    ctx.moveTo(x, y + isoHeight * 2);
+                    ctx.lineTo(x + side, y + isoHeight * 2);
+                    ctx.moveTo(x, y + isoHeight);
+                    ctx.lineTo(x + side, y + isoHeight);
+                    ctx.stroke();
+                };
+                
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const x = gridStartX + col * patternWidth;
+                        const y = gridStartY + row * patternHeight;
+                        drawPatternUnit(x, y);
+                    }
+                }
+            }
+            
+            // 7. 三角点阵
+            drawTriangleDots() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing, lineWidth } = this;
+                const startY = this.getGridStartY();
+                
+                const side = spacing;
+                const isoHeight = side * Math.sin(Math.PI / 3);
+                const dotRadius = lineWidth;
+                
+                const availableHeight = height - margin - startY;
+                const availableWidth = width - margin * 2;
+                const cols = Math.floor(availableWidth / side);
+                const rows = Math.floor(availableHeight / isoHeight);
+                
+                const actualWidth = cols * side;
+                const actualHeight = rows * isoHeight;
+                const offsetX = (availableWidth - actualWidth) / 2;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartX = margin + offsetX;
+                const gridStartY = startY + offsetY;
+                
+                const drawDot = (x, y) => {
+                    ctx.beginPath();
+                    ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                };
+                
+                for (let row = 0; row <= rows; row++) {
+                    for (let col = 0; col <= cols; col++) {
+                        let x = gridStartX + col * side;
+                        let y = gridStartY + row * isoHeight;
+                        
+                        if (row % 2 === 1) {
+                            x += side / 2;
+                        }
+                        
+                        if (x <= gridStartX + actualWidth) {
+                            drawDot(x, y);
+                        }
+                    }
+                }
+            }
+            
+            // 8. 田字格
+            drawTianZiGe() {
+                this.clear();
+                this.drawTitle();
+                this.setStyle();
+                const { ctx, width, height, margin, spacing, config } = this;
+                const startY = this.getGridStartY();
+                
+                const gap = config.tianzigeRowGap !== undefined ? config.tianzigeRowGap : spacing / 9;
+                const unitHeight = spacing + gap;
+                
+                const availableHeight = height - margin - startY;
+                const availableWidth = width - margin * 2;
+                const rowCount = Math.floor((availableHeight + gap) / unitHeight);
+                const colCount = Math.floor(availableWidth / spacing);
+                
+                const actualWidth = colCount * spacing;
+                const actualHeight = rowCount * spacing + (rowCount - 1) * gap;
+                const offsetX = (availableWidth - actualWidth) / 2;
+                const offsetY = (availableHeight - actualHeight) / 2;
+                const gridStartX = margin + offsetX;
+                const gridStartY = startY + offsetY;
+                
+                const originalColor = ctx.strokeStyle;
+                
+                for (let unitIndex = 0; unitIndex < rowCount; unitIndex++) {
+                    const unitYStart = gridStartY + unitIndex * unitHeight;
+                    
+                    ctx.beginPath();
+                    ctx.strokeStyle = originalColor;
+                    
+                    for (let col = 0; col < colCount; col++) {
+                        const x = gridStartX + col * spacing;
+                        ctx.rect(x, unitYStart, spacing, spacing);
+                    }
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#eeeeee';
+                    ctx.setLineDash([1, 3]);
+                    
+                    const crossY = unitYStart + spacing / 2;
+                    ctx.moveTo(gridStartX, crossY);
+                    ctx.lineTo(gridStartX + actualWidth, crossY);
+                    
+                    for (let col = 0; col < colCount; col++) {
+                        const x = gridStartX + col * spacing + spacing / 2;
+                        ctx.moveTo(x, unitYStart);
+                        ctx.lineTo(x, unitYStart + spacing);
+                    }
+                    
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    ctx.strokeStyle = originalColor;
+                }
+            }
+            
+            paint(type) {
+                switch (type) {
+                    case 'lines': this.drawLines(); break;
+                    case 'grid': this.drawGrid(); break;
+                    case 'dots': this.drawDots(); break;
+                    case 'music': this.drawMusic(); break;
+                    case 'hexagon': this.drawHexagon(); break;
+                    case 'triangle': this.drawTriangle(); break;
+                    case 'triangleDots': this.drawTriangleDots(); break;
+                    case 'tianzige': this.drawTianZiGe(); break;
+                    default: this.drawLines();
+                }
+            }
+        }
+        
         // 绘制网格到canvas
         function drawGrid() {
             const canvas = document.getElementById('gridCanvas');
             const ctx = canvas.getContext('2d');
             
-            // 清空画布
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, A4_WIDTH, A4_HEIGHT);
-            
             // 根据缩放比例调整配置参数
-            const scaledSpacing = config.spacing * SCALE_FACTOR;
-            const scaledLineWidth = config.lineWidth * SCALE_FACTOR;
-            const scaledMargin = config.margin * SCALE_FACTOR;
-            const scaledTitleSize = config.titleSize * SCALE_FACTOR;
-            const scaledTitleMarginTop = config.titleMarginTop * SCALE_FACTOR;
-            const scaledTitleMarginBottom = config.titleMarginBottom * SCALE_FACTOR;
+            const scaledConfig = {
+                spacing: config.spacing * SCALE_FACTOR,
+                lineWidth: config.lineWidth * SCALE_FACTOR,
+                margin: config.margin * SCALE_FACTOR,
+                lineColor: config.lineColor,
+                enableTitle: config.enableTitle,
+                titleText: config.titleText,
+                titleSize: config.titleSize * SCALE_FACTOR,
+                titleMarginTop: config.titleMarginTop * SCALE_FACTOR,
+                titleMarginBottom: config.titleMarginBottom * SCALE_FACTOR,
+                tianzigeRowGap: config.tianzigeRowGap * SCALE_FACTOR
+            };
             
-            // 设置样式
-            ctx.strokeStyle = config.lineColor;
-            ctx.lineWidth = scaledLineWidth;
-            
-            const startY = scaledMargin;
-            const endY = A4_HEIGHT - scaledMargin;
-            const startX = scaledMargin;
-            const endX = A4_WIDTH - scaledMargin;
-            
-            // 绘制横线
-            if (config.type === 'lines') {
-                ctx.beginPath();
-                for (let y = startY; y <= endY; y += scaledSpacing) {
-                    ctx.moveTo(startX, y);
-                    ctx.lineTo(endX, y);
-                }
-                ctx.stroke();
-            }
-            
-            // 绘制网格
-            if (config.type === 'grid') {
-                ctx.beginPath();
-                // 横线
-                for (let y = startY; y <= endY; y += scaledSpacing) {
-                    ctx.moveTo(startX, y);
-                    ctx.lineTo(endX, y);
-                }
-                // 竖线
-                for (let x = startX; x <= endX; x += scaledSpacing) {
-                    ctx.moveTo(x, startY);
-                    ctx.lineTo(x, endY);
-                }
-                ctx.stroke();
-            }
-            
-            // 绘制标题
-            if (config.enableTitle && config.titleText) {
-                ctx.fillStyle = config.lineColor;
-                ctx.font = `bold ${scaledTitleSize}px sans-serif`;
-                ctx.textAlign = 'center';
-                const titleY = scaledTitleMarginTop + scaledTitleSize;
-                ctx.fillText(config.titleText, A4_WIDTH / 2, titleY);
-            }
+            const painter = new GridPainter(ctx, A4_WIDTH, A4_HEIGHT, scaledConfig);
+            painter.paint(config.type);
         }
         
         // 生成PDF
