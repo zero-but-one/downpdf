@@ -151,7 +151,7 @@
     </div>
     
     <script>
-        // 从URL获取配置参数
+        // 从 URL获取配置参数
         const urlParams = new URLSearchParams(window.location.search);
         const config = {
             type: urlParams.get('type') || 'lines',
@@ -159,12 +159,20 @@
             lineWidth: parseFloat(urlParams.get('lineWidth')) || 0.5,
             lineColor: urlParams.get('lineColor') || '#000000',
             margin: parseFloat(urlParams.get('margin')) || 5,
+            bgColor: decodeURIComponent(urlParams.get('bgColor') || '#ffffff'),
             enableTitle: urlParams.get('enableTitle') === 'true',
             titleText: decodeURIComponent(urlParams.get('titleText') || ''),
             titleSize: parseFloat(urlParams.get('titleSize')) || 16,
             titleMarginTop: parseFloat(urlParams.get('titleMarginTop')) || 10,
             titleMarginBottom: parseFloat(urlParams.get('titleMarginBottom')) || 1,
-            tianzigeRowGap: parseFloat(urlParams.get('tianzigeRowGap')) || 3
+            tianzigeRowGap: parseFloat(urlParams.get('tianzigeRowGap')) || 3,
+            // 水印配置
+            enableWatermark: urlParams.get('enableWatermark') === 'true',
+            watermarkText: decodeURIComponent(urlParams.get('watermarkText') || ''),
+            watermarkSize: parseFloat(urlParams.get('watermarkSize')) || 12,
+            watermarkColor: decodeURIComponent(urlParams.get('watermarkColor') || '#999999'),
+            watermarkOpacity: parseFloat(urlParams.get('watermarkOpacity')) || 20,
+            watermarkPosition: urlParams.get('watermarkPosition') || 'tile'
         };
         
         // A4尺寸 (300dpi 高清)
@@ -189,12 +197,21 @@
                 this.lineWidth = cfg.lineWidth || 1;
                 this.lineColor = cfg.lineColor || '#dddddd';
                 this.margin = cfg.margin || 20;
+                this.bgColor = cfg.bgColor || '#ffffff';
                 
                 this.enableTitle = cfg.enableTitle || false;
                 this.titleText = cfg.titleText || '';
                 this.titleSize = cfg.titleSize || 24;
                 this.titleMarginTop = cfg.titleMarginTop || 20;
                 this.titleMarginBottom = cfg.titleMarginBottom || 15;
+                
+                // 水印配置
+                this.enableWatermark = cfg.enableWatermark || false;
+                this.watermarkText = cfg.watermarkText || '';
+                this.watermarkSize = cfg.watermarkSize || 12;
+                this.watermarkColor = cfg.watermarkColor || '#999999';
+                this.watermarkOpacity = cfg.watermarkOpacity || 20;
+                this.watermarkPosition = cfg.watermarkPosition || 'tile';
                 
                 this.titleAreaHeight = 0;
                 if (this.enableTitle && this.titleText) {
@@ -203,7 +220,7 @@
             }
             
             clear() {
-                this.ctx.fillStyle = '#ffffff';
+                this.ctx.fillStyle = this.bgColor;
                 this.ctx.fillRect(0, 0, this.width, this.height);
             }
             
@@ -562,6 +579,52 @@
                 }
             }
             
+            // 绘制水印
+            drawWatermark() {
+                if (!this.enableWatermark || !this.watermarkText) return;
+                
+                const { ctx, width, height, watermarkText, watermarkSize, watermarkColor, watermarkOpacity, watermarkPosition } = this;
+                
+                ctx.save();
+                ctx.globalAlpha = watermarkOpacity / 100;
+                ctx.fillStyle = watermarkColor;
+                ctx.font = `${watermarkSize}px sans-serif`;
+                
+                if (watermarkPosition === 'tile') {
+                    // 平铺水印
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    
+                    const angle = -25 * Math.PI / 180;
+                    const stepX = watermarkSize * watermarkText.length * 2;
+                    const stepY = watermarkSize * 4;
+                    
+                    for (let y = -height; y < height * 2; y += stepY) {
+                        for (let x = -width; x < width * 2; x += stepX) {
+                            ctx.save();
+                            ctx.translate(x, y);
+                            ctx.rotate(angle);
+                            ctx.fillText(watermarkText, 0, 0);
+                            ctx.restore();
+                        }
+                    }
+                } else if (watermarkPosition === 'center') {
+                    // 居中单个水印
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = `${watermarkSize * 3}px sans-serif`;
+                    ctx.fillText(watermarkText, width / 2, height / 2);
+                } else if (watermarkPosition === 'corner') {
+                    // 右下角水印
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'bottom';
+                    const padding = watermarkSize * 2;
+                    ctx.fillText(watermarkText, width - padding, height - padding);
+                }
+                
+                ctx.restore();
+            }
+            
             paint(type) {
                 switch (type) {
                     case 'lines': this.drawLines(); break;
@@ -574,6 +637,8 @@
                     case 'tianzige': this.drawTianZiGe(); break;
                     default: this.drawLines();
                 }
+                // 绘制水印
+                this.drawWatermark();
             }
         }
         
@@ -588,12 +653,20 @@
                 lineWidth: config.lineWidth * SCALE_FACTOR,
                 margin: config.margin * SCALE_FACTOR,
                 lineColor: config.lineColor,
+                bgColor: config.bgColor,
                 enableTitle: config.enableTitle,
                 titleText: config.titleText,
                 titleSize: config.titleSize * SCALE_FACTOR,
                 titleMarginTop: config.titleMarginTop * SCALE_FACTOR,
                 titleMarginBottom: config.titleMarginBottom * SCALE_FACTOR,
-                tianzigeRowGap: config.tianzigeRowGap * SCALE_FACTOR
+                tianzigeRowGap: config.tianzigeRowGap * SCALE_FACTOR,
+                // 水印配置
+                enableWatermark: config.enableWatermark,
+                watermarkText: config.watermarkText,
+                watermarkSize: config.watermarkSize * SCALE_FACTOR,
+                watermarkColor: config.watermarkColor,
+                watermarkOpacity: config.watermarkOpacity,
+                watermarkPosition: config.watermarkPosition
             };
             
             const painter = new GridPainter(ctx, A4_WIDTH, A4_HEIGHT, scaledConfig);
