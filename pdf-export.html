@@ -604,29 +604,27 @@
             drawWatermark() {
                 if (!this.enableWatermark || !this.watermarkText) return;
                 
-                const { ctx, width, height, watermarkText, watermarkSize, watermarkColor, watermarkOpacity, watermarkPosition } = this;
+                const { ctx, width, height, watermarkText, watermarkSize, watermarkColor, watermarkOpacity, watermarkPosition, margin } = this;
                 
                 ctx.save();
                 ctx.globalAlpha = watermarkOpacity / 100;
                 ctx.fillStyle = watermarkColor;
                 ctx.font = `${watermarkSize}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
                 
                 if (watermarkPosition === 'tile') {
-                    // 平铺水印
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    
+                    // 平铺水印 - 与小程序版本保持一致
                     const angle = -25 * Math.PI / 180;
-                    const stepX = watermarkSize * watermarkText.length * 2;
-                    const stepY = watermarkSize * 4;
+                    ctx.rotate(angle);
                     
-                    for (let y = -height; y < height * 2; y += stepY) {
-                        for (let x = -width; x < width * 2; x += stepX) {
-                            ctx.save();
-                            ctx.translate(x, y);
-                            ctx.rotate(angle);
-                            ctx.fillText(watermarkText, 0, 0);
-                            ctx.restore();
+                    const stepX = watermarkSize * 10;
+                    const stepY = watermarkSize * 5;
+                    const diagonal = Math.sqrt(width * width + height * height);
+                    
+                    for (let y = -diagonal; y < diagonal * 2; y += stepY) {
+                        for (let x = -diagonal; x < diagonal * 2; x += stepX) {
+                            ctx.fillText(watermarkText, x, y);
                         }
                     }
                 } else if (watermarkPosition === 'center') {
