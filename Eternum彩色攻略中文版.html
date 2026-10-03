@@ -1,0 +1,3330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternum 彩色攻略 中文版 0.9.5</title>
+<style>
+:root{
+  --annie:#9b59b6; --nancy:#e74c3c; --penny:#f1c40f; --dalia:#c49a6c;
+  --luna:#2d2d2d; --alex:#3b5bdb; --nova:#e87c2a; --sytel:#7dd3e0;
+  --eternal:#5fb3a8; --cm:#e88aa8; --harem:#4ade80;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;background:#e8e8e8;color:#222;line-height:1.6;padding:0 0 60px;}
+.container{max-width:820px;margin:0 auto;padding:20px 16px;}
+h1{font-size:2.2em;margin:20px 0 8px;}
+h2.chapter{background:#1a1a1a;color:#fff;font-size:1.6em;padding:12px 20px;border-radius:6px;margin:36px 0 16px;}
+h3.section{background:#3a3a3a;color:#fff;font-size:1.15em;padding:8px 16px;border-radius:5px;margin:24px 0 12px;}
+h4.subsection{background:#4a4a4a;color:#fff;font-size:1em;padding:6px 14px;border-radius:4px;margin:18px 0 10px;}
+p{margin:8px 0;}
+.lead{font-size:1.05em;margin:12px 0;}
+/* LI color legend */
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.9em;}
+.legend-swatch{width:28px;height:28px;border-radius:4px;}
+/* decision box */
+.box{background:#f5f5f5;border:1px solid #ccc;border-radius:6px;margin:10px 0;overflow:hidden;}
+.box-head{background:#3a3a3a;color:#fff;padding:6px 14px;font-size:.92em;}
+.box-body{padding:12px 14px;}
+.opt{display:block;padding:10px 14px;margin:6px 0;border-radius:6px;font-size:.95em;}
+.opt.gray{background:#8a8a8a;color:#fff;}
+.opt.blue{background:#7a9bb8;border:2px solid #5a7da0;color:#fff;}
+.opt.red{background:#c0392b;color:#fff;}
+.opt.redborder{background:#fadbd8;border:2px solid #c0392b;}
+.opt .sub{display:block;font-size:.85em;opacity:.9;margin-top:4px;}
+/* badges */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:12px;color:#fff;font-size:.82em;font-weight:bold;vertical-align:middle;}
+.b-annie{background:var(--annie);}
+.b-nancy{background:var(--nancy);}
+.b-penny{background:var(--penny);color:#333;}
+.b-dalia{background:var(--dalia);}
+.b-luna{background:var(--luna);}
+.b-alex{background:var(--alex);}
+.b-nova{background:var(--nova);}
+.b-sytel{background:var(--sytel);color:#333;}
+.b-eternal{background:var(--eternal);}
+.b-cm{background:var(--cm);}
+.b-harem{background:var(--harem);color:#333;}
+.b-cross{position:relative;}
+.b-cross::after{content:"";position:absolute;left:0;top:50%;width:100%;height:2px;background:#c0392b;transform:rotate(-12deg);}
+.b-outfit{background:#555;color:#fff;}
+.req{background:#ccc;padding:4px 14px;font-size:.88em;}
+.note{font-size:.88em;color:#555;}
+.colortext{font-weight:bold;}
+.lewd-head{background:#8b1a1a!important;}
+.lewd-body{background:#fadbd8;}
+.flow{background:#f0f0f0;border:1px dashed #aaa;border-radius:6px;padding:16px;margin:10px 0;text-align:center;}
+.flow-node{display:inline-block;background:#ddd;border-radius:8px;padding:8px 14px;margin:4px;font-size:.88em;max-width:220px;text-align:center;vertical-align:middle;}
+.flow-blue{background:#4a90d9;color:#fff;}
+.flow-start{background:#e0e0e0;border-radius:50%;padding:12px 18px;}
+.flow-end{display:inline-block;width:14px;height:14px;border-radius:50%;background:#333;margin:6px;vertical-align:middle;}
+.flow-row{margin:8px 0;}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.9em;}
+th,td{border:1px solid #999;padding:6px 10px;text-align:left;}
+th{background:#ddd;}
+.toc{background:#f5f5f5;border:1px solid #ccc;border-radius:6px;padding:16px 24px;margin:16px 0;}
+.toc a{text-decoration:none;color:#333;}
+.toc a:hover{color:#3b5bdb;}
+.toc td{border:none;border-bottom:1px dotted #aaa;}
+.toc td:last-child{text-align:right;white-space:nowrap;}
+.tag-line{display:flex;gap:8px;align-items:center;margin:4px 0;flex-wrap:wrap;}
+.map-box{background:#f9f9f9;border:1px solid #ddd;border-radius:8px;padding:16px;text-align:center;margin:10px 0;}
+.map-node{display:inline-block;background:#ddd;border-radius:20px;padding:6px 18px;margin:4px;font-size:.9em;}
+ul.simple{margin:8px 0 8px 24px;}
+ul.simple li{margin:4px 0;}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Eternum：彩色攻略</h1>
+<p class="note">版本 0.9.5（rev 1）｜ 中文版翻译</p>
+
+<p class="lead">本攻略专注于排查你的游玩流程，适用于：你可能错过了某条角色路线，或想看某个色情场景/服装。每位恋爱对象都有专属颜色标签——翻阅本文档时，根据颜色标签快速找到与该角色相关的所有重要互动。你也可以点击彩色标签跳转到下一个同色标签。</p>
+
+<p>如果你想边玩边看攻略，我推荐使用作者制作的<a href="#">被动攻略模组</a>（Passive Walkthrough），它更方便且能保持游戏沉浸感。</p>
+
+<h3 class="section">颜色标签说明（LI colors）</h3>
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--annie)"></div>Annie 安妮</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--nancy)"></div>Nancy 南希</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--penny)"></div>Penny 佩内洛普</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--dalia)"></div>Dalia 达莉娅</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--luna)"></div>Luna 卢娜</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--alex)"></div>Alex 亚历克斯</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--nova)"></div>Nova 诺娃</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--sytel)"></div>Sy-tel 希特尔</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--eternal)"></div>Eternals 永恒币</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--cm)"></div>C+M 张&米凯拉</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--harem)"></div>Harem 后宫</div>
+</div>
+
+<h3 class="section">版本/章节目录</h3>
+<table class="toc">
+<tr><td><a href="#ch01">0.1 - 信念一跃</a></td><td>第5页</td></tr>
+<tr><td><a href="#ch02">0.2 - 潘多拉魔盒</a></td><td>第15页</td></tr>
+<tr><td><a href="#ch03">0.3 - 强者生存</a></td><td>第24页</td></tr>
+<tr><td><a href="#ch04">0.4 - 上流社会</a></td><td>第32页</td></tr>
+<tr><td><a href="#ch05">0.5 - 亡者归来</a></td><td>第49页</td></tr>
+<tr><td><a href="#ch06">0.6 - 战争与西部人</a></td><td>第64页</td></tr>
+<tr><td><a href="#ch07">0.7 - 虚荣</a></td><td>第80页</td></tr>
+<tr><td><a href="#ch08">0.8 - 最重要的事</a></td><td>第93页</td></tr>
+<tr><td><a href="#ch09">0.9 - 桌上一席</a></td><td>第108页</td></tr>
+</table>
+
+<h2 class="chapter">游戏核心概念</h2>
+
+<h3 class="section">后宫（Harem）</h3>
+<p>本作设计为可同时攻略多位恋爱对象（LI）。你也可以只攻略其中一人。不过这样会大幅减少主线内容，以及与多位女孩相处的片段。如果你是第一次玩后宫向游戏，不必太在意"忠诚"——你需要努力争取，才能让每位女孩都愿意与其他女孩分享你。</p>
+
+<h3 class="section">角色路线（LI paths）</h3>
+<p>路线是游戏的核心。女孩的路线就是她与你的恋爱支线。游戏开始时你追随所有人的路线。一旦失去某人的路线，就永远无法挽回，该女孩的头像会变灰。没有模组的话，你不会立即收到反馈——失去路线和导致失去路线的事件之间可能间隔数小时游戏时间。要达成后宫结局，你需要在整个游戏过程中保持所有人的路线。</p>
+
+<h3 class="section">后宫路线（Harem path）</h3>
+<p>后宫路线是一条特殊路线，不围绕某个特定角色，而是围绕多角恋概念。在后宫路线中，你仍在攻略的所有LI会逐渐接受你作为她们的共享伴侣。与LI路线不同，后宫路线<strong>不是从一开始就激活的</strong>，你只有一次机会在0.8章获得它（见8.4.5）。后宫路线的最低前提是：你必须仍在南希和诺娃的路线上。此后仍可能再次失去后宫路线，一旦失去就永远无法挽回。</p>
+
+<h3 class="section">好感点数（Affection points）</h3>
+<p>大多数LI都有好感点数。当你做出女孩喜欢的选择时，通常会获得好感点，左上角心跳图标会跳动。部分好感提升是不可见的（尤其短信时）。游戏在特定节点会检查你是否有足够好感来推进——好感不足可能导致失去路线！也存在无论好感多高都会让你失去女孩路线的坏选择。</p>
+
+<h2 class="chapter">关于本攻略</h2>
+
+<h3 class="section">理想路线</h3>
+<p>在官方攻略中，开发者描述了一条理想路线：获得最多好感、保持所有人路线、看到几乎所有内容。在本攻略中，属于理想路线的选项都用<strong>蓝灰色边框</strong>标出。不过游戏给了你容错空间，即使不完全照搬理想路线也能玩得很好！</p>
+
+<h3 class="section">范围说明</h3>
+<p>为了控制篇幅，本文不会提及每一句对话变化，主要聚焦于与好感点数、路线、服装、色情场景和结局相关的内容。当你获得好感点、解锁新服装或失去路线时，通常会伴随对话变化或专属场景。</p>
+
+<h3 class="section">未知内容</h3>
+<p>游戏仍在活跃开发中，部分选择目前还没有后果，可能在未来版本中追加。本攻略会随新版本持续更新。目前理想路线可能预示了未来内容，因为它由开发者本人提供。</p>
+
+<h2 class="chapter">图标参考</h2>
+<p>以下以达莉娅为例说明图标含义，其他角色同理。</p>
+
+<h3 class="section">奖励（Rewards）</h3>
+<div class="box"><div class="box-body">
+  <span class="badge b-dalia">+2</span> 你与达莉娅的好感度+2
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-outfit">服装3</span> 解锁达莉娅收藏中的第三套服装。这可能在主线剧情中自然解锁。
+</div></div>
+
+<h3 class="section">中性（Neutral）</h3>
+<div class="box"><div class="box-body">
+  <span class="badge b-dalia">≥4</span> 作为条件：如果你与达莉娅好感至少为4，则此陈述成立。
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-dalia">路线</span> 作为条件：如果你尚未失去达莉娅的路线，则此陈述成立。
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-dalia">达莉娅</span> 表示达莉娅参与此色情场景。
+</div></div>
+
+<h3 class="section">惩罚（Penalties）</h3>
+<div class="box"><div class="box-body">
+  <span class="badge b-dalia">-1</span> 你与达莉娅的好感度-1
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-dalia b-cross">路线</span> 你失去达莉娅的路线。一旦失去路线就无法挽回。请注意！
+</div></div>
+
+<h3 class="section">非LI图标</h3>
+<div class="box"><div class="box-body">
+  <span class="badge b-sytel">路线</span> 虽然她严格来说是支线女孩，但她也有好感点数和可失去的路线。
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-eternal">-200</span> 追踪你获得和花费的永恒币。永恒币是一种资源，用于交换其他利益。
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-cm">+1</span> 严格来说也是好感点，但不是你和某个女孩之间的，而是你和张/米凯拉之间的。
+</div></div>
+<div class="box"><div class="box-body">
+  <span class="badge b-harem">路线</span> 特殊后宫路线，见上方说明。
+</div></div>
+
+<p class="note">当你看到<span class="colortext">彩色文字</span>时，表示该奖励/惩罚在后续某个时间点才生效。</p>
+
+<!-- ========== CHAPTER 0.1 ========== -->
+<h2 class="chapter" id="ch01">0.1 - 信念一跃</h2>
+<p class="note">（章节名非官方，基于社区建议与投票）</p>
+
+<h3 class="section">1.1 - 序章</h3>
+<div class="box"><div class="box-head">1.1.1 决定：是否开启怀孕内容？</div><div class="box-body">
+  <div class="opt blue">是<div class="sub">目前仅解锁女孩月经推迟的对话（9.12.2）。参考开发者前作，这不会解锁额外色情场景，只会改变对话和围绕早孕及未来家庭的场景。无论如何，内射都是可能的。</div></div>
+  <div class="opt gray">否</div>
+</div></div>
+
+<h3 class="section">1.2 - 抵达克雷登</h3>
+<div class="box"><div class="box-head">1.2.1 决定：张和安妮逼你选一个最喜欢的</div><div class="box-body">
+  <div class="opt gray">张</div>
+  <div class="opt blue">安妮 <span class="badge b-annie">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">1.2.2 决定：电话亭响了</div><div class="box-body">
+  <div class="opt blue">接电话</div>
+  <div class="opt gray">让它响</div>
+  <div class="opt gray">跳转到 ▶1.2.4</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.2.3 决定：一位老奶奶想用电话亭</div><div class="box-body">
+  <div class="opt blue">让她打电话 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">让她等着</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.2.4 决定：达莉娅和佩内洛普需要离开</div><div class="box-body">
+  <div class="opt gray">让她们留下</div>
+  <div class="opt gray">要求回报一个人情</div>
+  <div class="opt blue">让她们走 <span class="badge b-penny">+1</span> <span class="badge b-dalia">+1</span></div>
+</div></div>
+
+<h3 class="section">1.3 - 奇异梦境</h3>
+<div class="box"><div class="box-head">1.3.1 决定："你愿意帮助我们吗？"</div><div class="box-body">
+  <div class="opt blue">是</div>
+  <div class="opt gray">否</div>
+</div></div>
+
+<h3 class="section">1.4 - 第一天</h3>
+<div class="box"><div class="box-head">1.4.1 决定：南希主动提出给你的门装锁</div><div class="box-body">
+  <div class="opt gray">那是个好主意<div class="sub">你将错过后来与南希的一段微型色情场景（1.9）</div></div>
+  <div class="opt gray">敲门就够了</div>
+  <div class="opt blue">没必要那样做 <span class="badge b-nancy">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">1.4.2 决定：你在想什么？</div><div class="box-body">
+  <div class="opt gray">关于你的身体</div>
+  <div class="opt blue">关于你刚才说的话 <span class="badge b-penny">+1</span></div>
+  <div class="opt gray">没什么</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.4.3 决定：有人在跟安妮说话</div><div class="box-body">
+  <div class="opt gray">对那男的客气点 <span class="badge b-annie">+1</span></div>
+  <div class="opt blue">对那男的强硬些 <span class="badge b-annie">+2</span></div>
+  <div class="opt gray">不管他，去上学</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.4.4 决定：卢娜邀请你去她的咖啡馆</div><div class="box-body">
+  <div class="opt blue">去 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">不去</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.4.5 决定：南希让你做家务</div><div class="box-body">
+  <div class="opt blue">好的 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">不</div>
+  <div class="opt gray">跳转到 ▶1.6</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.4.6 决定：清洗浴缸</div><div class="box-body">
+  <div class="opt blue">彻底清洗干净<div class="sub"><span class="colortext" style="color:var(--nancy)">南希 +1</span> 稍后（1.8.2）</div></div>
+  <div class="opt gray">随便洗洗赶紧走人</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.4.7 决定：达莉娅走进浴室</div><div class="box-body">
+  <div class="opt gray">从浴缸里出来</div>
+  <div class="opt gray">跳转到 ▶1.6</div>
+  <div class="opt blue">躲起来</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">1.5 - 色情场景：淋浴春光 <span class="badge b-dalia">达莉娅</span></h3>
+<div class="box lewd-body"><div class="box-head" style="background:#c0392b;">1.5.1 决定：达莉娅撞破你</div><div class="box-body">
+  <div class="opt gray">我睡着了</div>
+  <div class="opt gray">我没听见你</div>
+  <div class="opt blue">我被你的美貌惊呆了 <span class="badge b-dalia">+1</span></div>
+</div></div>
+
+<h3 class="section">1.6 - 问答小游戏前</h3>
+<div class="box"><div class="box-head">1.6.1 决定：佩妮的粉丝抓住了她</div><div class="box-body">
+  <div class="opt blue">说点什么 <span class="badge b-penny">+1</span></div>
+  <div class="opt gray">别干涉</div>
+</div></div>
+
+<h3 class="section">1.7 - 问答之夜</h3>
+<p>你需要9题答对7题才能赢，不过有一题是不可能答对的。如果失败必须重试直到成功。全部答对没有特别奖励。</p>
+
+<div class="box"><div class="box-head">1.7.1 问题：哪位名人成为Twitter上首位粉丝破亿的人？</div><div class="box-body">
+  <div class="opt gray">克里斯蒂亚诺·罗纳尔多</div>
+  <div class="opt gray">贾斯汀·比伯</div>
+  <div class="opt gray">埃隆·马斯克</div>
+  <div class="opt blue">凯蒂·佩里</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.2 问题：柏林墙拆除始于哪一年？</div><div class="box-body">
+  <div class="opt gray">1988</div>
+  <div class="opt blue">1989</div>
+  <div class="opt gray">1990</div>
+  <div class="opt gray">1991</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.3 问题：梅尔·吉布森的中间名是什么？</div><div class="box-body">
+  <p class="note">（这题你无法答对）</p>
+  <div class="opt blue">Bruno</div>
+  <div class="opt blue">Allen</div>
+  <div class="opt blue">Patrick</div>
+  <div class="opt blue">Maxwell</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.4 问题：地球的直径是多少？</div><div class="box-body">
+  <div class="opt gray">7000英里（11300公里）</div>
+  <div class="opt blue">8000英里（12900公里）</div>
+  <div class="opt gray">9000英里（14500公里）</div>
+  <div class="opt gray">几百万英里（3,218,688公里）</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.5 问题：一具尸体腐烂到只剩骨头需要多久？</div><div class="box-body">
+  <div class="opt blue">1个月零14天</div>
+  <div class="opt gray">2个月零7天</div>
+  <div class="opt gray">3个月零21天</div>
+  <div class="opt gray">4个月零28天</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.6 问题：根据希腊神话，谁被视为农业女神？</div><div class="box-body">
+  <div class="opt gray">阿尔忒弥斯</div>
+  <div class="opt gray">珀耳塞福涅</div>
+  <div class="opt blue">德墨忒尔</div>
+  <div class="opt gray">芙蕾雅</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.7 问题：水星绕太阳公转一周需要多久？</div><div class="box-body">
+  <div class="opt blue">88天</div>
+  <div class="opt gray">101天</div>
+  <div class="opt gray">215天</div>
+  <div class="opt gray">365天</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.8 问题：按GDP百分比计算，哪个国家税率最高？</div><div class="box-body">
+  <div class="opt gray">比利时</div>
+  <div class="opt gray">古巴</div>
+  <div class="opt gray">黑山</div>
+  <div class="opt blue">东帝汶</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.9 问题：尤利西斯（Eternum背后的公司）最大股东是谁？</div><div class="box-body">
+  <div class="opt gray">蒂莫西·伯德</div>
+  <div class="opt gray">本杰明·法罗</div>
+  <div class="opt blue">威廉·巴多</div>
+  <div class="opt gray">詹姆斯·布兰克</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.7.10 结果：最终成绩</div><div class="box-body">
+  <p><strong>如果：</strong>你答对了7题或更多</p>
+  <p><strong>那么：</strong>你赢了！继续。</p>
+  <hr>
+  <p><strong>否则：</strong>你"死"了，回到 ▶1.7 开头重来</p>
+</div></div>
+
+<h3 class="section">1.8 - 胜利之夜</h3>
+<div class="box"><div class="box-head">1.8.1 决定：卢娜祝贺你</div><div class="box-body">
+  <div class="opt blue">拥抱她 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">给她空间</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.8.2 结果：南希检查你的清洁工作</div><div class="box-body">
+  <p><strong>如果：</strong>你彻底清洗了浴缸（1.4.6）</p>
+  <p><strong>那么：</strong><span class="badge b-nancy">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">1.8.3 决定：你看佩妮的Instagram照片</div><div class="box-body">
+  <div class="opt blue">给它点赞<div class="sub"><span class="colortext" style="color:var(--penny)">佩妮 +1</span> 稍后（1.14.1）</div></div>
+  <div class="opt gray">不点赞</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">1.9 - 微型色情：早起者 <span class="badge b-nancy">南希</span></h3>
+<div class="box lewd-body"><div class="box-body">
+  <p><strong>前提条件：</strong>你没有让南希给你的门装锁（1.4.1）</p>
+</div></div>
+
+<h3 class="section">1.10 - 进入Ion前</h3>
+<div class="box"><div class="box-head">1.10.1 决定：初遇亚历克斯</div><div class="box-body">
+  <div class="opt gray">赞美她的纹身</div>
+  <div class="opt gray">赞美她的泳技</div>
+  <div class="opt gray">赞美她的头发</div>
+  <div class="opt blue">赞美她的笔 <span class="badge b-alex">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">1.10.2 对话：伊德里尔向你介绍Eternum</div><div class="box-body">
+  <p>你想问多少就问多少，每个回答都很有趣！</p>
+</div></div>
+
+<h3 class="section">1.11 - Ion</h3>
+<div class="box"><div class="box-head">1.11.1 决定：信念一跃</div><div class="box-body">
+  <div class="opt blue">跳</div>
+  <div class="opt gray">不跳</div>
+</div></div>
+<div class="box"><div class="box-body">安妮给你钱：<span class="badge b-eternal">+1500</span></div></div>
+
+<div class="box"><div class="box-head">1.11.2 决定：测试X光眼镜</div><div class="box-body">
+  <div class="opt red">激活眼镜<div class="sub"><span class="badge b-annie">安妮</span>，你可以看到她裸体</div></div>
+  <div class="opt gray">不激活眼镜</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.11.3 决定：购买咔嚓的一件商品</div><div class="box-body">
+  <div class="opt gray">买铲子</div>
+  <div class="opt gray">买手枪</div>
+  <div class="opt gray">买眼镜</div>
+  <div class="opt blue">买吊坠<div class="sub"><span class="colortext" style="color:var(--annie)">安妮 +1</span> 稍后（1.13.1）。更晚些时候，这会在Eternum救你的命（4.16.3）。</div></div>
+  <div class="box-body">你支付：<span class="badge b-eternal">-300</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">1.11.4 决定：安妮取回你的剑</div><div class="box-body">
+  <div class="opt blue">去探索</div>
+  <div class="opt gray">等安妮</div>
+  <div class="opt gray">伊娃的故事结束。跳转到 ▶1.13</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.11.5 决定：在阿芙洛狄忒处</div><div class="box-body">
+  <div class="opt blue">和伊娃一起走 <span class="badge b-eternal">-1200</span></div>
+  <div class="opt gray">离开</div>
+  <div class="opt gray">伊娃的故事结束。跳转到 ▶1.13</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">1.12 - 色情场景：迷离现实（伊娃）</h3>
+<div class="box lewd-body"><div class="box-body">
+  <p>伊娃退还你的钱：<span class="badge b-eternal">+1200</span></p>
+  <p>这不是你们最后一次见面（6.13.2）</p>
+</div></div>
+
+<h3 class="section">1.13 - Ion（续）</h3>
+<div class="box"><div class="box-head">1.13.1 结果：安妮问你买了什么</div><div class="box-body">
+  <p><strong>如果：</strong>你从咔嚓那里买了吊坠（1.11.3）</p>
+  <p><strong>那么：</strong><span class="badge b-annie">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">1.13.2 决定：本杰明侵犯一个女孩</div><div class="box-body">
+  <div class="opt blue">干预 <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">别管闲事</div>
+</div></div>
+
+<h3 class="section">1.14 - Ion之后</h3>
+<div class="box"><div class="box-head">1.14.1 结果：佩妮谈论昨晚的照片</div><div class="box-body">
+  <p><strong>如果：</strong>你点赞了佩妮的Instagram照片（1.8.3）</p>
+  <p><strong>那么：</strong><span class="badge b-penny">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">1.14.2 决定：佩妮邀请你去摄影棚</div><div class="box-body">
+  <div class="opt blue">跟她去</div>
+  <div class="opt gray">不去 <span class="badge b-penny b-cross">路线</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">1.14.3 决定：南希邀请你去瑜伽课</div><div class="box-body">
+  <div class="opt blue">跟她去</div>
+  <div class="opt gray">不去 <span class="badge b-nancy b-cross">路线</span></div>
+</div></div>
+
+<h3 class="section">1.15 - 埃卡巴地下城</h3>
+<div class="box"><div class="box-head">1.15.1 小游戏：在正确时机攻击康</div><div class="box-body">
+  <div class="opt blue">在达莉娅说"你就是个该死的蠢货！"时精确攻击 <span class="badge b-dalia">+1</span></div>
+  <div class="opt gray">攻击太早、太晚或根本不攻击</div>
+</div></div>
+
+<div class="box"><div class="box-head">1.15.2 决定：塔纳托斯出现并拿走宝石</div><div class="box-body">
+  <div class="opt gray">拿上达莉娅的东西逃跑</div>
+  <div class="opt blue">留下 <span class="badge b-dalia">+1</span></div>
+</div></div>
+
+<h3 class="section">1.16 - 计算机课</h3>
+<div class="box"><div class="box-head">1.16.1 决定：达莉娅邀请你去健身房</div><div class="box-body">
+  <div class="opt blue">跟她去</div>
+  <div class="opt gray">不去 <span class="badge b-dalia b-cross">路线</span></div>
+</div></div>
+
+<!-- ========== CHAPTER 0.2 ========== -->
+<h2 class="chapter" id="ch02">0.2 - 潘多拉魔盒</h2>
+
+<h3 class="section">2.1 - 本杰明之死</h3>
+<div class="box"><div class="box-head">2.1.1 决定：安妮想跟你一起去红鲱鱼酒吧</div><div class="box-body">
+  <div class="opt blue">让安妮跟你一起来 <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">不让她来<div class="sub">你之后会<span class="colortext" style="color:var(--annie)">失去安妮的路线</span>（2.4.4）</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">2.1.2 决定：阿克塞尔在楼梯间指责你</div><div class="box-body">
+  <div class="opt blue">揍他 <div class="sub"><span class="colortext" style="color:var(--alex)">亚历克斯 +1</span> 稍后（2.9.2）</div></div>
+  <div class="opt gray">试着让他冷静</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.1.3 决定：诺娃对自己的桌面壁纸感到尴尬</div><div class="box-body">
+  <div class="opt gray">那个角色也蒙着眼。你就因为这个才喜欢的？</div>
+  <div class="opt blue">很酷，我也喜欢动漫 <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">嘿，那纹身是什么？</div>
+</div></div>
+
+<h3 class="section">2.2 - 红鲱鱼酒吧</h3>
+<div class="box"><div class="box-head">2.2.1 结果：队伍人数</div><div class="box-body">
+  <p><strong>如果：</strong>你让安妮来了红鲱鱼酒吧（2.1.1）</p>
+  <p><strong>那么：</strong>安妮加入你。<span class="badge b-outfit">服装4</span></p>
+  <div class="box-body">咔嚓卖给你一只"泰迪熊"：<span class="badge b-eternal">-30</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">2.2.2 决定：咔嚓想卖给你一只动物</div><div class="box-body">
+  <div class="opt gray">（接受第一次报价）<span class="badge b-eternal">-300</span>，<span class="colortext" style="color:var(--luna)">卢娜 +1</span> 稍后（2.4.1）。任何动物都行；你选的动物会影响未来某个场景（7.6.1）。</div>
+  <div class="opt blue">（先拒绝，然后接受第二次报价）<span class="badge b-eternal">-150</span>，<span class="colortext" style="color:var(--luna)">卢娜 +1</span> 稍后（2.4.1）。任何动物都行；你选的动物会影响未来某个场景（7.6.1）。</div>
+  <div class="opt gray">（拒绝第二次报价）</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.2.3 决定：谁去弗林克家？</div><div class="box-body">
+  <div class="opt blue">你自己去 <span class="badge b-luna">+2</span></div>
+  <div class="opt gray">让卢娜去<div class="sub">你之后会<span class="colortext" style="color:var(--luna)">失去卢娜的路线</span>（2.4.3），跳转到 ▶2.4</div></div>
+</div></div>
+
+<h3 class="section">2.3 - 弗林克家</h3>
+<p>这是自由探索环节。不会死亡或失败。探索房子会触发小事件让你保持紧张，但你可以忽略它们专注于任务：</p>
+<ol class="simple">
+  <li>参观客厅和卧室</li>
+  <li>接办公室里响铃的电话</li>
+  <li>找到卧室旁边的保险箱</li>
+  <li>跟随线索（可选）
+    <ul class="simple">
+      <li>数浴室里的蜡烛</li>
+      <li>数洗衣房里的恐龙</li>
+      <li>数花园里的木头</li>
+    </ul>
+  </li>
+  <li>打开保险箱：3-2-18</li>
+</ol>
+<div class="map-box">
+  <p>房子概念地图：</p><br>
+  <span class="map-node">④浴室</span><br>
+  <span class="map-node">③保险箱房</span> ↔ <span class="map-node">①卧室</span> ←→ <span class="map-node">④花园</span><br>
+  <span class="map-node">④洗衣房</span><br>
+  <span class="map-node">走廊</span> → <span class="map-node">①客厅</span><br>
+  <span class="map-node">②办公室</span><br>
+  <span class="map-node">走廊大厅</span> ←→ <span class="map-node">大厅</span>
+</div>
+
+<h3 class="section">2.4 - 红鲱鱼酒吧之后</h3>
+<div class="box"><div class="box-head">2.4.1 结果：你告诉卢娜关于礼物的事</div><div class="box-body">
+  <p><strong>如果：</strong>你给卢娜买了动物（2.2.2）并且你去了弗林克家（2.2.3）</p>
+  <p><strong>那么：</strong><span class="badge b-luna">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">2.4.2 决定：还有什么事吗？</div><div class="box-body">
+  <div class="opt blue">问她关于手套的事</div>
+  <div class="opt gray">不问她 <span class="badge b-luna b-cross">路线</span>，跳转到 ▶2.4.4</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.4.3 结果：卢娜犹豫着回答</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-luna">≥4</span> 且你去了弗林克家（2.2.3）</p>
+  <p><strong>那么：</strong>卢娜向你敞开心扉 <span class="badge b-luna">+1</span></p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-luna b-cross">路线</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">2.4.4 结果：回到家</div><div class="box-body">
+  <p><strong>如果：</strong>你让安妮来了红鲱鱼酒吧（2.1.1）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-annie b-cross">路线</span>，跳转到 ▶2.6</p>
+</div></div>
+
+<div class="box"><div class="box-head">2.4.5 决定：安妮害怕了</div><div class="box-body">
+  <div class="opt blue">让她睡在你房间</div>
+  <div class="opt gray">送回她自己房间 <span class="badge b-annie b-cross">路线</span>，跳转到 ▶2.6</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">2.5 - 色情场景：午夜慰藉 <span class="badge b-annie">安妮</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">2.5.1 结果：安妮睡着时抓住你</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-annie">≥3</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-annie b-cross">路线</span>，跳转到 ▶2.6</p>
+</div></div>
+<div class="box-head" style="background:#c0392b;">2.5.2 决定：安妮为你脱掉上衣</div><div class="box-body">
+  <div class="opt gray">到此为止 <span class="badge b-annie b-cross">路线</span>，跳转到 ▶2.6</div>
+  <div class="opt blue">继续 <span class="badge b-annie">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section">2.6 - 温馨的早晨</h3>
+<div class="box"><div class="box-head">2.6.1 决定：南希让你叫醒达莉娅</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nancy">路线</span> 和 <span class="badge b-dalia">路线</span></div>
+  <div class="opt blue">主动做早餐 <span class="badge b-nancy">+1</span> <span class="badge b-dalia">+1</span></div>
+  <div class="opt gray">去叫达莉娅起床</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.6.2 结果：作为补偿……</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-nancy">路线</span> 但<strong>不是</strong> <span class="badge b-dalia">路线</span></p>
+  <p><strong>那么：</strong><span class="badge b-nancy">+1</span>（不可见）</p>
+</div></div>
+
+<div class="box"><div class="box-head">2.6.3 结果：作为补偿……</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-dalia">路线</span> 但<strong>不是</strong> <span class="badge b-nancy">路线</span></p>
+  <p><strong>那么：</strong><span class="badge b-dalia">+1</span>（不可见）</p>
+</div></div>
+
+<h3 class="section">2.7 - 瑜伽课</h3>
+<div class="box"><div class="req"><strong>前提：</strong><span class="badge b-nancy">路线</span>（否则跳转到 ▶2.9）</div>
+<div class="box-head">2.7.1 决定：张该给米凯拉买什么？</div><div class="box-body">
+  <div class="opt gray">花 <span class="badge b-cm">+1</span></div>
+  <div class="opt gray">哑铃 <span class="badge b-cm">+1</span></div>
+  <div class="opt blue">演出票 <span class="badge b-cm">+2</span></div>
+  <div class="opt gray">什么都不买</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.7.2 决定：凯试图接近南希</div><div class="box-body">
+  <div class="opt gray">别管南希的私事 <span class="badge b-nancy b-cross">路线</span>，跳转到 ▶2.9</div>
+  <div class="opt blue">做点什么</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.7.3 决定：诺亚和劳尔要收钱</div><div class="box-body">
+  <div class="opt blue">雇佣诺亚和劳尔 <span class="badge b-eternal">-50</span> <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">算了 <span class="badge b-nancy b-cross">路线</span>，跳转到 ▶2.9</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">2.8 - 微型色情：浴室密谋 <span class="badge b-nancy">南希</span></h3>
+
+<h3 class="section">2.9 - 和亚历克斯一起做学校项目</h3>
+<div class="box"><div class="box-head">2.9.1 决定：诺娃热切地展示她的发现</div><div class="box-body">
+  <div class="opt blue">摸摸她的头 <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">只是赞美她</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.9.2 结果：谈论阿克塞尔</div><div class="box-body">
+  <p><strong>如果：</strong>你在楼梯间揍了阿克塞尔（2.1.2）</p>
+  <p><strong>那么：</strong><span class="badge b-alex">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">2.9.3 对话：问亚历克斯关于她自己</div><div class="box-body">
+  <p>（如果你问她关于纹身的事，可以看到她穿内衣的样子）</p>
+  <div class="opt blue">（问全部4个问题）<span class="badge b-alex">+1</span></div>
+  <div class="opt gray">（少问几个问题）</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.9.4 决定：威廉扇了亚历克斯耳光</div><div class="box-body">
+  <div class="opt gray">保持安静 <span class="badge b-alex b-cross">路线</span>，跳转到 ▶2.10</div>
+  <div class="opt blue">说点什么</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.9.5 决定：亚历克斯拥抱你</div><div class="box-body">
+  <div class="opt blue">回抱她 <span class="badge b-alex">+1</span></div>
+  <div class="opt gray">不回抱她</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.9.6 结果：在你走之前……</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-alex">≥2</span></p>
+  <p><strong>那么：</strong>你可以叫她Alex而不是Alexandra</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-alex b-cross">路线</span></p>
+</div></div>
+
+<h3 class="section">2.10 - 第二个梦</h3>
+<div class="box"><div class="box-head">2.10.1 决定："你愿意帮助我们吗？"</div><div class="box-body">
+  <div class="opt blue">是</div>
+  <div class="opt gray">否</div>
+</div></div>
+
+<h3 class="section">2.11 - 诺娃的第一部手机</h3>
+<div class="box"><div class="box-head">2.11.1 决定：向诺娃询问卡吕普索</div><div class="box-body">
+  <div class="opt blue">打电话给她 <span class="badge b-outfit">服装2</span> <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">给她发消息</div>
+</div></div>
+
+<h3 class="section">2.12 - 摄影棚</h3>
+<div class="box" style="background:#fef9e7;border:1px solid #f1c40f;">
+<div class="req" style="background:#f9e79f;"><strong>前提：</strong><span class="badge b-penny">路线</span>（否则跳转到 ▶2.15）</div>
+<div class="box-head">2.12.1 决定：在茶点桌旁</div><div class="box-body">
+  <div class="opt gray">给佩内洛普拿个甜甜圈</div>
+  <div class="opt gray">跳转到 ▶2.12.3</div>
+  <div class="opt blue">给佩内洛普拿杯咖啡</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.12.2 决定：放多少糖？</div><div class="box-body">
+  <div class="opt gray">1茶匙糖</div>
+  <div class="opt gray">2茶匙糖</div>
+  <div class="opt blue">3茶匙糖 <span class="badge b-penny">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">2.12.3 决定：拍照</div><div class="box-body">
+  <div class="opt gray">放大拍</div>
+  <div class="opt blue">正常缩放拍 <span class="badge b-penny">+1</span></div>
+  <div class="opt gray">缩小拍</div>
+</div></div>
+
+<div class="box"><div class="box-head">2.12.4 决定：瓦伦蒂诺先生想看佩妮裸体</div><div class="box-body">
+  <div class="opt gray">劝说佩内洛普脱光 <span class="badge b-penny b-cross">路线</span>，跳转到 ▶2.14</div>
+  <div class="opt blue">叫瓦伦蒂诺先生滚蛋 <span class="badge b-penny">+1</span></div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">2.13 - 色情场景：完美一击 <span class="badge b-penny">佩妮</span></h3>
+
+<h3 class="section">2.14 - 摄影棚（续）</h3>
+<div class="box" style="background:#fef9e7;border:1px solid #f1c40f;">
+<div class="box-body">诺娃出现了：<span class="badge b-outfit">服装3</span></div>
+<div class="box-head">2.14.1 决定：诺娃找到了登上奥吉吉亚的方法</div><div class="box-body">
+  <div class="opt blue">赞美她 <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">别浪费时间</div>
+</div></div>
+</div>
+
+<h3 class="section">2.15 - 寻找卡吕普索</h3>
+<div class="box"><div class="box-head">2.15.1 决定：神秘盒子</div><div class="box-body">
+  <div class="opt gray">让亚历克斯打开盒子</div>
+  <div class="opt blue">自己打开盒子 <span class="badge b-alex">+1</span> <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">让诺娃打开盒子</div>
+</div></div>
+
+<!-- ========== CHAPTER 0.3 ========== -->
+<h2 class="chapter" id="ch03">0.3 - 强者生存</h2>
+
+<h3 class="section">3.1 - 卡吕普索登场</h3>
+<div class="box"><div class="box-head">3.1.1 决定：诺娃为黑进你而道歉</div><div class="box-body">
+  <div class="opt gray">对她强硬</div>
+  <div class="opt blue">原谅她 <span class="badge b-nova">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">3.1.2 决定：诺娃又迷路了</div><div class="box-body">
+  <div class="opt gray">回到现实世界 <span class="badge b-nova b-cross">路线</span>，玛阿特的故事结束，跳转到 ▶3.5</div>
+  <div class="opt blue">去救诺娃</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">3.2 - 色情场景：诡谲游戏（<span class="badge b-nova">诺娃</span> & 玛阿特）</h3>
+<div class="box lewd-body"><div class="box-head" style="background:#c0392b;">3.2.1 决定：玛阿特引诱你</div><div class="box-body">
+  <div class="opt gray">离开这个地方<div class="sub">玛阿特的故事结束，跳转到 ▶3.4</div></div>
+  <div class="opt blue">上玛阿特<div class="sub">触发下一个色情场景，你之后会再次遇见玛阿特（8.18.1）</div></div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">3.3 - 色情场景：埃及掠夺（玛阿特 & <span class="badge b-nova">诺娃</span>）</h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">3.3.1 决定：选择体位</div><div class="box-body">
+  <div class="opt blue">把她推到墙上</div>
+  <div class="opt blue">把她拉到地上</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">3.3.2 决定：玛阿特失去意识</div><div class="box-body">
+  <p>如果你不偷她的钱，别人会偷。无论如何她之后都会向你要回一些（8.18.1）。</p>
+  <div class="opt blue">偷玛阿特的钱 <span class="badge b-eternal">+250</span></div>
+  <div class="opt gray">不碰那笔钱</div>
+</div></div>
+</div>
+
+<h3 class="section">3.4 - 送诺娃回家</h3>
+<div class="box"><div class="box-body">诺娃感谢你救了她：<span class="badge b-nova">+2</span></div></div>
+
+<h3 class="section">3.5 - 水上蝴蝶</h3>
+<div class="box"><div class="box-head">3.5.1 决定：谁的零食更好？</div><div class="box-body">
+  <div class="opt blue">达莉娅的布朗尼 <span class="badge b-dalia">+1</span></div>
+  <div class="opt blue">亚历克斯的贝果 <span class="badge b-alex">+1</span></div>
+</div></div>
+
+<h3 class="section">3.6 - 向安妮表白</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="req" style="background:#e8daef;"><strong>前提：</strong><span class="badge b-annie">路线</span>（否则跳转到 ▶3.7）</div>
+<div class="box-head">3.6.1 决定：安妮很尴尬</div><div class="box-body">
+  <div class="opt gray">算了 <span class="badge b-annie b-cross">路线</span>，跳转到 ▶3.7</div>
+  <div class="opt blue">告诉她你喜欢她 <span class="badge b-annie">+1</span></div>
+</div></div>
+<div class="box-head">3.6.2 决定：约会安排好了</div><div class="box-body">
+  <div class="opt gray">别冒险</div>
+  <div class="opt blue">吻她 <span class="badge b-annie">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section">3.7 - 群聊电话</h3>
+<div class="box"><div class="box-head">3.7.1 决定：黑的还是红的？</div><div class="box-body">
+  <div class="opt blue">黑色</div>
+  <div class="opt blue">红色</div>
+</div></div>
+
+<h3 class="section">3.8 - 战猪学校</h3>
+<p>这是自由探索环节。按你希望的顺序拜访各个地点收集印章。理想路线需要集齐全部5枚印章。点击"领奖"可随时离开（跳转到 ▶3.14），无论你有多少印章。</p>
+<p class="note">提示：如果你在拜访药水课之前先去百货商店，会获得一个额外笑话。</p>
+<div class="map-box">
+  <p><strong>战猪魔法学校地图：</strong></p><br>
+  <span class="map-node">占卜塔</span> | <span class="map-node">百货商店</span> | <span class="map-node">黑魔法</span><br>
+  <span class="map-node">召唤阵</span> | <span class="map-node">药水课</span><br><br>
+  <p style="text-align:right;font-weight:bold;">领奖</p>
+</div>
+
+<h3 class="section">3.9 - 战猪：占卜课</h3>
+<div class="box"><div class="box-head">3.9.1 决定：谁来使用回忆回溯器？</div><div class="box-body">
+  <div class="opt gray">你自己<div class="sub">回忆失败，只看到非常短暂的幻象……</div></div>
+  <div class="opt blue">佩内洛普 <span class="badge b-penny">+1</span>，且<span class="colortext" style="color:var(--penny)">佩妮 +1</span> 稍后（7.5.2）<div class="sub">观看一段过去的场景：你、达莉娅和佩妮还是孩子的时候。</div><div class="sub"><span class="colortext" style="color:var(--annie)">安妮 +1</span> 稍后（6.5.3）</div></div>
+  <div class="box-body">获得一枚印章（即使回忆失败了），返回地图：▶3.8</div>
+</div></div>
+
+<h3 class="section">3.10 - 战猪：百货商店</h3>
+<div class="box"><div class="box-head">3.10.1 决定：文林提供变身药水演示</div><div class="box-body">
+  <div class="opt gray">相信她</div>
+  <div class="opt red">试试（-60永恒币）<div class="sub"><span class="badge b-eternal">-60</span>，文林变成 <span class="badge b-luna">卢娜</span> 或 <span class="badge b-penny">佩妮</span> 的裸体形态</div></div>
+  <div class="box-body">获得一枚印章，返回地图：▶3.8</div>
+</div></div>
+
+<h3 class="section">3.11 - 战猪：药水课</h3>
+<div class="box"><div class="box-head">3.11.1 决定：佩妮感谢你不把她当名人对待</div><div class="box-body">
+  <div class="opt gray">你并不特别</div>
+  <div class="opt gray">你很出众</div>
+  <div class="opt blue">你对我来说很特别 <span class="badge b-penny">+1</span></div>
+  <div class="box-body">要获得印章，去百货商店（即使你已经去过）从文林处领取 <span class="badge b-eternal">+200</span>，然后带回药水课：<span class="badge b-eternal">-200</span>。</div>
+  <p>如果你想把钱留给自己：<strong>可以</strong>，但这样你只能获得4枚印章。如果你这样做了，邦尔多教授之后会奖励你300永恒币（3.14.2）。</p>
+  <div class="box-body">返回地图：▶3.8</div>
+</div></div>
+
+<h3 class="section">3.12 - 战猪：黑魔法</h3>
+<div class="box"><div class="box-head">3.12.1 结果：卢娜的负担</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-luna">路线</span></p>
+  <p><strong>那么：</strong><span class="badge b-luna">+2</span></p>
+  <div class="box-body">获得一枚印章，返回地图：▶3.8</div>
+</div></div>
+
+<h3 class="section">3.13 - 战猪：召唤阵</h3>
+<div class="box"><div class="box-body">获得一枚印章，返回地图：▶3.8</div></div>
+
+<h3 class="section">3.14 - 战猪：领奖</h3>
+<div class="box"><div class="box-head">3.14.1 决定：城堡墙外</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你有3枚或更少印章</div>
+  <div class="opt gray">离开服务器<div class="sub">跳转到 ▶3.15</div></div>
+  <div class="opt blue">回到城堡<div class="sub">返回地图：▶3.8</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">3.14.2 结果：多走一步</div><div class="box-body">
+  <p><strong>如果：</strong>你集齐了全部5枚印章</p>
+  <p><strong>那么：</strong><span class="badge b-eternal">+300</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">3.14.3 决定：给佩妮选一本魔法书</div><div class="box-body">
+  <div class="opt blue">恢复系</div>
+  <div class="opt gray">毁灭系</div>
+</div></div>
+
+<h3 class="section">3.15 - 不朽之名</h3>
+<div class="box"><div class="box-head">3.15.1 决定：一个小贩给你苹果</div><div class="box-body">
+  <div class="opt blue">买个苹果 <span class="badge b-eternal">-1</span></div>
+  <div class="opt gray">不买</div>
+</div></div>
+
+<div class="box"><div class="box-head">3.15.2 决定：一个"小贩"给你圆厅门票</div><div class="box-body">
+  <div class="opt gray">买票 <span class="badge b-eternal">-200</span></div>
+  <div class="opt blue">不买</div>
+</div></div>
+
+<div class="box"><div class="box-head">3.15.3 决定：一个乞丐要钱</div><div class="box-body">
+  <div class="opt blue">给他6永恒币 <span class="badge b-eternal">-6</span></div>
+  <div class="opt gray">什么都不给</div>
+</div></div>
+
+<div class="box"><div class="box-head">3.15.4 结果：达莉娅的密码</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-dalia">路线</span> 且 <span class="badge b-dalia">≥4</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-dalia b-cross">路线</span>，跳转到 ▶3.15.6</p>
+</div></div>
+
+<div class="box"><div class="box-head">3.15.5 决定："如果我打败你呢？"</div><div class="box-body">
+  <div class="opt blue">要点刺激的</div>
+  <div class="opt gray">不要任何回报 <span class="badge b-dalia b-cross">路线</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">3.15.6 QTE：与贾斯提库斯战斗</div><div class="box-body">
+  <div class="opt blue">在正确时机点击闪避、格挡、攻击</div>
+  <div class="opt gray">错过任何QTE<div class="sub">你死了。跳转到 ▶3.18</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">3.15.7 决定：贾斯提库斯跪下了</div><div class="box-body">
+  <div class="opt gray">杀了他</div>
+  <div class="opt blue">饶他一命 <span class="badge b-nancy">+1</span> 若 <span class="badge b-nancy">路线</span></div>
+</div></div>
+
+<h3 class="section">3.16 - 南希的奖励</h3>
+<div class="box" style="background:#fadbd8;">
+<div class="req" style="background:#f5b7b1;"><strong>前提：</strong><span class="badge b-nancy">路线</span>（否则跳转到 ▶3.18）</div>
+<div class="box-head">3.16.1 决定：你被邀请去皇家浴场</div><div class="box-body">
+  <div class="opt blue">接受邀请</div>
+  <div class="opt gray">不接受，回家<div class="sub">跳转到 ▶3.18</div></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">3.17 - 色情场景：禁果 <span class="badge b-nancy">南希</span></h3>
+<div class="box lewd-body"><div class="box-head" style="background:#c0392b;">3.17.1 决定：你愿意和南希的一个女儿发生关系吗？</div><div class="box-body">
+  <div class="opt blue">愿意 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">不愿意</div>
+</div></div>
+
+<h3 class="section">3.18 - 抢劫准备</h3>
+<div class="box"><div class="box-head">3.18.1 决定：达莉娅最喜欢的电影是什么？</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-dalia">路线</span></div>
+  <div class="opt gray">洛奇</div>
+  <div class="opt blue">指环王 <span class="badge b-dalia">+1</span></div>
+  <div class="opt gray">搏击俱乐部</div>
+  <div class="opt gray">哈利·波特</div>
+  <div class="opt gray">百万宝贝</div>
+</div></div>
+
+<!-- ========== CHAPTER 0.4 ========== -->
+<h2 class="chapter" id="ch04">0.4 - 上流社会</h2>
+
+<h3 class="section">4.1 - 神秘访客</h3>
+<div class="box"><div class="box-head">4.1.1 决定：一封奇怪的信</div><div class="box-body">
+  <div class="opt gray">打开信</div>
+  <div class="opt blue">不打开信</div>
+</div></div>
+
+<h3 class="section">4.2 - 抢劫</h3>
+<div class="box"><div class="box-head">4.2.1 决定：你和诺娃的掩护故事</div><div class="box-body">
+  <div class="opt gray">牵强的故事</div>
+  <div class="opt gray">可信的故事</div>
+  <div class="opt blue">尽量贴近现实<div class="sub"><div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div><span class="badge b-nova">+1</span></div></div>
+</div></div>
+
+<div class="box"><div class="box-head">4.2.2 决定：和你的"妻子"说话</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="opt blue">抓住她的肩膀 <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">专注任务</div>
+</div></div>
+
+<h3 class="section">4.3 - 老虎机</h3>
+<p>主角转两次，每次10永恒币，第二次赢20永恒币，总计归零。之后你可以想玩多久玩多久。和真实赌场一样，庄家赢面更大。平均每次旋转亏1.25永恒币。理想路线是立刻离开不玩。</p>
+<table>
+<tr><th>赢得永恒币</th><th>概率</th></tr>
+<tr><td>150</td><td>2.5%</td></tr>
+<tr><td>30</td><td>10%</td></tr>
+<tr><td>20</td><td>10%</td></tr>
+<tr><td>10</td><td>15%</td></tr>
+<tr><td>0</td><td>67.5%</td></tr>
+</table>
+<p class="note">（每次旋转10永恒币）</p>
+<p>如果旋转后你少于471或多于1899永恒币，会自动离开。</p>
+
+<h3 class="section">4.4 - 抢劫（续）</h3>
+<div class="box"><div class="box-head">4.4.1 决定：本尼对佩内洛普动手动脚</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span></div>
+  <div class="opt blue">坐在他们中间 <span class="badge b-penny">+1</span></div>
+  <div class="opt gray">坐在另一张沙发上</div>
+</div></div>
+
+<div class="box"><div class="box-head">4.4.2 决定：正面还是反面？</div><div class="box-body">
+  <div class="opt gray">正面</div>
+  <div class="opt blue">反面</div>
+</div></div>
+
+<h3 class="section">4.5 - 在亚历克斯的咖啡馆</h3>
+<div class="box"><div class="box-body">抢劫净亏损：<span class="badge b-eternal">-120</span></div></div>
+<div class="box"><div class="box-head">4.5.1 决定：为你的咖啡付钱给亚历克斯</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-alex">路线</span></div>
+  <div class="opt gray">不给小费</div>
+  <div class="opt blue">给她一点小费 <span class="badge b-eternal">-5</span> <span class="badge b-alex">+1</span></div>
+  <div class="opt gray">给她一大笔小费</div>
+</div></div>
+
+<h3 class="section">4.6 - 健身房比赛</h3>
+<div class="box" style="background:#f5e6d3;border:1px solid var(--dalia);">
+<div class="req" style="background:#e8d0b0;"><strong>前提：</strong><span class="badge b-dalia">路线</span>（否则跳转到 ▶4.9）</div>
+
+<div class="box-head">4.6.1 决定：格特鲁德把你当成达莉娅</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nancy">路线</span></div>
+  <div class="opt blue">将错就错 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">纠正她</div>
+</div></div>
+
+<div class="box-head">4.6.2 决定：达莉娅开始犹豫了</div><div class="box-body">
+  <div class="opt gray">跟她一起回家 <span class="badge b-dalia b-cross">路线</span>，跳转到 ▶4.9</div>
+  <div class="opt blue">说服她参加 <span class="badge b-dalia">+1</span></div>
+</div></div>
+
+<div class="box-head">4.6.3 决定：达莉娅的上衣湿了</div><div class="box-body">
+  <div class="opt blue">告诉她 <span class="badge b-dalia">+1</span></div>
+  <div class="opt gray">什么都不说</div>
+</div></div>
+
+<div class="box-head">4.6.4 决定：张问起私人服务器</div><div class="box-body">
+  <div class="opt gray">把密码告诉张<div class="sub">你之后会<span class="colortext" style="color:var(--dalia)">失去达莉娅的路线</span>（4.7.1）</div></div>
+  <div class="opt blue">保密</div>
+</div></div>
+
+<div class="box-head">4.6.5 决定：欣喜若狂的达莉娅吻了你</div><div class="box-body">
+  <div class="opt blue">回吻她 <span class="badge b-dalia">+1</span></div>
+  <div class="opt gray">站着不动</div>
+</div></div>
+
+<div class="box-head">4.6.6 决定：布罗克嘲讽达莉娅</div><div class="box-body">
+  <div class="opt blue">对他说点什么</div>
+  <div class="opt gray">离开<div class="sub">你之后会失去达莉娅的路线（4.7.2），跳转到 ▶4.6.8</div></div>
+</div></div>
+
+<div class="box-head">4.6.7 QTE：布罗克让你打他</div><div class="box-body">
+  <div class="opt blue">攻击</div>
+  <div class="opt gray">不攻击<div class="sub">你之后会失去达莉娅的路线（4.7.2）</div></div>
+</div></div>
+
+<div class="box-head">4.6.8 决定：跟着达莉娅</div><div class="box-body">
+  <div class="opt blue">追上她</div>
+  <div class="opt gray">给她空间 <span class="badge b-dalia b-cross">路线</span>，跳转到 ▶4.9</div>
+</div></div>
+</div>
+
+<h3 class="section">4.7 - 海湾</h3>
+<div class="box"><div class="box-head">4.7.1 结果：海滩派对</div><div class="box-body">
+  <p><strong>如果：</strong>你没有把达莉娅服务器密码告诉张（4.6.4）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-dalia b-cross">路线</span>，跳转到 ▶4.9</p>
+</div></div>
+
+<div class="box"><div class="box-head">4.7.2 结果：传递性原理</div><div class="box-body">
+  <p><strong>如果：</strong>你对峙并攻击了布罗克（4.6.6, 4.6.7）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-dalia b-cross">路线</span>，跳转到 ▶4.9</p>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">4.8 - 色情场景：静水深流 <span class="badge b-dalia">达莉娅</span></h3>
+
+<h3 class="section">4.9 - 第三个梦</h3>
+<div class="box"><div class="box-head">4.9.1 决定：你会按那个按钮吗？</div><div class="box-body">
+  <div class="opt blue">是</div>
+  <div class="opt gray">否</div>
+</div></div>
+
+<h3 class="section">4.10 - 放学后短信</h3>
+<p>按任意顺序回复短信。有些短信只有在回复其他短信后才会出现。你可以随时结束本段（跳转到 ▶4.11），但理想路线需要回复全部短信。</p>
+<p>如果你不回复卢娜的短信（4.10.5）：<span class="badge b-luna b-cross">路线</span></p>
+
+<div class="box"><div class="box-head">4.10.1 短信：和亚历克斯聊正式晚宴</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node flow-start"><span class="badge b-alex">路线</span></div><br>
+    <div class="flow-row"><span style="font-size:.8em;">true ↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false ↘</span></div>
+    <div class="flow-row">
+      <span class="flow-node">博伊尔宅邸，洛克菲勒服务器，化装舞会……还记得吗？😉</span>
+      <span style="display:inline-block;width:30px;"></span>
+      <span class="flow-node">对了，我爸可能也会在……我们尽量避开他吧？</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">当然。我怎么会忘了我们的第一次约会呢，宝贝？❤️</span>
+      <span class="flow-node flow-blue">是啊，我知道你们都指望着我。放心，有我在，没问题。💪</span>
+      <span class="flow-node flow-blue">知道了。我明天发短信给你。拜拜亚历克斯</span>
+      <span class="flow-node flow-blue">知道了。我明天发短信给你。拜拜亚历山德拉</span>
+    </div>
+    <div class="flow-row"><span class="badge b-alex">+1</span></div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">4.10.2 短信：达莉娅的梗图</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-dalia">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">天哪奥利安，我刚在Reddit上看到一只羊驼，发型跟你一模一样！😱</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">这梗你早该发出来的……</span>
+      <span class="flow-node flow-blue">哈哈哈哈。挺好笑的，达莉娅……</span>
+    </div>
+    <div class="flow-row">
+      <span class="badge b-dalia">+1</span>
+      <span class="flow-node">不说了我要跳进去洗澡了。拜拜！</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">哈哈哈哈哈</span>
+      <span class="flow-node flow-blue">也许我才是那个没幽默感的人。</span>
+      <span class="flow-node flow-blue">回头聊！</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">现在我知道你的发型是哪来的了</span>
+      <span class="flow-node flow-blue">也许你该回去扎辫子了</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">4.10.3 短信：给佩妮选照片</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">嘿嘿！我需要我经纪人的帮助！</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">怎么了？我能怎么帮我最喜欢的客户？</span>
+      <span class="flow-node flow-blue">现在没空，佩妮</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">选A还是选B？</span></div>
+    <div class="flow-row"><span class="flow-node flow-blue">照片里的女孩这么美，哪张都好看😊</span></div>
+    <div class="flow-row"><span class="badge b-penny">+1</span></div>
+    <div class="flow-row"><span class="flow-node">谢谢啦❤️</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">选项A</span>
+      <span class="flow-node flow-blue">选项B</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">4.10.4 短信：给诺娃找句霸气台词</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">如果你刚杀了一个远古恶魔救了一个女孩，你会立刻说什么霸气台词？😏</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">这问题也太具体了吧</span>
+      <span class="flow-node flow-blue">听起来不太急……我还有事，回头聊</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">快说！</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">弱者的命运就是被强者碾碎。认清你的位置，恶魔。</span>
+      <span class="flow-node flow-blue">不关你事，恶魔。把这垃圾拖出去。</span>
+      <span class="flow-node flow-blue">你对那女孩伸出脏手的那一刻就注定了你的命运，恶魔。下地狱吧……再一次。</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">别烦我了！😡</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">是你先发短信给我的！</span>
+      <span class="flow-node flow-blue">哈哈好吧，去忙你的……事吧</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">4.10.5 短信：卢娜的邀请</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">不想去也没关系</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">真的吗？我超想去！🇲🇽💀🇲🇽</span>
+      <span class="flow-node flow-blue">谢谢！但我还是不太想去，感觉像是家庭聚会</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">你喜欢你的塔可饼辣还是超辣？</span>
+      <span class="badge b-luna b-cross">路线</span>（略微延迟）
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">不太辣</span>
+      <span class="flow-node flow-blue">超辣！🌶️🌶️🌶️</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">抱歉，他抢了我手机</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">你爸有点……太那啥了</span>
+      <span class="flow-node flow-blue">哈哈没事，你爸跟你一样棒</span>
+    </div>
+    <div class="flow-row"><span class="badge b-luna">+1</span></div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">4.10.6 短信：南希调侃</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nancy">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">你觉得怎么样？</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">看起来很棒！</span>
+      <span class="flow-node flow-blue">我觉得你不戴它更好看😊</span>
+    </div>
+    <div class="flow-row"><span class="badge b-nancy">+1</span></div>
+    <div class="flow-row"><span class="flow-node">谢谢！😊我们改天趁天还没太冷去海滩吧</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">听起来太棒了！</span>
+      <span class="flow-node flow-blue">算了，我不太喜欢海滩</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">4.10.7 短信：张需要支持</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">你得帮我！</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">你需要什么？</span>
+      <span class="flow-node flow-blue">抱歉兄弟，我现在没空</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">哪条领带更适合我？</span></div>
+    <div class="flow-row"><span class="flow-node flow-blue">兄弟它们一模一样</span></div>
+    <div class="flow-row"><span class="flow-node">等等，我重新拍几张光线好的</span></div>
+    <div class="flow-row"><span class="flow-node flow-blue">这明明就是同一张照片！！！</span></div>
+    <div class="flow-row"><span class="flow-node">不！才不是！帮我选一个，求你了！</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">第一条</span>
+      <span class="flow-node flow-blue">它们颜色一样啊</span>
+      <span class="flow-node flow-blue">第二条</span>
+    </div>
+    <div class="flow-row">
+      <span class="badge b-cm">+1</span>
+      <span class="badge b-cm">+1</span>
+    </div>
+  </div>
+</div></div>
+
+<h3 class="section">4.11 - 太空约会</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="req" style="background:#e8daef;"><strong>前提：</strong><span class="badge b-annie">路线</span>（否则跳转到 ▶4.17）</div>
+
+<div class="box-head">4.11.1 决定："你想多了解仙女座吗？"</div><div class="box-body">
+  <div class="opt blue">当然</div>
+  <div class="opt gray">不想</div>
+</div></div>
+
+<div class="box-head">4.11.2 决定："就像我们第一次在Ion玩Eternum时说的……"</div><div class="box-body">
+  <div class="opt blue">信念一跃！ <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">赶紧搞定这破事！</div>
+  <div class="opt gray">不入虎穴焉得虎子！</div>
+</div></div>
+
+<div class="box-head">4.11.3 决定：你们该看什么电影？</div><div class="box-body">
+  <div class="opt blue">星际穿越 <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">热浴盆时光机2</div>
+</div></div>
+
+<div class="box-head">4.11.4 对话：在零重力房间</div><div class="box-body">
+  <p>聊"关于克雷登……"会获得 <span class="badge b-annie">+1</span>，其他话题可选。</p>
+</div></div>
+
+<div class="box-head">4.11.5 结果：舒适地裸体</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-annie">≥9</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-annie b-cross">路线</span>，跳转到 ▶4.17</p>
+</div></div>
+
+<div class="box-head">4.11.6 决定：安妮想让你看她裸体</div><div class="box-body">
+  <div class="opt blue">同意</div>
+  <div class="opt gray">拒绝，保持朋友关系 <span class="badge b-annie b-cross">路线</span>，跳转到 ▶4.17</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">4.12 - 色情场景：太空奥德赛 <span class="badge b-annie">安妮</span></h3>
+<div class="box lewd-body"><div class="box-head" style="background:#c0392b;">4.12.1 决定：手活进行中</div><div class="box-body">
+  <div class="opt blue">射</div>
+  <div class="opt blue">抓住安妮把她放到你身上<div class="sub">延长场景，强烈推荐</div></div>
+</div></div>
+
+<h3 class="section">4.13 - 外星爆发</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="box-head">4.13.1 决定：音频日志</div><div class="box-body">
+  <div class="opt blue">拿上音频日志设备<div class="sub">你可以通过点击右上角的唱片来听太空站上的音频日志。这是可选的！如果你在找到日志后立即听，主角有时会评论。</div></div>
+  <div class="opt gray">别碰它</div>
+</div></div>
+
+<div class="box-head">4.13.2 决定：瓦西尔想要实验室里的蛋</div><div class="box-body">
+  <div class="opt gray">付他500永恒币<div class="sub"><div class="req"><strong>前提：</strong><span class="badge b-eternal">≥500</span></div><span class="badge b-eternal">-50</span>，跳转到 ▶4.16</div></div>
+  <div class="opt blue">去找蛋</div>
+</div></div>
+
+<div class="box-head">4.13.3 决定：哈斯勒指挥官把枪递给你</div><div class="box-body">
+  <div class="opt blue">拿枪</div>
+  <div class="opt gray">不拿<div class="sub">你之后可能会死（4.15.1）</div></div>
+</div></div>
+
+<div class="box-head">4.13.4 决定：交叉口</div><div class="box-body">
+  <p>这个选择会同时影响短期（4.16.1）和长期（8.19.1）剧情。官方攻略称没有最佳选择，你应该两个都体验。我个人觉得哈斯勒的结局更好，但也有不同意见。</p>
+  <div class="opt blue">帮瓦西尔去拿蛋<div class="sub">继续于 ▶4.14</div></div>
+  <div class="opt blue">帮哈斯勒指挥官放炸弹<div class="sub">继续于 ▶4.15</div></div>
+</div></div>
+</div>
+
+<h3 class="section">4.14 - 外星爆发：给瓦西尔的蛋</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<p class="note">本段与4.15互斥。</p>
+<div class="box-head">4.14.1 决定：默瑟博士想被释放</div><div class="box-body">
+  <p>同样，这里没有最佳选择，你应该两个都试试。之后再见到默瑟博士时，她不会记仇。</p>
+  <div class="opt blue">解开她的绑</div>
+  <div class="opt gray">不解开</div>
+</div></div>
+
+<div class="box-head">4.14.2 决定：你找到了蛋</div><div class="box-body">
+  <div class="opt gray">看打开的蛋里面<div class="sub">你死了。跳转到 ▶4.17</div></div>
+  <div class="opt blue">拿一个闭合的蛋离开</div>
+  <div class="box-body">继续于 ▶4.16</div>
+</div></div>
+</div>
+
+<h3 class="section">4.15 - 外星爆发：给哈斯勒指挥官的炸弹</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<p class="note">本段与4.14互斥。</p>
+<div class="box-head">4.15.1 结果：一只外星飞镖穿过走廊</div><div class="box-body">
+  <p><strong>如果：</strong>你拿了哈斯勒指挥官给你的枪（4.13.3）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>你死了。跳转到 ▶4.17</p>
+</div></div>
+
+<div class="box-head">4.15.2 QTE：一只外星跳到你脖子上</div><div class="box-body">
+  <div class="opt blue">及时按"击杀"</div>
+  <div class="opt gray">QTE失败<div class="sub">你死了。跳转到 ▶4.17</div></div>
+  <div class="box-body">继续于 ▶4.16</div>
+</div></div>
+</div>
+
+<h3 class="section">4.16 - 外星爆发：和安妮一起逃脱</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="box-head">4.16.1 结果：打开食堂门</div><div class="box-body">
+  <ul class="simple">
+    <li>如果你只是付了瓦西尔钱（4.13.2），他会拿钱直接给你开门。</li>
+    <li>如果你给哈斯勒指挥官放了炸弹（4.13.4），他会射杀瓦西尔并为你开门。</li>
+    <li>如果你拿了蛋给瓦西尔（4.13.4）但没释放默瑟博士（4.14.1），他会拿蛋为你开门。</li>
+    <li>如果你拿了蛋给瓦西尔（4.13.4）并释放了默瑟博士（4.14.1），她会射杀哈斯勒，揭露她的计划，并为你开门。</li>
+  </ul>
+</div></div>
+
+<div class="box-head">4.16.2 决定：等待传送器</div><div class="box-body">
+  <div class="opt blue">听他最后的音频日志</div>
+  <div class="opt gray">算了</div>
+</div></div>
+
+<div class="box-head">4.16.3 结果：把它们全炸了</div><div class="box-body">
+  <p><strong>如果：</strong>你在Ion从咔嚓那里买了吊坠（1.11.3）</p>
+  <p><strong>那么：</strong>你和安妮活下来了！继续。</p>
+  <hr>
+  <p><strong>否则：</strong>你和安妮死了。继续。</p>
+  <div class="box-body">克服一切困难，安妮爱上了这次约会：<span class="badge b-annie">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section">4.17 - 正式晚宴</h3>
+<div class="box"><div class="box-head">4.17.1 亚历克斯的装扮</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-alex">路线</span></div>
+  <div class="opt gray">你今晚美极了</div>
+  <div class="opt blue">你看起来像个上流社会的女孩！ <span class="badge b-alex">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">4.17.2 对话：楼上</div><div class="box-body">
+  <p>你可以多选！点击"离开"继续。</p>
+  <div class="opt blue">卡吕普索和八卦女人们（左）<span class="badge b-sytel">+1</span></div>
+  <div class="opt blue">莫斯先生（中）<span class="badge b-eternal">+120</span>，任选话题</div>
+  <div class="opt gray">杜邦博士（右）可选</div>
+</div></div>
+
+<div class="box"><div class="box-head">4.17.3 决定："你来这里找什么？"</div><div class="box-body">
+  <div class="opt gray">厄运宝石</div>
+  <div class="opt gray">女人</div>
+  <div class="opt gray">金钱和权力</div>
+  <div class="opt blue">答案<div class="sub">他会安排午夜与你见面，但你永远不会赴约。当前版本无后续影响。</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">4.17.4 结果：观星</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-alex">路线</span> 且 <span class="badge b-alex">≥5</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-alex b-cross">路线</span>，跳转到 ▶5.1</p>
+</div></div>
+
+<div class="box"><div class="box-head">4.17.5 决定："你介意我们在这外面待一会儿吗？"</div><div class="box-body">
+  <div class="opt blue">不，我们在这待着吧</div>
+  <div class="opt gray">我们先专注目标吧 <span class="badge b-alex b-cross">路线</span>，跳转到 ▶5.1</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">4.18 - 色情场景：华丽之夜 <span class="badge b-alex">亚历克斯</span></h3>
+<div class="box lewd-body"><div class="box-head" style="background:#c0392b;">4.18.1 决定：收尾</div><div class="box-body">
+  <div class="opt blue">射在她嘴里</div>
+  <div class="opt blue">射在她脸上</div>
+  <div class="box-body">之后：<span class="badge b-alex">+1</span></div>
+</div></div>
+
+<!-- ========== CHAPTER 0.5 ========== -->
+<h2 class="chapter" id="ch05">0.5 - 亡者归来</h2>
+
+<h3 class="section">5.1 - 会见创始者</h3>
+<div class="box"><div class="box-head">5.1.1 决定：布莱尔护身符</div><div class="box-body">
+  <div class="opt gray">拿走护身符<div class="sub">目前只有一个实例护身符能防止你死亡（6.6.13, 6.7.2）。但收益很小，而且暗示使用护身符是有代价的。</div></div>
+  <div class="opt blue">拒绝</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.1.2 决定：你的信念</div><div class="box-body">
+  <p>创始者问你两个问题：</p>
+  <div class="opt blue">我为保护他人而战 &（任何答案都行）<div class="sub">第二个问题的答案在这里不重要。</div></div>
+  <div class="opt gray">我为自己而战 & 我不会牺牲他们</div>
+  <div class="opt gray">我为自己而战 & 我会牺牲他们</div>
+</div></div>
+
+<h3 class="section">5.2 - 屋顶</h3>
+<div class="box"><div class="box-head">5.2.1 决定：诺娃去浴室了</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="opt gray">看那幅画 <span class="badge b-nova">-1</span></div>
+  <div class="opt blue">不看<div class="sub">与诺娃的额外片段，且<span class="colortext" style="color:var(--nova)">诺娃 +1</span> 稍后（5.10）</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">5.2.2 决定：张没拿到任务</div><div class="box-body">
+  <div class="opt blue">给张一个任务 <span class="badge b-cm">+1</span></div>
+  <div class="opt gray">不给他任务</div>
+</div></div>
+
+<h3 class="section">5.3 - 亡灵节：出发</h3>
+<div class="box">
+<div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span>（否则跳转到 ▶5.9）</div>
+<div class="box-head">5.3.1 决定：事件重叠</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span></div>
+  <div class="opt blue">上车<div class="sub">你会及时赶到派对的，别担心。</div></div>
+  <div class="opt gray">别冒险明天的派对 <span class="badge b-luna b-cross">路线</span>，跳转到 ▶5.9</div>
+</div></div>
+
+<div class="box-head">5.3.2 决定：谁坐前面？</div><div class="box-body">
+  <div class="opt gray">坐前面</div>
+  <div class="opt blue">和卢娜坐后面 <span class="badge b-luna">+1</span></div>
+</div></div>
+
+<div class="box-head">5.3.3 决定：20个问题</div><div class="box-body">
+  <div class="opt blue">玩游戏</div>
+  <div class="opt gray">跳过<div class="sub">跳转到 ▶5.5</div></div>
+</div></div>
+</div>
+
+<h3 class="section">5.4 - 亡灵节：20个问题</h3>
+<p>猜卢娜在想谁！是劳尔、伊德里尔或诺娃之一。随着游戏进行会逐渐解锁更多问题。如果你赶时间，伊德里尔是唯一可能的著名人物，劳尔是唯一可能的男性。</p>
+
+<div class="box"><div class="box-head">5.4.1 决定：你觉得卢娜漂亮吗？</div><div class="box-body">
+  <div class="req"><strong>触发：</strong>游戏中你问"这个人……漂亮吗？"时</div>
+  <div class="opt blue">她完美 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">没意见</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.4.2 奖励</div><div class="box-body">
+  <p>如果你赢了第一轮，卢娜会提议再玩。如果你第二轮也赢了：<span class="badge b-luna">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">5.4.3 决定：轮到你了："你的那个人是女性吗？"</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你没有拒绝再玩一次</div>
+  <div class="opt blue">是</div>
+  <div class="opt blue">否</div>
+</div></div>
+
+<h3 class="section">5.5 - 亡灵节：深夜</h3>
+<div class="box"><div class="box-head">5.5.1 决定：卢娜睡着了</div><div class="box-body">
+  <div class="opt gray">什么都不做</div>
+  <div class="opt blue">搂住她 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">抚摸她的身体</div>
+</div></div>
+
+<h3 class="section">5.6 - 亡灵节：见卢娜的家人</h3>
+<div class="box"><div class="box-head">5.6.1 决定："你一定是卢娜的男朋友"</div><div class="box-body">
+  <div class="opt blue">将错就错 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">纠正他</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.2 决定："你对我女儿有什么意图？"</div><div class="box-body">
+  <div class="opt gray">她只是朋友</div>
+  <div class="opt blue">我喜欢她</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.3 决定：问某人你是否看起来更强壮了</div><div class="box-body">
+  <div class="opt gray">给张发照片</div>
+  <div class="opt blue">给安妮发照片<div class="sub"><span class="colortext" style="color:var(--annie)">安妮 +1</span> 她之后会回你一张照片（5.9.4）</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.4 对话：和卢娜在泳池里</div><div class="box-body">
+  <p>理想路线：先问她三个常规问题，然后让她脱掉手套，可获得 <span class="badge b-luna">+1</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.5 决定：卢娜被你迷住了</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你刚才让卢娜脱掉了手套</div>
+  <div class="opt blue">吻她<div class="sub"><span class="colortext" style="color:var(--luna)">卢娜 +1</span> 稍后（5.8.2）</div></div>
+  <div class="opt gray">退开</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.6 决定：摆姿势拍照</div><div class="box-body">
+  <div class="opt gray">保持同一个姿势</div>
+  <div class="opt blue">搂住卢娜的腰 <span class="badge b-luna">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.7 决定：你应该加入卢娜的奶奶</div><div class="box-body">
+  <div class="opt blue">加入祭坛</div>
+  <div class="opt gray">跳过<div class="sub">跳转到 ▶5.6.9</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.8 决定：在祭坛前</div><div class="box-body">
+  <div class="opt blue">说点什么</div>
+  <div class="opt gray">保持沉默</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.6.9 决定：卢娜在晒日光浴</div><div class="box-body">
+  <div class="opt blue">主动提出给她按摩</div>
+  <div class="opt gray">离开 <span class="badge b-luna b-cross">路线</span>，跳转到 ▶5.9</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">5.7 - 色情场景：墨西哥盛宴 <span class="badge b-luna">卢娜</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">5.7.1 决定：卢娜喜欢你的按摩</div><div class="box-body">
+  <div class="opt gray">凑近她的私密部位<div class="sub">场景提前结束，跳转到 ▶5.9</div></div>
+  <div class="opt blue">别逼她</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">5.7.2 结果：更进一步</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-luna">≥11</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>场景提前结束，跳转到 ▶5.8</p>
+  <div class="box-body">卢娜高潮了：<span class="badge b-luna">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section">5.8 - 亡灵节：告别</h3>
+<div class="box"><div class="box-head">5.8.1 决定：收尾</div><div class="box-body">
+  <div class="opt blue">回去看看 <span class="badge b-outfit">服装9</span></div>
+  <div class="opt gray">不回去<div class="sub">跳转到 ▶5.9</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">5.8.2 结果：初吻</div><div class="box-body">
+  <p><strong>如果：</strong>你在泳池试图吻卢娜（5.6.5）</p>
+  <p><strong>那么：</strong><span class="badge b-luna">+1</span></p>
+</div></div>
+
+<h3 class="section">5.9 - 晚间短信</h3>
+<div class="box"><div class="box-head">5.9.1 结果：段落前提</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-penny">路线</span> 或 <span class="badge b-nova">路线</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>跳转到 ▶5.18</p>
+</div></div>
+
+<div class="box"><div class="box-head">5.9.2 短信：卢娜想和安妮一起玩</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">我本来打算玩会儿Eternum的</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">酷</span>
+      <span class="flow-node flow-blue">听起来很棒！玩得开心😂😂</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">你觉得她会喜欢哪个服务器？</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">有点怪的！</span>
+      <span class="flow-node flow-blue">有打斗动作的！</span>
+      <span class="flow-node flow-blue">钓鱼模拟器！</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">5.9.3 短信：诺娃想见你</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span> 且你没看诺娃的画（5.2.1）</div>
+  <div class="flow">
+    <div class="flow-node">等我一下，我马上回来！</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">我一步都不会动的！</span>
+      <span class="flow-node flow-blue">好吧，但你快点</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">5.9.4 短信：安妮看到你的照片</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你给安妮发了你的半裸照（5.6.3）</div>
+  <div class="flow">
+    <div class="flow-node">你是不是问我你看起来是不是更强壮了……？</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">是的！我今天早上在卢娜家拍的这张</span>
+      <span class="flow-node flow-blue">没事啦，别在意。只是我犯傻而已</span>
+    </div>
+    <div class="flow-row"><span class="badge b-annie">路线</span></div>
+    <div class="flow-row"><span style="font-size:.8em;">true ↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false ↘</span></div>
+    <div class="flow-row">
+      <span class="flow-node">我是说，对！你看起来超棒！比几个月前强壮多了！那当然！</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">哈哈，你这么说就好。我先走了lol</span>
+      <span class="flow-node flow-blue">对吧！我也这么觉得。很高兴你喜欢😘</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">5.9.5 短信：安妮看到你的照片（续）</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">看看我的头发！都这么长了！</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">这是现在拍的？你在哪？</span>
+      <span class="flow-node flow-blue">哇！我好喜欢😍</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">我之前在她的更衣室里。她身材真好😋</span>
+      <span class="flow-node">我要让它长到跟Eternum里一样长！</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">哦不错！我得走了，回头见，到时候看你的新发型！😊</span>
+      <span class="flow-node flow-blue">你身材也超棒！真希望能多看看那张照片……😝</span>
+      <span class="flow-node flow-blue">迫不及待想看了！真希望你是竖拍的……😝</span>
+      <span class="flow-node flow-blue">哦不错！我得走了，回头见，到时候看你的新发型！😊</span>
+    </div>
+    <div class="flow-row"><span class="flow-node" style="background:#f5b7b1;">……这样？</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">哦不错！张会爱死这个的！</span>
+      <span class="flow-node flow-blue">OMG🔥🔥🔥🔥</span>
+    </div>
+    <div class="flow-row"><span class="badge b-annie">+1</span></div>
+  </div>
+</div></div>
+
+<h3 class="section">5.10 - 诺娃的漫画</h3>
+<div class="box" style="background:#fdebd0;border:1px solid var(--nova);">
+<div class="req" style="background:#fad7a0;"><strong>前提：</strong><span class="badge b-nova">路线</span> 且你没看诺娃的画（5.2.1）</div>
+<div class="box-head">5.10.1 决定：诺娃等你评价</div><div class="box-body">
+  <div class="opt gray">不是我喜欢的类型……</div>
+  <div class="opt gray">看起来有点业余</div>
+  <div class="opt blue">我超喜欢 <span class="badge b-nova">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section">5.11 - 派对前</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<div class="req" style="background:#f9e79f;"><strong>前提：</strong><span class="badge b-penny">路线</span>（否则跳转到 ▶5.18）</div>
+<div class="box-head">5.11.1 决定：佩妮能进浴室吗？</div><div class="box-body">
+  <div class="opt red">能 <span class="badge b-outfit">服装11</span></div>
+  <div class="opt gray">不能</div>
+</div></div>
+
+<div class="box-head">5.11.2 短信：诺娃准备好了</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">我在奥康纳桥的转角等你</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">我们在路上了！迫不及待想见你😜</span>
+      <span class="flow-node flow-blue">好</span>
+    </div>
+    <div class="flow-row"><span class="badge b-nova">+1</span></div>
+  </div>
+</div></div>
+
+<div class="box-head">5.11.3 结果：诺娃加入派对</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-nova">路线</span></p>
+  <p><strong>那么：</strong><span class="badge b-outfit">服装8</span></p>
+</div></div>
+</div>
+
+<h3 class="section">5.12 - 万圣节派对</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<p>开始时你必须先在柜台和朱迪思说话 <span class="badge b-eternal">-49</span>。然后可以自由活动。没有佩妮不能参加派对。只有在 <span class="badge b-nova">路线</span> 上诺娃才会在。</p>
+<p>你可以提前离开派对，这会导致 <span class="badge b-penny b-cross">路线</span> 并跳转到 ▶5.18。</p>
+<hr>
+<p><strong>如果在 <span class="badge b-nova">路线</span> 上：</strong></p>
+<ol class="simple">
+  <li>按任意顺序：
+    <ul class="simple">
+      <li>找佩妮看她被泼水（可选）</li>
+      <li>找诺娃，让明解释他的游戏</li>
+    </ul>
+  </li>
+  <li>开始明的游戏（跟随 ▶5.13）</li>
+  <li>如果你还没见佩妮，去教室找她</li>
+  <li>去储物柜找佩妮，向她要胸罩</li>
+  <li>恢复明的游戏（跟随 ▶5.14）</li>
+  <li>去佩妮的教室玩真心话大冒险（跟随 ▶5.16）</li>
+  <li>选一：
+    <ul class="simple">
+      <li>在楼梯找佩妮（理想路线，跟随 ▶5.17）</li>
+      <li>跟蕾吉娜去储物柜（<span class="badge b-penny b-cross">路线</span>，跳转到 ▶5.18）</li>
+    </ul>
+  </li>
+</ol>
+<p>在佩妮教室等她会跳过明的游戏，继续到第6步。</p>
+<hr>
+<p><strong>如果不在 <span class="badge b-nova">路线</span> 上：</strong></p>
+<ol class="simple">
+  <li>找佩妮看她被泼水</li>
+  <li>在佩妮教室等她玩真心话大冒险（跟随 ▶5.16）</li>
+  <li>选一：
+    <ul class="simple">
+      <li>在楼梯找佩妮（理想路线，跟随 ▶5.17）</li>
+      <li>跟蕾吉娜去储物柜（<span class="badge b-penny b-cross">路线</span>，跳转到 ▶5.18）</li>
+    </ul>
+  </li>
+</ol>
+</div>
+
+<h3 class="section">5.13 - 万圣节派对：开始明的游戏</h3>
+<div class="box" style="background:#fdebd0;border:1px solid var(--nova);">
+<div class="box-head">5.13.1 决定："喝酒"</div><div class="box-body">
+  <div class="opt gray">再喝一杯<div class="sub">你醉倒并失去明的游戏。第4、5步不可用。返回派对：▶5.12</div></div>
+  <div class="opt blue">到此为止<div class="sub">你输了战役但没输掉战争。返回派对：▶5.12</div></div>
+</div></div>
+</div>
+
+<h3 class="section">5.14 - 万圣节派对：继续明的游戏</h3>
+<div class="box" style="background:#fdebd0;border:1px solid var(--nova);">
+<div class="box-head">5.14.1 决定："我这么说是因为诺娃是我的……"</div><div class="box-body">
+  <div class="opt gray">朋友</div>
+  <div class="opt gray">队友</div>
+  <div class="opt blue">女孩 <span class="badge b-nova">+1</span></div>
+  <div class="box-body">诺娃的战斗服：<span class="badge b-outfit">服装9</span></div>
+</div></div>
+
+<div class="box-head">5.14.2 决定：回忆埃及服务器</div><div class="box-body">
+  <div class="opt gray">那地方太疯了</div>
+  <div class="opt gray">不过玛阿特确实很辣</div>
+  <div class="opt blue">那个口交才叫绝 <span class="badge b-nova">+1</span></div>
+</div></div>
+
+<div class="box-head">5.14.3 决定：缓解紧张气氛</div><div class="box-body">
+  <div class="opt blue">提议互相抚摸<div class="sub">前进到 ▶5.15</div></div>
+  <div class="opt gray">转移注意力忍着<div class="sub">跳上色情场景，返回派对：▶5.12</div></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">5.15 - 色情场景：大胆挑战 <span class="badge b-nova">诺娃</span></h3>
+<div class="box lewd-body">
+<div class="box-body"><span class="badge b-nova">+1</span>（不可见）</div>
+<div class="box-head" style="background:#c0392b;">5.15.1 决定：诺娃靠得很近</div><div class="box-body">
+  <div class="opt gray">抓住诺娃上她<div class="sub">她不会让你做的，但最终没有负面影响。</div></div>
+  <div class="opt blue">让她高潮</div>
+  <div class="box-body">返回派对：▶5.12</div>
+</div></div>
+</div>
+
+<h3 class="section">5.16 - 万圣节派对：真心话大冒险</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<div class="box-head">5.16.1 决定：第一轮</div><div class="box-body">
+  <div class="opt gray">真心话</div>
+  <div class="opt blue">大冒险 <span class="badge b-penny">+1</span></div>
+</div></div>
+
+<div class="box-head">5.16.2 决定：第二轮</div><div class="box-body">
+  <div class="opt gray">真心话<div class="sub">你怎么回答都行。跳转到 ▶5.16.4</div></div>
+  <div class="opt blue">大冒险</div>
+</div></div>
+
+<div class="box-head">5.16.3 决定：蘑菇之旅</div><div class="box-body">
+  <div class="opt gray">正面</div>
+  <div class="opt blue">反面</div>
+</div></div>
+
+<div class="box-head">5.16.4 决定：你要指定谁大冒险？</div><div class="box-body">
+  <div class="opt blue">佩内洛普</div>
+  <div class="opt gray">蕾吉娜 <span class="badge b-penny">-1</span></div>
+  <div class="opt gray">夏洛特</div>
+</div></div>
+
+<div class="box-head">5.16.5 决定：佩妮想找失踪的年鉴</div><div class="box-body">
+  <div class="opt blue">帮她<div class="sub">返回派对：▶5.12</div></div>
+  <div class="opt gray">劝阻她 <span class="badge b-penny b-cross">路线</span>，跳转到 ▶5.18</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">5.17 - 色情场景：荣誉任务 <span class="badge b-penny">佩妮</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">5.17.1 决定：选择方式</div><div class="box-body">
+  <div class="opt blue">浪漫方式</div>
+  <div class="opt blue">粗暴方式<div class="sub">下一段佩妮的色情场景（7.13）会有两段更粗暴的性爱和打屁股动画。</div></div>
+  <div class="box-body">晚安吻：<span class="badge b-penny">+2</span></div>
+</div></div>
+</div>
+
+<h3 class="section">5.18 - 南希的工作场所</h3>
+<div class="box"><div class="box-head">5.18.1 决定：南希给你带了咖啡</div><div class="box-body">
+  <div class="opt blue">感谢她的咖啡 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">专注任务</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.18.2 决定：格特鲁德又把你当成达莉娅</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nancy">路线</span></div>
+  <div class="opt blue">扮演南希的孩子<div class="sub">南希在游戏剩余部分会偶尔扮演你妈妈。</div></div>
+  <div class="opt gray">纠正她</div>
+</div></div>
+
+<div class="box"><div class="box-head">5.18.3 决定：调查尤利西斯</div><div class="box-body">
+  <div class="opt blue">其他厄运宝石持有者</div>
+  <div class="opt blue">尤利西斯的下一个活动</div>
+  <div class="opt blue">创始者</div>
+  <div class="opt gray">离开</div>
+</div></div>
+
+<h3 class="section">5.19 - 在电梯里</h3>
+<div class="box" style="background:#fadbd8;">
+<div class="req" style="background:#f5b7b1;"><strong>前提：</strong><span class="badge b-nancy">路线</span>（否则跳转到 ▶6.1）</div>
+<div class="box-head">5.19.1 决定：南希担心利用你</div><div class="box-body">
+  <div class="opt gray">我只想做对你最好的事</div>
+  <div class="opt gray">也许我们应该暂时忘记"我们"…… <span class="badge b-nancy b-cross">路线</span>，跳转到 ▶6.1</div>
+  <div class="opt blue">我也知道自己想要什么 <span class="badge b-nancy">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">5.20 - 色情场景：紧急叫停 <span class="badge b-nancy">南希</span></h3>
+<div class="box lewd-body"><div class="box-body">在她背上收尾：<span class="badge b-nancy">+2</span></div></div>
+
+<!-- ========== CHAPTER 0.6 ========== -->
+<h2 class="chapter" id="ch06">0.6 - 战争与西部人</h2>
+
+<h3 class="section">6.1 - 瓦格纳将军的宝石</h3>
+<div class="box"><div class="box-head">6.1.1 决定：选一个昵称</div><div class="box-body">
+  <p>在Eternum的世界里，你将以此名为人所知。</p>
+  <div class="opt blue">赫拉克勒斯</div>
+  <div class="opt blue">无名氏</div>
+  <div class="opt blue">厄洛斯</div>
+  <div class="opt blue">其他<div class="sub">你可以输入自己的昵称</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">6.1.2 决定："啊，这就是奥吉吉亚的森林吗？真美！"</div><div class="box-body">
+  <div class="opt blue">但不如站在我面前的精灵公主美！ <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">虽然有点冷。不是有更暖和的地方吗？</div>
+  <div class="opt blue">怎么耷拉着脸，我的公主？ <span class="badge b-sytel">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">6.1.3 决定：卡吕普索离开</div><div class="box-body">
+  <div class="opt gray">非正式告别</div>
+  <div class="opt blue">正式告别 <span class="badge b-sytel">+1</span></div>
+</div></div>
+
+<h3 class="section">6.2 - 谋杀之谜前</h3>
+<div class="box"><div class="box-head">6.2.1 决定：魔法和肌肉哪个更好？</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span> 和 <span class="badge b-dalia">路线</span></div>
+  <div class="opt blue">体育 <span class="badge b-dalia">+1</span></div>
+  <div class="opt blue">魔法 <span class="badge b-penny">+1</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">6.2.2 决定：南希去洗澡</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nancy">路线</span></div>
+  <div class="opt blue">调情 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">感谢她</div>
+</div></div>
+
+<div class="box"><div class="box-head">6.2.3 决定：什么比死更可怕？</div><div class="box-body">
+  <div class="opt blue">孤独</div>
+  <div class="opt blue">黑暗</div>
+  <div class="opt blue">失败</div>
+</div></div>
+
+<h3 class="section">6.3 - 谋杀之谜</h3>
+<p>强烈建议你第一次盲玩这段！这是一个复杂的自由探索环节。为简单起见，我只按理想路线逐步列出操作序列。不过完成这段有多种方式。这里没列出的所有内容都是可选的，主要是在各轮中与客人交谈。除了一些额外对话外没有任何收益或惩罚。</p>
+
+<h3 class="section">6.4 - 谋杀之谜：第一轮</h3>
+<div class="box"><div class="box-head">6.4.1 行动（在武器处）</div><div class="box-body">和哈雷说话</div></div>
+<div class="box"><div class="box-head">6.4.2 决定：你喜欢矮个女孩吗？</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-annie">路线</span> 和 <span class="badge b-nova">路线</span></div>
+  <div class="opt blue">我喜欢她们 <span class="badge b-annie">+1</span> <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">我喜欢高个女孩</div>
+</div></div>
+<div class="box"><div class="box-head">6.4.3 行动（在锁着的门处）</div><div class="box-body">试着开门</div></div>
+<div class="box"><div class="box-head">6.4.4 决定：门纹丝不动</div><div class="box-body">
+  <div class="opt blue">再试一次</div>
+  <div class="opt blue">看看别的地方</div>
+</div></div>
+<div class="box"><div class="box-head">6.4.5 行动（在接待处）</div><div class="box-body">和克隆克说话</div></div>
+<div class="box"><div class="box-head">6.4.6 决定：克隆克为自己笨拙的身手难过</div><div class="box-body">
+  <div class="opt blue">对克隆克好一点 <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">对克隆克粗鲁</div>
+</div></div>
+<div class="box"><div class="box-head">6.4.7 决定：准备好投票了吗？</div><div class="box-body">
+  <div class="opt blue">投票</div>
+  <div class="opt gray">还没<div class="sub">继续探索</div></div>
+</div></div>
+<div class="box"><div class="box-head">6.4.8 决定：第一轮投票</div><div class="box-body">
+  <p>无论你投谁，埃利奥特都会死。</p>
+  <div class="opt blue">哈雷·琼斯，女杀手</div>
+  <div class="opt blue">安娜·皮亚热，心理学家</div>
+  <div class="opt blue">杰米尼，灵媒</div>
+  <div class="opt blue">白修女，灵媒</div>
+  <div class="opt blue">埃利奥特·库克，收藏家之子</div>
+  <div class="opt gray">黛利拉·沃伦<div class="sub">诺娃会生气但没有负面影响……至少这次没有。</div></div>
+</div></div>
+
+<h3 class="section">6.5 - 谋杀之谜：第二轮</h3>
+<div class="box"><div class="box-head">6.5.1 行动（在接待处）</div><div class="box-body">检查接待处找钥匙</div></div>
+<div class="box"><div class="box-head">6.5.2 行动（在锁着的门处）</div><div class="box-body">开门</div></div>
+<div class="box"><div class="box-head">6.5.3 结果：安妮隐身了</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-annie">路线</span> 且你在战猪参观了占卜课（3.9）</p>
+  <p><strong>那么：</strong><span class="badge b-annie">+1</span></p>
+</div></div>
+<div class="box"><div class="box-head">6.5.4 小贴士（可选，在沙发处）</div><div class="box-body">
+  <p>如果你现在和皮亚热说话，她会提出在最后一轮投票给白修女后给你看她的胸。你接不接受、是否守约都由你决定，两种方式都没有重大后果。</p>
+</div></div>
+<div class="box"><div class="box-head">6.5.5 行动（在窗户处）</div><div class="box-body">和杰米尼说话问他的年龄</div></div>
+<div class="box"><div class="box-head">6.5.6 行动（在武器处）</div><div class="box-body">和哈雷说话问她的年龄</div></div>
+<div class="box"><div class="box-head">6.5.7 行动</div><div class="box-body">回行李箱区或去克隆克处投票</div></div>
+<div class="box"><div class="box-head">6.5.8 决定：第二轮投票</div><div class="box-body">
+  <p>如果这一轮死两个人，游戏就只有3轮而不是4轮（6.7）。不过第4轮除了一些对话外没有收益。全程活下来的客人之后会给你一个人情（6.8.2）。</p>
+  <div class="opt gray">哈雷·琼斯，女杀手<div class="sub">杰米尼和白修女死</div></div>
+  <div class="opt gray">安娜·皮亚热，心理学家<div class="sub">杰米尼和白修女死</div></div>
+  <div class="opt blue">杰米尼，灵媒<div class="sub">杰米尼死。白修女活下来，这样你之后可以从她那里获得120永恒币（6.6.10）</div></div>
+  <div class="opt gray">白修女，灵媒<div class="sub">白修女死</div></div>
+  <div class="opt gray">黛利拉·沃伦<div class="sub">杰米尼和白修女死</div></div>
+</div></div>
+
+<h3 class="section">6.6 - 谋杀之谜：第三轮</h3>
+<div class="box"><div class="box-head">6.6.1 行动（在行李箱区）</div><div class="box-body">检查行李箱</div></div>
+<div class="box lewd-head" style="background:#8b1a1a;color:#fff;padding:8px 14px;border-radius:5px;margin:10px 0;">6.6.2 微型色情：蓝眼 <span class="badge b-nova">诺娃</span> <div class="req" style="background:#f5b7b1;color:#333;"><strong>前提：</strong><span class="badge b-nova">路线</span></div></div>
+<div class="box"><div class="box-head">6.6.3 行动（在行李箱区）</div><div class="box-body">如果你看了色情场景，再检查一次行李箱</div></div>
+<div class="box"><div class="box-head">6.6.4 行动</div><div class="box-body">打开行李箱，密码1491</div></div>
+<div class="box"><div class="box-head">6.6.5 决定：安妮想继续隐身调查</div><div class="box-body">
+  <div class="opt blue">信任她，让她调查<div class="sub">解开谜团所需（6.8.1）</div></div>
+  <div class="opt gray">让她恢复正常</div>
+</div></div>
+<div class="box"><div class="box-head">6.6.6 行动（在窗户处）</div><div class="box-body">如果他还活着，和杰米尼说话揭穿他的谎言</div></div>
+<div class="box"><div class="box-head">6.6.7 行动（在武器处）</div><div class="box-body">和哈雷说话揭穿她的谎言</div></div>
+<div class="box"><div class="box-head">6.6.8 决定：蓝发诺娃想让你摸摸头奖励她揭穿哈雷</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="opt blue">摸摸她的头 <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">不摸</div>
+</div></div>
+<div class="box"><div class="box-head">6.6.9 行动（在外面）</div><div class="box-body">如果她还活着，和白修女说话揭穿她的谎言</div></div>
+<div class="box"><div class="box-head">6.6.10 决定：白修女出钱让你保密</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>白修女在第二轮活了下来（6.5.8）</div>
+  <div class="opt gray">成交 <span class="badge b-eternal">+100</span></div>
+  <div class="opt blue">我要更多 <span class="badge b-eternal">+120</span></div>
+  <div class="opt gray">我不要你的钱</div>
+</div></div>
+<div class="box"><div class="box-head">6.6.11 行动（在沙发处）</div><div class="box-body">和皮亚热说话揭穿她的谎言</div></div>
+<div class="box"><div class="box-head">6.6.12 行动（在接待处）</div><div class="box-body">和克隆克说话投票</div></div>
+<div class="box"><div class="box-head">6.6.13 决定：第三轮投票</div><div class="box-body">
+  <p>你投谁谁就死。死人不能投票。全程活下来的客人之后会给你一个人情（6.8.2）。</p>
+  <div class="opt blue">哈雷·琼斯，女杀手</div>
+  <div class="opt blue">安娜·皮亚热，心理学家</div>
+  <div class="opt blue">杰米尼，灵媒</div>
+  <div class="opt blue">白修女，灵媒</div>
+  <div class="opt gray">黛利拉·沃伦 <span class="badge b-nova b-cross">路线</span><div class="sub">所有人都死，包括你。如果你有布莱尔护身符（5.1.1）会有特殊场景，但后果基本一样。跳转到 ▶6.11</div></div>
+</div></div>
+
+<h3 class="section">6.7 - 谋杀之谜：第四轮</h3>
+<div class="box"><div class="req"><strong>前提：</strong>第二轮只死了一个客人（6.5.8）。否则跳转到 ▶6.8</div>
+<div class="box-head">6.7.1 行动（在接待处）</div><div class="box-body">所有剩余客人会变得绝望；你除了投票做不了太多。</div></div>
+<div class="box-head">6.7.2 决定：第四轮投票</div><div class="box-body">
+  <p>你投谁谁就死。全程活下来的客人之后会给你一个人情（6.8.2）。</p>
+  <div class="opt blue">哈雷·琼斯，女杀手</div>
+  <div class="opt blue">安娜·皮亚热，心理学家</div>
+  <div class="opt blue">杰米尼，灵媒</div>
+  <div class="opt blue">白修女，灵媒</div>
+  <div class="opt gray">黛利拉·沃伦 <span class="badge b-nova b-cross">路线</span><div class="sub">所有人都死，包括你。如果你有布莱尔护身符会有特殊场景，但后果基本一样。跳转到 ▶6.11</div></div>
+</div></div>
+</div>
+
+<h3 class="section">6.8 - 谋杀之谜：对决</h3>
+<div class="box"><div class="box-head">6.8.1 结果：夏洛克的揭示</div><div class="box-body">
+  <p><strong>如果：</strong>你让安妮隐身调查（6.6.5）且你揭穿了至少两个客人的谎言（6.6.6, 6.6.7, 6.6.9, 6.6.11）</p>
+  <p><strong>那么：</strong>安妮解开了谜团！</p>
+  <hr>
+  <p><strong>否则：</strong>谜团仍未解开，<span class="badge b-eternal">+50</span></p>
+</div></div>
+
+<div class="box"><div class="box-head">6.8.2 结果：还活着</div><div class="box-body">
+  <p>除了你、安妮和诺娃，只有一位其他客人能活下来。谁活下来完全取决于你在2-4轮结束时的投票（6.5.8, 6.6.13, 6.7.2）。活下来的客人会感谢你放他一条命并提供一个人情：</p>
+  <ul class="simple">
+    <li>哈雷·琼斯在罪恶城服务器的商店给你折扣</li>
+    <li>安娜·皮亚热帮你在明阳服务器处理与幕府的麻烦</li>
+    <li>杰米尼在阿哥拉服务器为你预测未来</li>
+    <li>白修女在仙女座服务器给你一艘太空船、武器或外交通道</li>
+  </ul>
+  <p>当前版本中你还无法使用这些提议。</p>
+</div></div>
+
+<div class="box"><div class="box-head">6.8.3 决定：选一个奖励</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>安妮解开了谜团（6.8.1）</div>
+  <div class="opt blue">神器<div class="sub">开发者说神器将在未来的色情场景中使用，虽然游戏里还没有。</div></div>
+  <div class="opt gray">50永恒币 <span class="badge b-eternal">+50</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">6.8.4 结果：赞美安妮</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-annie">路线</span> 且安妮解开了谜团（6.8.1）</p>
+  <p><strong>那么：</strong><span class="badge b-annie">+1</span></p>
+</div></div>
+
+<h3 class="section">6.9 - 安妮的房间</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="req" style="background:#e8daef;"><strong>前提：</strong><span class="badge b-annie">路线</span>（否则跳转到 ▶6.11）</div>
+<div class="box-head">6.9.1 决定：谈论你的父亲</div><div class="box-body">
+  <div class="opt blue">我真正的家人在克雷登 <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">我不想谈这个</div>
+  <div class="opt gray">你知道当爹的有时候真的很混蛋</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">6.10 - 色情场景：夜半饼干 <span class="badge b-annie">安妮</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">6.10.1 决定：安妮在给你口交</div><div class="box-body">
+  <div class="opt blue">让她自己找节奏</div>
+  <div class="opt blue">推她到极限</div>
+  <div class="box-body">赞美她：<span class="badge b-annie">+1</span></div>
+</div></div>
+</div>
+
+<h3 class="section">6.11 - 公交站</h3>
+<div class="box"><div class="box-head">6.11.1 为达莉娅的蛋白粉选口味</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-dalia">路线</span></div>
+  <div class="opt gray">羽衣甘蓝 <span class="badge b-eternal">-75</span><div class="sub">达莉娅会喜欢任何礼物，但如果你选其他两个中的一个，她会回赠你一个肉桂卷。</div></div>
+  <div class="opt gray">曲奇奶油 <span class="badge b-eternal">-66</span></div>
+  <div class="opt blue">烧烤味 <span class="badge b-eternal">-71</span>，<span class="colortext" style="color:var(--dalia)">达莉娅 +1</span> 稍后（8.11.1）</div>
+  <div class="opt gray">不给她买</div>
+</div></div>
+
+<div class="box"><div class="box-head">6.11.2 短信：亚历克斯生病了</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">我改天再带你看公寓吧</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">我去，真的吗？我可以过来照顾你😔</span>
+      <span class="flow-node flow-blue">那西部服务器呢？还有那个宝石？</span>
+    </div>
+    <div class="flow-row"><span class="badge b-alex">+1</span></div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">6.11.3 决定：亚历克斯不想让你来</div><div class="box-body">
+  <div class="opt blue">买点药和毯子，还是去看她</div>
+  <div class="opt gray">算了，回家<div class="sub">你之后会失去亚历克斯的路线（6.11.7）</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">6.11.4 决定：张想带米凯拉去看电影</div><div class="box-body">
+  <div class="opt blue">借张25美元 <span class="badge b-eternal">-25</span> <span class="badge b-cm">+1</span></div>
+  <div class="opt gray">不借给他钱</div>
+</div></div>
+
+<div class="box"><div class="box-head">6.11.5 短信：卢娜的发型</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span> 和 <span class="badge b-luna">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">我需要你告诉她她在洗澡换发型之前有多美！</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">她看起来超漂亮😍</span>
+      <span class="flow-node flow-blue">你们俩都美翻了😍😍</span>
+      <span class="flow-node flow-blue">哈哈行了别闹了</span>
+    </div>
+    <div class="flow-row">
+      <span class="badge b-luna">+1</span>
+      <span class="badge b-penny">+1</span> <span class="badge b-luna">+1</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">6.11.6 决定：阿克塞尔想交换情报</div><div class="box-body">
+  <div class="opt blue">告诉他你知道的<div class="sub">你交换情报，阿克塞尔之后会要求再见面（9.8.3）</div></div>
+  <div class="opt gray">叫他滚蛋</div>
+</div></div>
+
+<div class="box"><div class="box-head">6.11.7 结果：拜访亚历克斯</div><div class="box-body">
+  <p><strong>如果：</strong>你决定还是去看亚历克斯（6.11.3）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-alex b-cross">路线</span>，跳转到 ▶6.13</p>
+</div></div>
+
+<h3 class="section">6.12 - 亚历克斯的公寓</h3>
+<div class="box"><div class="box-head">6.12.1 结果：亚历克斯是否让你进门</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-alex">路线</span> 且 <span class="badge b-alex">≥6</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-alex b-cross">路线</span>，跳转到 ▶6.13</p>
+  <div class="box-body">亚历克斯喜欢你带给她的东西：<span class="badge b-alex">+1</span></div>
+</div></div>
+
+<h3 class="section">6.13 - 边境小径</h3>
+<div class="box"><div class="box-head">6.13.1 决定：点一杯饮料</div><div class="box-body">
+  <div class="opt blue">可乐</div>
+  <div class="opt blue">咖啡</div>
+  <div class="opt blue">茶</div>
+</div></div>
+<div class="box"><div class="box-head">6.13.2 结果：再次找到伊娃</div><div class="box-body">
+  <p><strong>如果：</strong>你在Ion和伊娃发生过关系（1.12）</p>
+  <p><strong>那么：</strong>她会主动来找你说话</p>
+</div></div>
+
+<h3 class="section">6.14 - 边境小径：黑岭</h3>
+<p>这是自由探索环节。按你希望的顺序加入女孩们，但如果你按达莉娅、卡吕普索、亚历克斯、然后再达莉娅的顺序拜访，会看到最多笑话。第二次拜访达莉娅会结束本段。理想路线需要拜访所有人。如果你结束本段时没拜访卡吕普索：<span class="badge b-sytel b-cross">路线</span></p>
+
+<h3 class="section">6.15 - 边境小径：第一次加入达莉娅</h3>
+<div class="box"><div class="box-head">6.15.1 小游戏：石头剪刀布</div><div class="box-body">
+  <p>达莉娅随机出。官方攻略建议你读档直到赢。看到达莉娅赢了开心的样子值150永恒币。</p>
+  <div class="opt blue">赢</div>
+  <div class="opt gray">输 <span class="badge b-eternal">-150</span></div>
+  <div class="opt gray">平局<div class="sub">再来一次</div></div>
+  <div class="box-body">返回地图：▶6.14</div>
+</div></div>
+
+<h3 class="section">6.16 - 边境小径：加入卡吕普索</h3>
+<div class="box"><div class="box-head">6.16.1 决定：卡吕普索需要你站岗</div><div class="box-body">
+  <div class="opt blue">留下保护公主 <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">离开 <span class="badge b-sytel b-cross">路线</span>，返回地图：▶6.14</div>
+</div></div>
+<div class="box"><div class="box-head">6.16.2 决定：卡吕普索想报答你救了她</div><div class="box-body">
+  <div class="opt blue">挑逗她<div class="sub">前进到 ▶6.17</div></div>
+  <div class="opt gray">算了 <span class="badge b-sytel b-cross">路线</span>，返回地图：▶6.14</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">6.17 - 色情场景：王室礼仪 <span class="badge b-sytel">卡吕普索</span></h3>
+<div class="box lewd-body"><div class="box-body"><span class="badge b-sytel">+1</span>，返回地图：▶6.14</div></div>
+
+<h3 class="section">6.18 - 边境小径：加入亚历克斯</h3>
+<div class="box"><div class="box-head">6.18.1 决定：装作不显眼</div><div class="box-body">
+  <div class="opt gray">打我</div>
+  <div class="opt blue">吻我 <span class="badge b-alex">+1</span> 若 <span class="badge b-alex">路线</span></div>
+</div></div>
+<div class="box"><div class="box-head">6.18.2 决定：面对虐童者</div><div class="box-body">
+  <div class="opt blue">杀了他 <span class="badge b-alex">+2</span></div>
+  <div class="opt gray">拿钱放他走 <span class="badge b-eternal">+500</span></div>
+  <div class="box-body">返回地图：▶6.14</div>
+</div></div>
+
+<h3 class="section">6.19 - 边境小径：第二次加入达莉娅</h3>
+<div class="box"><div class="box-head">6.19.1 决定：达莉娅想骑马去小屋</div><div class="box-body">
+  <div class="opt blue">跟她去</div>
+  <div class="opt gray">留在镇上<div class="sub">跳转到 ▶6.22</div></div>
+</div></div>
+
+<h3 class="section">6.20 - 边境小径：在小屋</h3>
+<div class="box" style="background:#f5e6d3;border:1px solid var(--dalia);">
+<div class="req" style="background:#e8d0b0;"><strong>前提：</strong><span class="badge b-dalia">路线</span>（否则跳转到 ▶6.22）</div>
+<div class="box-head">6.20.1 小游戏：和格特鲁德、夏洛特及一个禁军玩"上/娶/杀"</div><div class="box-body">随便你怎么玩</div></div>
+<div class="box-head">6.20.2 小游戏：和米凯拉、伊德里尔及达莉娅玩"上/娶/杀"</div><div class="box-body">
+  <p>如果你选择娶达莉娅：<span class="badge b-dalia">+1</span></p>
+  <p>如果你选择杀达莉娅，她会给你一个不爽的表情，但没有其他惩罚。</p>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">6.21 - 色情场景：磁暴狂沙 <span class="badge b-dalia">达莉娅</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">6.21.1 小游戏：坚持住</div><div class="box-body">
+  <div class="opt blue">选择"先让她高潮"六次</div>
+  <div class="opt gray">其他<div class="sub">场景提前结束，跳转到 ▶6.21.3</div></div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">6.21.2 决定：后入</div><div class="box-body">
+  <p>选择"继续后入"来推进</p>
+  <div class="opt blue">（拍打她屁股两次或以上）</div>
+  <div class="opt gray">（拍她屁股一次）</div>
+  <div class="opt gray">（不拍）</div>
+  <div class="opt gray">插入她 <span class="badge b-dalia b-cross">路线</span>，场景立即结束，跳转到 ▶6.22</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">6.21.3 奖励</div><div class="box-body">达莉娅感谢你尊重她的边界：<span class="badge b-dalia">+1</span></div>
+</div>
+
+<h3 class="section">6.22 - 和亚历克斯过夜</h3>
+<div class="box" style="background:#e8e0f0;border:1px solid var(--alex);">
+<div class="req" style="background:#d5c8e8;"><strong>前提：</strong><span class="badge b-alex">路线</span>（否则跳转到 ▶7.1）</div>
+<div class="box-head">6.22.1 决定：你想说什么？</div><div class="box-body">
+  <div class="opt gray">我能留下来吗？</div>
+  <div class="opt gray">你今晚真漂亮</div>
+  <div class="opt blue">我喜欢和你一起玩 <span class="badge b-alex">+1</span></div>
+</div></div>
+<div class="box-head">6.22.2 对话：和亚历克斯聊天</div><div class="box-body">
+  <div class="opt blue">（问全部三个话题）</div>
+  <div class="opt gray">去睡觉 <span class="badge b-alex b-cross">路线</span>，跳转到 ▶7.1</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">6.23 - 色情场景：公寓初夜 <span class="badge b-alex">亚历克斯</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">6.23.1 决定：晚安吻</div><div class="box-body">
+  <div class="opt blue">抚摸她</div>
+  <div class="opt blue">口交</div>
+  <div class="opt blue">让她抚摸你</div>
+  <div class="opt blue">足交</div>
+  <div class="box-body">不留遗憾：<span class="badge b-alex">+1</span></div>
+  <p>如果怀孕功能开启（1.1.1），亚历克斯会怀孕（9.12.2）</p>
+</div></div>
+</div>
+
+<!-- ========== CHAPTER 0.7 ========== -->
+<h2 class="chapter" id="ch07">0.7 - 虚荣</h2>
+
+<h3 class="section">7.1 - 威廉的揭示</h3>
+<div class="box"><div class="box-head">7.1.1 决定：伤心的亚历克斯</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-alex">路线</span></div>
+  <div class="opt gray">让她一个人待着</div>
+  <div class="opt blue">拥抱她 <span class="badge b-alex">+1</span></div>
+</div></div>
+
+<h3 class="section">7.2 - 和卢娜在咖啡馆</h3>
+<div class="box"><div class="box-head">7.2.1 短信：佩妮聊摄影</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">我刚在商场买了几样新东西……为明天的拍摄准备的</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">不错！我打赌我们会拍出好照片的😊</span>
+      <span class="flow-node flow-blue">哦买噶🔥🔥🔥能让我先睹为快吗？😜</span>
+    </div>
+    <div class="flow-row"><span class="badge b-penny">+1</span></div>
+    <div class="flow-row"><span class="flow-node">今天的任务：猎杀吸血鬼🧛</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">啊对！💀迫不及待和你一起玩了❤️</span>
+      <span class="flow-node flow-blue">没错！我该出发了。回头见佩妮^^</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">7.2.2 决定：给卢娜选饮料</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span></div>
+  <div class="opt gray">咖啡</div>
+  <div class="opt gray">茶</div>
+  <div class="opt blue">热巧克力 <span class="badge b-luna">+1</span>（延迟）</div>
+  <div class="box-body">付饮料钱：<span class="badge b-eternal">-20</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">7.2.3 决定：卢娜告诉你她在看的书</div><div class="box-body">
+  <div class="opt gray">就这些？</div>
+  <div class="opt gray">酷</div>
+  <div class="opt blue">多告诉我一点 <span class="badge b-luna">+1</span> 若 <span class="badge b-luna">路线</span></div>
+</div></div>
+
+<div class="box"><div class="box-head">7.2.4 决定：卢娜的超能力</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span></div>
+  <div class="opt blue">抓住她的手 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">不抓她的手</div>
+</div></div>
+
+<h3 class="section">7.3 - 霍洛布鲁克</h3>
+<div class="box"><div class="box-head">7.3.1 决定："如果我帮他们，我会得到……"</div><div class="box-body">
+  <div class="opt gray">正面</div>
+  <div class="opt blue">反面</div>
+</div></div>
+
+<div class="box"><div class="box-head">7.3.2 决定：东边还是西边？</div><div class="box-body">
+  <p>两个分支都可以探索后再选你喜欢的。</p>
+  <div class="opt blue">西边（卢娜，狼人）<div class="sub">卢娜+2的机会，继续于 ▶7.4</div></div>
+  <div class="opt blue">东边（佩妮，吸血鬼）<div class="sub">佩妮+2的机会，继续于 ▶7.5</div></div>
+</div></div>
+
+<h3 class="section">7.4 - 霍洛布鲁克：狼人</h3>
+<p class="note">本段与7.5互斥。</p>
+<div class="box"><div class="box-head">7.4.1 决定：你为什么在这里？</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span></div>
+  <div class="opt gray">我无聊</div>
+  <div class="opt blue">我想你了 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">我觉得你需要帮助</div>
+</div></div>
+<div class="box"><div class="box-head">7.4.2 决定：方德雷德向你发起决斗</div><div class="box-body">
+  <div class="opt blue">接受</div>
+  <div class="opt gray">拒绝<div class="sub">跳转到 ▶7.6</div></div>
+</div></div>
+<div class="box"><div class="box-head">7.4.3 决定：死战到底</div><div class="box-body">
+  <div class="opt gray">接受<div class="sub">跳转到 ▶7.6</div></div>
+  <div class="opt blue">不让卢娜参与 <span class="badge b-luna">+1</span> 若 <span class="badge b-luna">路线</span></div>
+  <div class="opt gray">拒绝</div>
+</div></div>
+<div class="box"><div class="box-head">7.4.4 对话：审问狼人</div><div class="box-body">理想路线：问每个问题。</div></div>
+<div class="box"><div class="box-head">7.4.5 决定：选边站</div><div class="box-body">
+  <p>官方攻略称这里没有最佳选择。两个都可以探索。虽然我不知道为什么有人会选择站在猎人一边。</p>
+  <div class="opt gray">站在猎人一边<div class="sub">之后猎人会成为你的盟友（7.8.1）</div></div>
+  <div class="opt blue">站在狼人一边<div class="sub">之后吸血鬼和狼人会成为你的盟友（7.8.1）</div></div>
+  <div class="box-body">继续于 ▶7.6</div>
+</div></div>
+
+<h3 class="section">7.5 - 霍洛布鲁克：吸血鬼</h3>
+<p class="note">本段与7.4互斥。</p>
+<div class="box"><div class="box-head">7.5.1 结果：调情</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-penny">路线</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>跳转到 ▶7.5.5</p>
+</div></div>
+<div class="box"><div class="box-head">7.5.2 决定："还记得我们曾经……"</div><div class="box-body">
+  <div class="opt gray">拍过写真</div>
+  <div class="opt blue">用过回忆回溯器<div class="sub"><div class="req"><strong>前提：</strong>你在战猪让佩妮用过回忆回溯器（3.9.1）</div><span class="badge b-penny">+1</span></div></div>
+  <div class="opt gray">去过蕾吉娜的房间</div>
+</div></div>
+<div class="box"><div class="box-head">7.5.3 决定：为吸血鬼跳舞</div><div class="box-body">
+  <div class="opt blue">接受</div>
+  <div class="opt gray">拒绝<div class="sub">跳转到 ▶7.5.5</div></div>
+</div></div>
+<div class="box"><div class="box-head">7.5.4 决定："让音乐引导你和你的妻子"</div><div class="box-body">
+  <div class="opt gray">好吧</div>
+  <div class="opt gray">她不是我妻子</div>
+  <div class="opt blue">她还不是我妻子 <span class="badge b-penny">+1</span></div>
+</div></div>
+<div class="box"><div class="box-head">7.5.5 对话：审问吸血鬼</div><div class="box-body">理想路线：问每个问题。</div></div>
+<div class="box"><div class="box-head">7.5.6 决定：选边站</div><div class="box-body">
+  <p>官方攻略称这里没有最佳选择。两个都可以探索。</p>
+  <div class="opt gray">站在猎人一边<div class="sub">之后猎人会成为你的盟友（7.8.1）</div></div>
+  <div class="opt blue">站在吸血鬼一边<div class="sub">之后吸血鬼和狼人会成为你的盟友（7.8.1）</div></div>
+  <div class="box-body">继续于 ▶7.6</div>
+</div></div>
+
+<h3 class="section">7.6 - 霍洛布鲁克：猎巫</h3>
+<div class="box"><div class="box-head">7.6.1 结果：哄孩子开心</div><div class="box-body">
+  <p>卢娜总会想办法哄西西比拉开心。不过如果你在红鲱鱼酒吧给卢娜买了动物（2.2.2），场景会根据你选的动物而不同。</p>
+</div></div>
+<div class="box"><div class="box-head">7.6.2 结果：卢娜在哪？</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-luna">路线</span></p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>跳转到 ▶7.8</p>
+</div></div>
+<div class="box"><div class="box-head">7.6.3 决定：寻找卢娜</div><div class="box-body">
+  <div class="opt blue">旧谷仓</div>
+  <div class="opt gray">风车 <span class="badge b-luna b-cross">路线</span>，跳转到 ▶7.8</div>
+  <div class="opt gray">教堂 <span class="badge b-luna b-cross">路线</span>，跳转到 ▶7.8</div>
+</div></div>
+<div class="box"><div class="box-head">7.6.4 决定：卢娜在谷仓里</div><div class="box-body">
+  <div class="opt blue">陪她</div>
+  <div class="opt gray">离开 <span class="badge b-luna b-cross">路线</span>，跳转到 ▶7.8</div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">7.7 - 色情场景：便利藏身地 <span class="badge b-luna">卢娜</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">7.7.1 决定：探索</div><div class="box-body">
+  <div class="opt gray">让她继续<div class="sub">场景会缩短不少。跳转到 ▶7.8</div></div>
+  <div class="opt blue">让她给你口交</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">7.7.2 决定：收尾</div><div class="box-body">
+  <div class="opt blue">射在她身上</div>
+  <div class="opt blue">射在她嘴里</div>
+</div></div>
+</div>
+
+<h3 class="section">7.8 - 离开霍洛布鲁克</h3>
+<div class="box"><div class="box-head">7.8.1 结果：巴卡神父找到你</div><div class="box-body">
+  <p><strong>如果：</strong>你没有明确站在猎人一边（7.4.5, 7.5.6）</p>
+  <p><strong>那么：</strong>狼人和吸血鬼成为你的盟友</p>
+  <hr>
+  <p><strong>否则：</strong>猎人成为你的盟友</p>
+</div></div>
+
+<div class="box"><div class="box-head">7.8.2 短信：快乐的卢娜</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-luna">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">你睡了吗？</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">不跟你说晚安我睡不着！再亲一个</span>
+      <span class="flow-node flow-blue">我在试呢</span>
+    </div>
+    <div class="flow-row"><span class="badge b-luna">+1</span></div>
+  </div>
+</div></div>
+
+<h3 class="section">7.9 - 星期五狂欢</h3>
+<div class="box"><div class="box-head">7.9.1 决定：张想约米凯拉出去</div><div class="box-body">
+  <div class="opt blue">去吧 <span class="badge b-cm">+1</span> 且<span class="colortext" style="color:var(--cm)">张 +1</span> 稍后（8.8.2）</div>
+  <div class="opt gray">先别约她<div class="sub">你之后会看到，张无论如何都会约米凯拉出去，而且他会没事，但如果你现在鼓励他他会做得更好。</div></div>
+</div></div>
+
+<h3 class="section">7.10 - 汽车拍摄</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<div class="req" style="background:#f9e79f;"><strong>前提：</strong><span class="badge b-penny">路线</span>（否则跳转到 ▶7.15）</div>
+<div class="box-head">7.10.1 决定：佩妮去浴室</div><div class="box-body">
+  <div class="opt blue">用内裤逗她<div class="sub">解锁与佩妮的微型色情场景，且<span class="colortext" style="color:var(--penny)">佩妮 +1</span> 稍后（7.11）</div></div>
+  <div class="opt gray">算了</div>
+</div></div>
+
+<div class="box-head">7.10.2 决定：阿斯彭告诉你关于取消的场次</div><div class="box-body">
+  <div class="opt blue">强硬 <span class="badge b-penny">+1</span></div>
+  <div class="opt gray">贿赂她<div class="sub"><div class="req"><strong>前提：</strong><span class="badge b-eternal">≥150</span></div><span class="badge b-eternal">-150</span></div></div>
+  <div class="opt gray">对她好</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">7.11 - 微型色情：没穿内裤 <span class="badge b-penny">佩妮</span></h3>
+<div class="box lewd-body">
+<div class="req" style="background:#f5b7b1;color:#333;"><strong>前提：</strong>你用内裤逗了佩妮（7.10.1）</div>
+<div class="box-body">之后：<span class="badge b-penny">+1</span></div>
+</div>
+
+<h3 class="section">7.12 - 汽车拍摄（续）</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<div class="box-head">7.12.1 决定：最后一张照片</div><div class="box-body">
+  <p>你可以先看完所有姿势再做决定！</p>
+  <div class="opt blue">靠在引擎盖上</div>
+  <div class="opt blue">躺在引擎盖上</div>
+  <div class="opt blue">在引擎盖前分开腿</div>
+</div></div>
+<div class="box-head">7.12.2 决定：阿斯彭离开</div><div class="box-body">
+  <div class="opt blue">对她好</div>
+  <div class="opt gray">对她粗鲁</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">7.13 - 色情场景：狂热机车 <span class="badge b-penny">佩妮</span></h3>
+<div class="box lewd-body">
+<div class="box-body">虽然表面上有时间限制，但这段色情场景中你做多少都没关系。按完成即可继续。</div>
+<div class="box-head" style="background:#c0392b;">7.13.1 决定：收尾</div><div class="box-body">
+  <div class="opt blue">内射<div class="sub">如果怀孕功能开启（1.1.1），这会让佩妮怀孕（9.12.2）</div></div>
+  <div class="opt blue">外射</div>
+</div></div>
+</div>
+
+<h3 class="section">7.14 - 机车疯狂之后</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<div class="box-head">7.14.1 短信：佩妮在健身房</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">虽然今天在放松……我的腿还是软绵绵的……😵</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">我在想……昨天是不是发生了什么？😜</span>
+      <span class="flow-node flow-blue">酷！祝你训练顺利！</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">昨天在摄影棚进行了一场相当激烈的训练……😏</span>
+      <span class="flow-node">达莉娅有个任务要把我们变成最健美的团队😳</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">抱歉佩妮……😊</span>
+      <span class="flow-node flow-blue">哈哈祝你好运🤜🤛</span>
+      <span class="flow-node flow-blue">哇，你在那儿拍到达莉娅了？😳</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">你后悔什么吗？</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">是啊，我听说模特圈可以很辛苦😊</span>
+      <span class="flow-node flow-blue">一点也不😝</span>
+      <span class="flow-node flow-blue">也许我们当面聊这件事更好</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">达莉娅有个任务要把我们变成最健美的团队😳</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="box-head">7.14.2 短信：佩妮在健身房（续）</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">达莉娅有个任务要把我们变成最健美的团队😳</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">哈哈祝你好运🤜🤛</span>
+      <span class="flow-node flow-blue">哇，你在那儿拍到达莉娅了？😳</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">祝你寻宝顺利，奥利安！🤞</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">那就好😊谢谢！今晚见😂</span>
+      <span class="flow-node flow-blue">哇，你好美😍</span>
+      <span class="flow-node flow-blue">哇，你在那儿拍到达莉娅了吗/又拍了？</span>
+    </div>
+    <div class="flow-row"><span class="flow-node" style="background:#f5b7b1;">你对她们有什么想法……？</span></div>
+    <div class="flow-row"><span class="badge b-penny">+1</span></div>
+  </div>
+</div></div>
+</div>
+
+<h3 class="section">7.15 - 新世界</h3>
+<div class="box"><div class="box-head">7.15.1 决定：艾尔·科约特用枪指着马克西莫</div><div class="box-body">
+  <div class="opt gray">不听他的要求<div class="sub">马克西莫被杀，跳转到 ▶7.15.3</div></div>
+  <div class="opt blue">谈判</div>
+</div></div>
+
+<div class="box"><div class="box-head">7.15.2 决定：马克西莫想以你的名字给孩子命名</div><div class="box-body">
+  <div class="opt blue">接受<div class="sub">马克西莫以你的名字给孩子命名</div></div>
+  <div class="opt gray">拒绝<div class="sub">马克西莫以张的名字给孩子命名</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">7.15.3 决定：文林给你关于岛屿的内部消息</div><div class="box-body">
+  <div class="opt gray">（立即接受）<span class="badge b-eternal">-50</span></div>
+  <div class="opt gray">（拒绝一次）<span class="badge b-eternal">-20</span></div>
+  <div class="opt blue">（拒绝两次）<span class="badge b-eternal">-10</span></div>
+  <div class="opt gray">（拒绝三次）<div class="sub">文林不会给你消息</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">7.15.4 决定：咔嚓给你变身药水</div><div class="box-body">
+  <div class="opt blue">买变身药水<div class="sub">只有你有足够钱时才成功。如果你买了：<span class="badge b-eternal">-999</span></div></div>
+  <div class="opt gray">不买</div>
+</div></div>
+
+<h3 class="section">7.16 - 在诺娃家休息</h3>
+<div class="box" style="background:#fdebd0;border:1px solid var(--nova);">
+<div class="req" style="background:#fad7a0;"><strong>前提：</strong><span class="badge b-nova">路线</span>（否则跳转到 ▶7.18）</div>
+<div class="box-head">7.16.1 决定：诺娃情绪低落</div><div class="box-body">
+  <div class="opt blue">向她证明你在乎她</div>
+  <div class="opt gray">我想吃披萨 <span class="badge b-nova b-cross">路线</span>，跳转到 ▶7.18</div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">7.17 - 色情场景：仓促温存 <span class="badge b-nova">诺娃</span></h3>
+<div class="box lewd-body">
+<div class="box-body">之前：<span class="badge b-nova">+1</span></div>
+<div class="box-body">之后：<span class="badge b-nova">+2</span></div>
+</div>
+
+<h3 class="section">7.18 - 唐人街捷径</h3>
+<div class="box"><div class="box-body">主角总是会中枪，这是不可避免的。</div></div>
+
+<!-- ========== CHAPTER 0.8 ========== -->
+<h2 class="chapter" id="ch08">0.8 - 最重要的事</h2>
+
+<h3 class="section">8.1 - 卡吕普索救你</h3>
+<div class="box"><div class="box-head">8.1.1 决定：卡吕普索需要休息</div><div class="box-body">
+  <div class="opt blue">陪她回旅馆 <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">去出口传送门 <span class="badge b-sytel b-cross">路线</span></div>
+</div></div>
+<div class="box"><div class="box-head">8.1.2 结果：同伴关系</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-sytel">路线</span> 且 <span class="badge b-sytel">≥5</span></p>
+  <p><strong>那么：</strong>卡吕普索现在把你当同伴了！</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-sytel b-cross">路线</span></p>
+</div></div>
+
+<h3 class="section">8.2 - 深入深渊之心</h3>
+<div class="box"><div class="box-head">8.2.1 决定：这是你的卡吗？</div><div class="box-body">
+  <div class="opt blue">是</div>
+  <div class="opt gray">不是</div>
+</div></div>
+<div class="box"><div class="box-head">8.2.2 决定：招募一名水手</div><div class="box-body">
+  <p>无论你选谁，他们都会以同样的方式死去。不过在遇到死亡之前，每个人都有不同场景。</p>
+  <div class="opt blue">黑心雷德斯 <span class="badge b-nova">+1</span> 若 <span class="badge b-nova">路线</span></div>
+  <div class="opt blue">银钩洛尔迪 <span class="badge b-nancy">+1</span> 若 <span class="badge b-nancy">路线</span></div>
+  <div class="opt gray">红斯卡莱特</div>
+</div></div>
+<div class="box"><div class="box-head">8.2.3 小游戏：抵抗美人鱼</div><div class="box-body">你最终会屈服，撑多久都一样。</div></div>
+<div class="box"><div class="box-head">8.2.4 决定：与艾德和莫蒂谈判</div><div class="box-body">
+  <div class="opt blue">从莫蒂那里买一幅画</div>
+  <div class="opt gray">出150永恒币<div class="sub"><div class="req"><strong>前提：</strong><span class="badge b-eternal">≥150</span></div><span class="badge b-eternal">-150</span></div></div>
+  <div class="opt gray">威胁他们</div>
+</div></div>
+<div class="box"><div class="box-head">8.2.5 决定：诺娃穿上比基尼</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="opt blue">调情 <span class="badge b-nova">+1</span></div>
+  <div class="opt gray">和她一起游泳</div>
+</div></div>
+
+<h3 class="section">8.3 - 伦敦办公室</h3>
+<p>本段会循环往复直到你逃脱。没有失败点。逃脱方法如下：</p>
+<ul class="simple">
+  <li>第一轮：选右边的电梯，去接待处或会议室。</li>
+  <li>第二轮：再选右边的电梯，去另一个你没去过的地方。</li>
+  <li>第三轮：你会在桌上收到一封邮件。读"RE: Read this"邮件，然后坐左边的电梯。</li>
+</ul>
+<p>其他没提到的决定由你自己。不过如果你在会议室附近等达莉娅，她会给你看胸。想看更多细节就继续读，否则跳到 ▶8.4。</p>
+
+<div class="box"><div class="box-head">8.3.1 地点：你的桌子</div><div class="box-body">你可以看邮件、相框和桌子下面。除了你访问接待处和会议室后收到的"RE: Read this"邮件外，这里每轮都不会有变化。</div></div>
+<div class="box"><div class="box-head">8.3.2 地点：两部电梯</div><div class="box-body">你大部分时间都得用右边的电梯才能去任何地方。除了假出口外所有地点只能访问一次。左边的电梯什么都不会做，除非你读了"RE: Read this"邮件，然后你会通过7楼逃脱。</div></div>
+<div class="box"><div class="box-head">8.3.3 地点：接待处</div><div class="box-body">你可以在这里见到夏洛特、佩妮、卢娜和亚历克斯。卢娜会给你摇头丸，无论你选什么主角都会接受。之后循环重新开始。</div></div>
+<div class="box"><div class="box-head">8.3.4 地点：会议室</div><div class="box-body">这个地点只有在第二轮或读了"RE: Birthday Celebration!"邮件后才可访问。你可以在这里见到佩妮和张。之后，如果你决定等达莉娅，她会给你看胸并在屏幕外和你做爱，即使你拒绝了。但无论你是否见到达莉娅，循环都会重新开始。</div></div>
+<div class="box"><div class="box-head">8.3.5 地点：假出口</div><div class="box-body">这个地点在第二轮及以后解锁。访问它会立即重启循环且无任何进展。</div></div>
+<div class="box"><div class="box-head">8.3.6 地点：7楼</div><div class="box-body">这个地点只能通过左边电梯到达。在这里你会见到安妮，她会递给你一把枪让你自杀逃脱梦境。让安妮用枪指着你不会改变任何事。</div></div>
+
+<h3 class="section">8.4 - 悖论群岛</h3>
+<div class="box" style="background:#fdebd0;border:1px solid var(--nova);">
+<div class="req" style="background:#fad7a0;"><strong>前提：</strong><span class="badge b-nova">路线</span> 和 <span class="badge b-nancy">路线</span>（否则跳转到 ▶8.6）</div>
+<div class="box-head">8.4.1 决定：独处时的娱乐</div><div class="box-body">
+  <div class="opt blue">一只狗 <span class="badge b-nova">+1</span></div>
+  <div class="opt blue">书 <span class="badge b-nancy">+1</span></div>
+  <div class="opt gray">色情杂志</div>
+</div></div>
+<div class="box-head">8.4.2 决定：想一个问题</div><div class="box-body">
+  <div class="opt blue">你会用100万美元买什么？</div>
+  <div class="opt blue">你曾经被逮捕过吗？<div class="sub">包含一张南希少女时期的照片。</div></div>
+</div></div>
+<div class="box-head">8.4.3 决定：你宁愿看还是被看？</div><div class="box-body">
+  <p>这不会改变接下来的色情场景。</p>
+  <div class="opt blue">看</div>
+  <div class="opt blue">被看</div>
+</div></div>
+<div class="box-head">8.4.4 决定：再想一个问题</div><div class="box-body">
+  <div class="opt blue">你曾经撞见过家人做爱吗？</div>
+  <div class="opt blue">你最喜欢的体位是什么？<div class="sub">这不会改变接下来的色情场景，总是她们最喜欢的体位。</div></div>
+</div></div>
+<div class="box-head">8.4.5 决定：你爱我们吗？</div><div class="box-body">
+  <div class="opt blue">我爱<div class="sub">你获得 <span class="badge b-harem">路线</span>（这就是后宫路线，见上方说明）</div></div>
+  <div class="opt gray">这很复杂<div class="sub">跳转到 ▶8.6</div></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">8.5 - 色情场景：百慕大三角（<span class="badge b-nova">诺娃</span> & <span class="badge b-nancy">南希</span>）</h3>
+<div class="box lewd-body">
+<div class="box-body">亲吻诺娃：<span class="badge b-nova">+1</span> <span class="badge b-nancy">+1</span></div>
+<div class="box-head" style="background:#c0392b;">8.5.1 决定：收尾</div><div class="box-body">
+  <div class="opt blue">和诺娃收尾</div>
+  <div class="opt blue">和南希收尾</div>
+</div></div>
+</div>
+
+<h3 class="section">8.6 - 深渊之心之后</h3>
+<div class="box"><div class="box-body"><span class="badge b-nancy">+1</span> 若 <span class="badge b-nancy">路线</span>（告别吻）</div></div>
+<div class="box"><div class="box-head">8.6.1 决定：诺娃意识到她可能会死</div><div class="box-body">
+  <div class="opt blue">吻她 <span class="badge b-nova">+1</span> 若 <span class="badge b-nova">路线</span>，否则她会扇你耳光</div>
+  <div class="opt gray">让她冷静</div>
+</div></div>
+
+<h3 class="section">8.7 - 83号聚合物</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="req" style="background:#e8daef;"><strong>前提：</strong><span class="badge b-luna">路线</span>（否则跳转到 ▶8.11）</div>
+<div class="box-body">卢娜的套装：<span class="badge b-outfit">服装13</span></div>
+<div class="box-head">8.7.1 决定：安妮和卢娜转过身</div><div class="box-body">
+  <div class="opt blue">像绅士一样目视前方</div>
+  <div class="opt gray">看她们的屁股</div>
+</div></div>
+<div class="box-head">8.7.2 决定：第五颗宝石在哪来着？</div><div class="box-body">
+  <div class="opt blue">红鲱鱼酒吧</div>
+  <div class="opt blue">Ion</div>
+</div></div>
+</div>
+
+<h3 class="section">8.8 - 和安妮的晚餐约会：短信</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="box-head">8.8.1 短信：安妮要迟到了</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">OMG😭😭😭</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">嗯？你忘了我们的晚餐？</span>
+      <span class="flow-node flow-blue">发生什么了？？？</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">我要迟到了😭😭😭</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">没事！！！不着急😊</span>
+      <span class="flow-node flow-blue">没事，但尽量快点。想想厨房9:30关门</span>
+    </div>
+    <div class="flow-row"><span class="badge b-annie">+1</span></div>
+  </div>
+</div></div>
+
+<p>你可以按任意顺序回复以下短信。理想路线需要回复全部。诺娃的聊天只在没有其他聊天时才出现。放下手机会跳转到 ▶8.9。</p>
+
+<div class="box-head">8.8.2 短信：张想借你的笑话</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你鼓励张约米凯拉出去（7.9.1）</div>
+  <div class="flow">
+    <div class="flow-node">求你了，告诉我我可以借用你关于两个朋友和鳄鱼的那个笑话</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">哈哈当然兄弟，都是你的</span>
+      <span class="flow-node flow-blue">兄弟那是我的笑话😊你自己编一个</span>
+    </div>
+    <div class="flow-row"><span class="badge b-cm">+1</span></div>
+  </div>
+</div></div>
+
+<div class="box-head">8.8.3 短信：亚历克斯求你跑腿</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-alex">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">嘿嘿，你明天12点左右能把达莉娅的数学笔记带到泳池来吗？</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">我会到的😘</span>
+      <span class="flow-node flow-blue">抱歉我不行🙏我尽量周一给你</span>
+    </div>
+    <div class="flow-row"><span class="flow-node" style="background:#e8daef;">之后解锁与亚历克斯的色情场景和好感点（8.12）</span></div>
+  </div>
+</div></div>
+
+<div class="box-head">8.8.4 短信：诺娃抱怨晒伤</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-nova">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">我现在有比基尼晒痕了😭</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">哦不！我能看看吗？😀</span>
+      <span class="flow-node flow-blue">哦不！你有晒后修复吗？</span>
+    </div>
+    <div class="flow-row"><span class="flow-node">但我还是得去晒日光浴把晒痕消掉……好无聊😌</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">让我看看有多严重😛</span>
+      <span class="flow-node flow-blue">我可以和你一起去晒日光浴😊</span>
+    </div>
+    <div class="flow-row"><span class="flow-node" style="background:#f5b7b1;">🙈🙈🙈🙈</span></div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">你早就准备好那张照片了吧？？😏</span>
+      <span class="flow-node flow-blue">哇你确定要发吗！😅</span>
+      <span class="flow-node flow-blue">哦妈的🔥🥵前面也这么糟糕吗？🥵</span>
+    </div>
+    <div class="flow-row"><span class="badge b-nova">+1</span></div>
+  </div>
+</div></div>
+</div>
+
+<h3 class="section">8.9 - 和安妮的晚餐约会</h3>
+<div class="box" style="background:#f4ecf7;border:1px solid var(--annie);">
+<div class="box-head">8.9.1 决定：尤拉莉在勾引你</div><div class="box-body">
+  <div class="opt gray">调情<div class="sub">你之后会<span class="colortext" style="color:var(--annie)">失去安妮的路线</span>和<span class="colortext" style="color:var(--harem)">后宫路线</span>（8.9.4）</div></div>
+  <div class="opt blue">拒绝</div>
+</div></div>
+
+<div class="box-head">8.9.2 决定："我穿的什么？"</div><div class="box-body">
+  <div class="opt gray">牛仔背带裤配彩虹条纹T恤<div class="sub">跳转到 ▶8.9.4</div></div>
+  <div class="opt gray">粉色卫衣配紧身裤<div class="sub">跳转到 ▶8.9.4</div></div>
+  <div class="opt blue">橙色衬衫塞进带背带的裙子里</div>
+</div></div>
+
+<div class="box-head">8.9.3 决定："那天我和爸爸要去哪里？"</div><div class="box-body">
+  <div class="opt gray">电影院</div>
+  <div class="opt blue">去动物园看熊猫 <span class="badge b-annie">+1</span></div>
+  <div class="opt gray">去打迷你高尔夫</div>
+</div></div>
+
+<div class="box-head">8.9.4 结果："特别"</div><div class="box-body">
+  <p><strong>如果：</strong>你没有和尤拉莉调情（8.9.1）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong><span class="badge b-annie b-cross">路线</span> <span class="badge b-harem b-cross">路线</span>，跳转到 ▶8.11</p>
+</div></div>
+
+<div class="box-head">8.9.5 决定：陷阱题："你最喜欢我什么？"</div><div class="box-body">
+  <div class="opt gray">你的眼睛</div>
+  <div class="opt gray">你的屁股 <span class="badge b-annie">-1</span></div>
+  <div class="opt gray">你的性格</div>
+  <div class="opt blue">是</div>
+  <div class="opt gray">（让时间耗尽）<span class="badge b-annie">-1</span></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">8.10 - 色情场景：客房服务 <span class="badge b-annie">安妮</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">8.10.1 决定："我准备好给你了"</div><div class="box-body">
+  <div class="opt blue">吻她<div class="sub">延长一些亲热场景</div></div>
+  <div class="opt gray">把她扔到床上</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">8.10.2 决定：口交</div><div class="box-body">
+  <div class="opt blue">继续前戏</div>
+  <div class="opt gray">上她<div class="sub">安妮还不够湿，上不了你。场景失败，跳转到 ▶8.11</div></div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">8.10.3 决定：手指</div><div class="box-body">
+  <div class="opt blue">继续前戏</div>
+  <div class="opt gray">上她<div class="sub">安妮还不够湿，上不了你。场景失败，跳转到 ▶8.11</div></div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">8.10.4 决定：安妮让你射在外面</div><div class="box-body">
+  <div class="opt gray">内射<div class="sub">安妮会生一会儿气。没有第二轮，跳转到 ▶8.11</div></div>
+  <div class="opt blue">拔出来<div class="sub">亲热一会儿后会进入第二轮，安妮会求你内射。</div></div>
+</div></div>
+</div>
+
+<h3 class="section">8.11 - 和达莉娅在健身房</h3>
+<div class="box"><div class="box-head">8.11.1 结果：送达莉娅蛋白粉</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-dalia">路线</span> 且你给她买了烧烤味蛋白粉（6.11.1）</p>
+  <p><strong>那么：</strong><span class="badge b-dalia">+1</span></p>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">8.12 - 色情场景：仓促戏水 <span class="badge b-alex">亚历克斯</span></h3>
+<div class="box lewd-body">
+<div class="req" style="background:#f5b7b1;color:#333;"><strong>前提：</strong><span class="badge b-alex">路线</span> 且你要么同意把达莉娅的数学笔记带给她（8.8.3）要么你根本没和安妮约会（8.8）<br><strong>否则：</strong>跳转到 ▶8.13</div>
+<div class="box-body">亲热：<span class="badge b-alex">+1</span></div>
+<div class="box-head" style="background:#c0392b;">8.12.1 决定：怀孕恐慌</div><div class="box-body">
+  <p>由于亚历克斯实际上只是在捉弄你，即使你关闭了怀孕功能这个场景也会播放（1.1.1）</p>
+  <div class="opt blue">太棒了！ <span class="badge b-alex">+1</span></div>
+  <div class="opt gray">恐慌</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">8.12.2 短信：达莉娅等得不耐烦了</div><div class="box-body">
+  <div class="flow">
+    <div class="flow-node">（沙漏梗图）</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">是是是，我这就去，别这么急嘛😒</span>
+      <span class="flow-node flow-blue">抱歉！我在路上了！！！</span>
+    </div>
+    <div class="flow-row"><span class="badge b-dalia">+1</span></div>
+  </div>
+</div></div>
+</div>
+
+<h3 class="section">8.13 - 会见萨米尔</h3>
+<div class="box"><div class="box-head">8.13.1 决定：杰瑞一个人坐着</div><div class="box-body">
+  <div class="opt blue">和杰瑞说话<div class="sub">你之后会有机会和杰瑞成为朋友（8.19.5）</div></div>
+  <div class="opt gray">不理他</div>
+</div></div>
+
+<h3 class="section">8.14 - 城堡市场</h3>
+<p>这是自由探索环节。你必须在13分钟游戏时间后停止探索，虽然超过最后一个地点也没关系。要探索全部内容（且为了理想路线），你需要最后再去最左边的地点，因为它消耗时间最多。除此之外顺序由你决定。</p>
+<p>下午3:30或更晚，故事在这里继续：▶8.19</p>
+
+<h3 class="section">8.15 - 城堡市场：单峰驼商人</h3>
+<div class="box"><div class="box-body">
+  <p>如果在<span class="badge b-harem">路线</span>上且你追随至少3个主LI的路线，会有关于你和女孩们不寻常关系的特殊对话。</p>
+  <p>你在这里花5分钟，返回市场：▶8.14</p>
+</div></div>
+
+<h3 class="section">8.16 - 城堡市场：头巾商人</h3>
+<div class="box"><div class="box-head">8.16.1 决定：他在卖普赛克铜雕像</div><div class="box-body">
+  <div class="opt blue">买一个 <span class="badge b-eternal">-3</span></div>
+  <div class="opt gray">不买</div>
+  <div class="box-body">你在这里花4分钟，返回市场：▶8.14</div>
+</div></div>
+
+<h3 class="section">8.17 - 城堡市场：白衬衫男人</h3>
+<div class="box"><div class="box-body">你了解到更多关于萨米尔的信息。你在这里花3分钟，返回市场：▶8.14</div></div>
+
+<h3 class="section">8.18 - 城堡市场：红头发</h3>
+<div class="box"><div class="box-head">8.18.1 决定：玛阿特想要回一些钱</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你在诺娃口交后和玛阿特发生过关系（3.2.1）</div>
+  <div class="opt blue">给她80永恒币 <span class="badge b-eternal">-80</span></div>
+  <div class="opt gray">拒绝<div class="sub">玛阿特成为你的敌人</div></div>
+  <div class="box-body">你在这里花7分钟，返回市场：▶8.14</div>
+</div></div>
+
+<h3 class="section">8.19 - 城堡宫殿</h3>
+<div class="box"><div class="box-head">8.19.1 结果：找到方法</div><div class="box-body">
+  <p><strong>如果：</strong>你在和安妮约会时决定帮助哈斯勒指挥官（4.13.4），即使你在放炸弹前就死了</p>
+  <p><strong>那么：</strong>哈斯勒指挥官出现并提供引开守卫，让你可以潜入宫殿</p>
+  <hr>
+  <p><strong>否则：</strong>默瑟博士找到你并邀请你在宫殿花园聊天</p>
+</div></div>
+
+<div class="box"><div class="box-head">8.19.2 决定：谁跟你进宫殿？</div><div class="box-body">
+  <div class="opt gray">萨米尔<div class="sub">他之后会告诉你他刚加入伊什里只是为了上床。他会把领袖头衔传给你，然后留你一个人。</div></div>
+  <div class="opt blue">杰瑞<div class="sub">如果你之前和杰瑞说过话（8.13.1），你会有机会和他成为朋友（8.19.5）。如果你没和他说话，他会被杀。</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">8.19.3 结果：分散队伍</div><div class="box-body">
+  <p>如果你是偷偷潜入的，默瑟博士现在会找到你并邀请你在宫殿花园聊天。</p>
+  <p>无论如何，你现在必须留下杰瑞/萨米尔。</p>
+</div></div>
+
+<div class="box"><div class="box-head">8.19.4 决定：面对默瑟博士</div><div class="box-body">
+  <div class="opt blue">杀了她</div>
+  <div class="opt gray">放她走</div>
+</div></div>
+
+<div class="box"><div class="box-head">8.19.5 决定：杰瑞呼救</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你之前和杰瑞说过话（8.13.1）且你带他进了宫殿（8.19.2）</div>
+  <div class="opt blue">救杰瑞<div class="sub">杰瑞成为你的朋友！</div></div>
+  <div class="opt gray">不理他的呼救<div class="sub">杰瑞被杀</div></div>
+</div></div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">8.20 - 色情场景：大漠热浪 <span class="badge b-dalia">达莉娅</span></h3>
+<div class="box lewd-body">
+<div class="req" style="background:#f5b7b1;color:#333;"><strong>前提：</strong><span class="badge b-dalia">路线</span>（否则跳转到 ▶9.1）</div>
+<div class="box-head" style="background:#c0392b;">8.20.1 决定："你喜欢我吗？"</div><div class="box-body">
+  <div class="opt gray">我喜欢和你待在一起 <span class="badge b-dalia b-cross">路线</span>，跳上色情场景，跳转到 ▶9.1</div>
+  <div class="opt gray">我当然喜欢你</div>
+  <div class="opt blue">我爱你 <span class="badge b-dalia">+1</span></div>
+  <div class="box-body">吻：<span class="badge b-dalia">+1</span></div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">8.20.2 结果：汇报</div><div class="box-body">
+  <p><strong>如果：</strong>你之前从豺狼手中救了杰瑞（8.19.5）</p>
+  <p><strong>那么：</strong>杰瑞会进来告诉你他救了其他女孩，萨米尔把领袖头衔传给了他。</p>
+  <hr>
+  <p><strong>否则：</strong>萨米尔会进来把领袖头衔传给你。如果杰瑞在宫殿里他还会告诉你杰瑞被杀了。</p>
+</div></div>
+</div>
+
+<!-- ========== CHAPTER 0.9 ========== -->
+<h2 class="chapter" id="ch09">0.9 - 桌上一席</h2>
+
+<h3 class="section">9.1 - 审判</h3>
+<div class="box"><div class="box-head">9.1.1 决定：西拉克斯命令你吃地上的食物</div><div class="box-body">
+  <div class="opt gray">跪下拿食物吃</div>
+  <div class="opt blue">拒绝</div>
+  <div class="opt gray">攻击他逃跑<div class="sub">这会失败并让审判更难（9.1.15）</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.2 小游戏：证明你的清白</div><div class="box-body">
+  <p>本段中你会获得<strong>审判点数</strong>。审判结束时你必须有至少<strong>9点</strong>，否则会被立即处决（9.1.17）。</p>
+  <p>被处决意味着你从这里自动重新开始审判。第一次尝试从<strong>0审判点数</strong>开始，之后每次从<strong>2审判点数</strong>开始。</p>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.3 决定："我说明白了吗？"</div><div class="box-body">
+  <div class="opt gray">随便<div class="sub">审判点数 -1</div></div>
+  <div class="opt blue">我明白</div>
+  <div class="opt gray">去你妈的<div class="sub">审判点数 -2</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.4 决定：你可以问一个问题</div><div class="box-body">
+  <div class="opt gray">我要律师</div>
+  <div class="opt gray">决斗审判</div>
+  <div class="opt blue">要求介绍<div class="sub">审判点数 +1</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.5 决定：你和公主是什么关系？</div><div class="box-body">
+  <div class="opt gray">我是她的主人<div class="sub">审判点数 -2</div></div>
+  <div class="opt gray">我们是朋友<div class="sub">审判点数 -1</div></div>
+  <div class="opt blue">我是她的仆人</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.6 决定：你和公主的路径是如何交汇的？</div><div class="box-body">
+  <div class="opt gray">说实话<div class="sub">跳转到 ▶9.1.8</div></div>
+  <div class="opt blue">说谎<div class="sub">审判点数 +1</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.7 决定：公主为什么处境如此糟糕？</div><div class="box-body">
+  <div class="opt gray">她救了我</div>
+  <div class="opt blue">我们被攻击了<div class="sub">审判点数 +1</div></div>
+  <div class="opt gray">我不知道</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.8 决定：你为什么和公主待在一起？</div><div class="box-body">
+  <div class="opt blue">我对她有用<div class="sub">审判点数 +1</div></div>
+  <div class="opt gray">她欠我的</div>
+  <div class="opt gray">我们成了恋人<div class="sub">审判点数 -2</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.9 决定：希特尔奎瑟的第一位女王是谁？</div><div class="box-body">
+  <div class="opt blue">光辉的阿尼玛<div class="sub">审判点数 +1</div></div>
+  <div class="opt gray">辉煌的阿娜拉</div>
+  <div class="opt gray">闪耀的阿尼拉</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.10 决定：谁奴役了她？</div><div class="box-body">
+  <div class="opt gray">德拉克斯</div>
+  <div class="opt gray">泽菲罗斯</div>
+  <div class="opt blue">伊利亚<div class="sub">审判点数 +1</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.11 决定：卡吕普索公主的父亲叫什么？</div><div class="box-body">
+  <div class="opt blue">瑞温<div class="sub">审判点数 +1</div></div>
+  <div class="opt gray">西尔瓦努斯</div>
+  <div class="opt gray">加尔纳</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.12 决定：公主多大了？</div><div class="box-body">
+  <div class="opt gray">44</div>
+  <div class="opt gray">68</div>
+  <div class="opt blue">84<div class="sub">审判点数 +1</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.13 决定：冥想仪式叫什么？</div><div class="box-body">
+  <div class="opt blue">埃拉里尔<div class="sub">审判点数 +1</div></div>
+  <div class="opt gray">拉拉里埃尔</div>
+  <div class="opt gray">托莫丁</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.14 决定：同意麻雀的判决吗？</div><div class="box-body">
+  <div class="opt blue">接受<div class="sub">50%概率获得审判点数 +1。运气不好也没有惩罚，所以不妨试试运气。</div></div>
+  <div class="opt gray">拒绝</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.15 决定：最终判决前你有什么要说的吗？</div><div class="box-body">
+  <div class="opt blue">我是无辜的<div class="sub">审判点数 +1，跳转到 ▶9.1.17</div></div>
+  <div class="opt blue">我要传唤证人<div class="sub">如果你没有攻击牢房里的西拉克斯（9.1.1），继续。否则你现在获得审判点数 -1并跳转到 ▶9.1.17</div></div>
+  <div class="opt gray">你会后悔的<div class="sub">审判点数 -2，跳转到 ▶9.1.17</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.16 决定：谁来作证？</div><div class="box-body">
+  <div class="opt gray">阿拉尼斯</div>
+  <div class="opt blue">洛蕾莱<div class="sub">审判点数 +2</div></div>
+</div></div>
+
+<div class="box"><div class="box-head">9.1.17 结果：判决</div><div class="box-body">
+  <p><strong>如果：</strong>你至少有9审判点数</p>
+  <p><strong>那么：</strong>索伦德领主暂时饶你不死</p>
+  <hr>
+  <p><strong>否则：</strong>你被处决并跳回 ▶9.1.2</p>
+</div></div>
+
+<h3 class="section">9.2 - 回到牢房</h3>
+<div class="box"><div class="box-head">9.2.1 决定：和洛蕾莱谈论卡吕普索</div><div class="box-body">
+  <div class="opt blue">她对我意义重大 <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">我欠她的</div>
+  <div class="opt gray">我非常尊重皇室</div>
+</div></div>
+<div class="box"><div class="box-head">9.2.2 决定：伊德里尔的故事结局是什么？</div><div class="box-body">
+  <div class="opt blue">门开了</div>
+  <div class="opt gray">门仍然关着</div>
+</div></div>
+
+<h3 class="section">9.3 - 伊斯卡尔德林</h3>
+<div class="box"><div class="box-head">9.3.1 决定：阿拉尼斯将军道歉</div><div class="box-body">
+  <div class="opt blue">接受他的道歉<div class="sub">阿拉尼斯会对你更好，虽然不改变故事。</div></div>
+  <div class="opt gray">不接受他的道歉</div>
+</div></div>
+<div class="box"><div class="box-head">9.3.2 决定：卡吕普索来你的房间看你</div><div class="box-body">
+  <div class="opt blue">拥抱她 <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">不抱她</div>
+</div></div>
+<div class="box"><div class="box-head">9.3.3 对话：和卡吕普索叙旧</div><div class="box-body">
+  <p>你可以问任意数量的问题。理想路线：确保先问卡吕普索是否安好，否则她会说你的。</p>
+  <div class="opt gray">洛蕾莱怎么样？</div>
+  <div class="opt blue">你还好吗？<div class="sub">如果你在问洛蕾莱或回地球之前先问这个：<span class="badge b-sytel">+1</span></div></div>
+  <div class="opt gray">我们现在到底在哪？</div>
+  <div class="opt gray">我需要回地球！</div>
+</div></div>
+<div class="box"><div class="box-head">9.3.4 小游戏：和阿拉尼斯对练</div><div class="box-body">
+  <p>快速点击剑即将袭来的方向！正确顺序是：</p>
+  <ol class="simple">
+    <li>右下</li>
+    <li>左上</li>
+    <li>右上</li>
+    <li>左上</li>
+    <li>然后反击</li>
+  </ol>
+  <div class="opt blue">通过所有QTE <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">QTE失败</div>
+</div></div>
+<div class="box"><div class="box-head">9.3.5 决定：卡吕普索有心事</div><div class="box-body">
+  <div class="opt blue">深入挖掘</div>
+  <div class="opt gray">算了 <span class="badge b-sytel b-cross">路线</span>，跳转到 9.3.7</div>
+</div></div>
+<div class="box"><div class="box-head">9.3.6 决定：我不想当公主</div><div class="box-body">
+  <div class="opt gray">保持沉默 <span class="badge b-sytel b-cross">路线</span></div>
+  <div class="opt gray">拥抱她<div class="sub">如果<span class="badge b-sytel">路线</span>且<span class="badge b-sytel">≥8</span>则成功。否则：<span class="badge b-sytel b-cross">路线</span></div></div>
+  <div class="opt blue">请求她允许拥抱<div class="sub">如果<span class="badge b-sytel">路线</span>且<span class="badge b-sytel">≥5</span>则成功。否则：<span class="badge b-sytel b-cross">路线</span></div></div>
+</div></div>
+<div class="box"><div class="box-head">9.3.7 决定：回家的传送门</div><div class="box-body">
+  <div class="opt gray">进入传送门 <span class="badge b-sytel b-cross">路线</span>，跳转到 ▶9.7</div>
+  <div class="opt blue">多待一天<div class="sub"><div class="req"><strong>前提：</strong><span class="badge b-sytel">路线</span></div>继续</div></div>
+</div></div>
+
+<h3 class="section">9.4 - 求婚者仪式</h3>
+<div class="box" style="background:#e0f4f8;border:1px solid var(--sytel);">
+<div class="box-head">9.4.1 决定：你在仪式上看到洛蕾莱</div><div class="box-body">
+  <div class="opt blue">向她挥手 <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">不理她</div>
+</div></div>
+<div class="box-head">9.4.2 决定：诗的第二句</div><div class="box-body">
+  <div class="opt gray">特拉莱罗特拉莱</div>
+  <div class="opt blue">我的手紧握，她的眼明亮<div class="sub">这是唯一一句好的</div></div>
+  <div class="opt gray">我试着调情，她说了句"好吧"</div>
+  <div class="opt gray">她的牙齿像皓月一样白</div>
+</div></div>
+<div class="box-head">9.4.3 决定：诗的第四句</div><div class="box-body">
+  <div class="opt gray">哦波科迪奥波库阿拉</div>
+  <div class="opt gray">但我是尘埃，她是恩典</div>
+  <div class="opt gray">我们去看风骚律师吧</div>
+  <div class="opt blue">足以让士兵倒下<div class="sub">如果第二句也好：<span class="badge b-sytel">+1</span></div></div>
+</div></div>
+<div class="box-head">9.4.4 决定：画什么？</div><div class="box-body">
+  <div class="opt blue">卡吕普索 <span class="badge b-sytel">+1</span></div>
+  <div class="opt gray">一匹马</div>
+  <div class="opt gray">阿拉尼斯将军</div>
+</div></div>
+<div class="box-head">9.4.5 小游戏：弹奏里拉琴</div><div class="box-body">
+  <p>无论你弹什么都会被认为是糟糕的。按"停止"继续。游戏会说你弹得很差，即使你什么都没弹，不过没有惩罚。</p>
+  <p>如果你的曲调包含[C C G' G' A' A' G']，即"一闪一闪小星星"的开头，会有一个小秘密。</p>
+</div></div>
+<div class="box-head">9.4.6 决定：为拉弓激活你的能力吗？</div><div class="box-body">
+  <div class="opt blue">激活你的能力</div>
+  <div class="opt gray">不激活 <span class="badge b-sytel">+1</span>，但接下来的小游戏会更难</div>
+</div></div>
+<div class="box-head">9.4.7 小游戏：射箭</div><div class="box-body">
+  <p>当蓝色移动标记在绿色区域内时按空格或鼠标左键。可以用鼠标左键，但要注意松开时才算。没有时间限制。失败可以重来。只有两种结果：</p>
+  <div class="opt blue">标记在绿色区域内<div class="sub">你正中靶心：<span class="badge b-sytel">+1</span><br><br>此外，一位求婚者托里昂会在比赛后来称赞你的技巧。他会承诺红维尔家族在内战中支持卡吕普索，这可能影响后续章节的故事。</div></div>
+  <div class="opt gray">标记在红色区域内<div class="sub">你射中了靶子的边框</div></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">9.5 - 色情场景：王室代理人（洛蕾莱 & <span class="badge b-sytel">卡吕普索</span>）</h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">9.5.1 决定：卡吕普索要求"视觉刺激"</div><div class="box-body">
+  <div class="opt blue">接受</div>
+  <div class="opt gray">拒绝 <span class="badge b-sytel b-cross">路线</span>，跳上色情场景，跳转到 ▶9.7</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">9.5.2 决定：上洛蕾莱？</div><div class="box-body">
+  <div class="opt blue">上她</div>
+  <div class="opt gray">到此为止<div class="sub">跳过与洛蕾莱的阴道性交。但这不会结束色情场景，最后一段仍会播放！</div></div>
+</div></div>
+</div>
+
+<h3 class="section">9.6 - 政变</h3>
+<div class="box" style="background:#e0f4f8;border:1px solid var(--sytel);">
+<div class="box-head">9.6.1 QTE：一个精灵从背后攻击</div><div class="box-body">你必须及时按"反击"，但如果你失败了，伊德里尔会重新开始场景让你重试。游戏不会记住你在这里是否失败。</div></div>
+<div class="box-head">9.6.2 决定：焦虑的卡吕普索</div><div class="box-body">
+  <div class="opt gray">什么都不说</div>
+  <div class="opt gray">催促她</div>
+  <div class="opt blue">引用阿拉尼斯的话 <span class="badge b-sytel">+1</span></div>
+</div></div>
+<div class="box-head">9.6.3 决定：卡吕普索该去哪？</div><div class="box-body">
+  <div class="opt blue">瓦埃尔塔拉斯要塞</div>
+  <div class="opt gray">安多尔谷</div>
+  <div class="opt gray">塔洛林飞地</div>
+</div></div>
+<div class="box-head">9.6.4 决定：卡吕普索能信任哪个家族？</div><div class="box-body">
+  <div class="opt gray">伊西翁</div>
+  <div class="opt blue">红维尔</div>
+  <div class="opt gray">西里纳维尔</div>
+</div></div>
+<div class="box-head">9.6.5 结果：我会回到你身边</div><div class="box-body"><span class="badge b-sytel">卡吕普索</span> 现在是主恋爱对象了！</div></div>
+</div>
+
+<h3 class="section">9.7 - 回家</h3>
+<div class="box"><div class="box-head">9.7.1 结果：账户余额</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-eternal">≥0</span></p>
+  <p><strong>那么：</strong>主角会 briefly 想想他的账户余额</p>
+  <hr>
+  <p><strong>否则：</strong>主角会提到他因为负余额被Eternum封号。不过他说这无所谓因为他不需要神经植入体就能访问Eternum了。游戏甚至不会记住这件事，也许真的无所谓。</p>
+</div></div>
+
+<div class="box"><div class="box-head">9.7.2 结果：张和米凯拉</div><div class="box-body">
+  <p><strong>如果：</strong><span class="badge b-cm">≥4</span></p>
+  <p><strong>那么：</strong>张兴奋地报告米凯拉现在是他女朋友了，他们已经有了第一次。</p>
+  <hr>
+  <p><strong>否则：</strong>张遗憾地报告他没能追到米凯拉。不过他完全不怪你。</p>
+</div></div>
+
+<div class="box"><div class="box-head">9.7.3 决定：让张跟上进度</div><div class="box-body">
+  <div class="opt blue">给他全部细节</div>
+  <div class="opt gray">给他简版</div>
+</div></div>
+
+<h3 class="section">9.8 - 圣诞小屋</h3>
+<div class="box"><div class="box-head">9.8.1 小游戏：劈柴</div><div class="box-body">
+  <p>场景开始时已有6根木头劈好，你应该再劈5根，总共11根。不过你可以自由劈少或劈多来看几句独特对话。</p>
+  <p>官方攻略建议至少劈到11根，但目前劈少了没有后果。一旦你劈到100根，会有更多特殊对话然后游戏强制你继续。</p>
+</div></div>
+
+<div class="box"><div class="box-head">9.8.2 短信：在伦敦的安妮</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-annie">路线</span></div>
+  <div class="flow">
+    <div class="flow-node">伦敦下雪了😍😍😍</div><br>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">不是几乎每年都下吗？😄</span>
+      <span class="flow-node flow-blue">哇！好棒😍</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node">你至少喜欢我的自拍吗？🥺</span>
+      <span class="flow-node">我以为南希说你没信号？？</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-node flow-blue">我超爱！！😍</span>
+      <span class="flow-node flow-blue">看起来有点模糊哈哈</span>
+      <span class="flow-node flow-blue">爱的力量增强了信号，显然如此😌</span>
+      <span class="flow-node flow-blue">是的但我走开了一点去捡柴火生火</span>
+    </div>
+    <div class="flow-row"><span class="badge b-annie">+1</span></div>
+  </div>
+</div></div>
+
+<div class="box"><div class="box-head">9.8.3 决定：未知号码来电</div><div class="box-body">
+  <div class="req"><strong>前提：</strong>你同意和阿克塞尔交换情报（6.11.6）</div>
+  <div class="opt blue">接<div class="sub">是阿克塞尔。他会安排和你见面。你之后会和女孩们讨论这件事。</div></div>
+  <div class="opt gray">挂断</div>
+</div></div>
+
+<div class="box"><div class="box-head">9.8.4 决定：为佩妮的新闻项目提议一个主题</div><div class="box-body">
+  <div class="opt gray">Eternum</div>
+  <div class="opt gray">劳尔和诺亚</div>
+  <div class="opt blue">瓦伦蒂诺先生<div class="sub"><div class="req"><strong>前提：</strong><span class="badge b-penny">路线</span></div><span class="badge b-penny">+1</span></div></div>
+</div></div>
+
+<h3 class="section">9.9 - 和佩妮在楼上</h3>
+<div class="box" style="background:#fef9e7;border:1px solid var(--penny);">
+<div class="req" style="background:#f9e79f;"><strong>前提：</strong><span class="badge b-penny">路线</span>（否则跳转到 ▶9.11）</div>
+<div class="box-head">9.9.1 决定：来帮佩妮选比基尼？</div><div class="box-body">
+  <div class="opt blue">接受并跟她去</div>
+  <div class="opt gray">留在这里<div class="sub">放弃之后与佩妮的色情场景机会（9.9.7）。而且她无论如何都会让你跟她上楼；你逃不掉接下来发生的事。</div></div>
+</div></div>
+
+<div class="box-head">9.9.2 决定：自从摄影棚那件事后你和别人睡过吗？</div><div class="box-body">
+  <p>真相是"是"，如果你看过这些色情场景中的任何一个：仓促温存（7.17）、百慕大三角（8.5）、客房服务（8.10）、仓促戏水（8.12）、大漠热浪（8.20），或者和洛蕾莱发生过阴道性交（9.5.2）</p>
+  <div class="opt blue">是的<div class="sub"><div class="req"><strong>前提：</strong>真相是"是"</div>继续</div></div>
+  <div class="opt gray">不是<div class="sub">如果为真：跳转到 ▶9.9.5<br>如果说谎：<span class="badge b-penny b-cross">路线</span> <span class="badge b-harem b-cross">路线</span>，跳转到 ▶9.11</div></div>
+</div></div>
+
+<div class="box-head">9.9.3 决定：你上达莉娅了吗？</div><div class="box-body">
+  <p>真相是"是"如果<span class="badge b-dalia">路线</span></p>
+  <div class="opt blue">是的<div class="sub"><div class="req"><strong>前提：</strong>真相是"是"</div>继续</div></div>
+  <div class="opt gray">不是<div class="sub">如果为真：跳转到 ▶9.9.5<br>如果说谎：<span class="badge b-penny b-cross">路线</span> <span class="badge b-harem b-cross">路线</span>，跳转到 ▶9.11</div></div>
+</div></div>
+
+<div class="box-head">9.9.4 决定：你爱上达莉娅了吗？</div><div class="box-body">
+  <div class="opt blue">是的</div>
+  <div class="opt gray">不是（真话）<div class="sub">她会因为你告诉达莉娅别的而说你。<span class="badge b-penny b-cross">路线</span> <span class="badge b-harem b-cross">路线</span>，跳转到 ▶9.11</div></div>
+  <div class="opt gray">不是（说谎）<div class="sub"><span class="badge b-penny b-cross">路线</span> <span class="badge b-harem b-cross">路线</span>，跳转到 ▶9.11</div></div>
+</div></div>
+
+<div class="box-head">9.9.5 决定：你爱佩妮吗？</div><div class="box-body">
+  <div class="opt blue">爱</div>
+  <div class="opt gray">不爱<div class="sub"><span class="badge b-penny b-cross">路线</span> <span class="badge b-harem b-cross">路线</span>，跳转到 ▶9.11</div></div>
+</div></div>
+
+<div class="box-head">9.9.6 决定：亚历克斯也被你的魅力征服了吗？</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-dalia">路线</span></div>
+  <div class="opt blue">是的</div>
+  <div class="opt gray">不是<div class="sub">如果在<span class="badge b-alex">路线</span>上，佩妮之后可能发现你在说谎，然后你会获得佩妮-1好感点（9.12.16）</div></div>
+</div></div>
+
+<div class="box-head">9.9.7 结果：我不得不把你拖上来</div><div class="box-body">
+  <p><strong>如果：</strong>你立刻同意跟佩妮上楼（9.9.1）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>跳转到 ▶9.11</p>
+</div></div>
+
+<div class="box-head">9.9.8 小游戏：撬锁</div><div class="box-body">
+  <p>如果你成功：继续。如果失败：跳转到 ▶9.11</p>
+  <p>这基本上就是TES 5：天际的撬锁小游戏。即使你从没玩过天际，也能靠试出来。记住如果你失败了可以直接回退重试。但如果你卡住了，方法如下：</p>
+  <p>目标是将锁的圆柱顺时针转90度。你可以按住鼠标左键转动圆柱。不过你只能在撬锁工具处于最佳位置时才能完全转动圆柱90度。你不知道最佳位置在哪，得自己找。如果圆柱完全转不动，说明撬锁工具离最佳位置很远。撬锁工具越接近最佳位置，你能转动圆柱的角度就越大。</p>
+  <p>当你试图将圆柱转到超过撬锁工具允许的角度时，撬锁工具会受损。一旦撬锁工具受损过多就会断裂，你得用新的。四个撬锁工具都断了后小游戏结束。所以：每次转动圆柱时只轻轻点按按钮，不要反复用力按，以免过度损坏撬锁工具。</p>
+  <p>策略是：把撬锁工具放到随机位置尝试转动圆柱。一旦圆柱转动了一点，做微调让它越来越接近最佳位置。记住转动圆柱时只轻点。撬锁工具的最佳位置每次开始小游戏都是随机的，但你断了撬锁工具后它保持不变。</p>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">9.10 - 色情场景：绳结清单 <span class="badge b-penny">路线</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">9.10.1 决定：佩妮想在性爱中怎么称呼你？</div><div class="box-body">
+  <p>佩妮会在这段（以及未来可能的）和她的色情场景中使用你选择的昵称。</p>
+  <div class="opt blue">让她用别的称呼叫你<div class="sub">你可以选"主人"、"爸爸"或自己输入昵称。</div></div>
+  <div class="opt gray">不要昵称<div class="sub">佩妮会叫你的名字。</div></div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">9.10.2 决定：佩妮该挨一顿打</div><div class="box-body">
+  <div class="opt blue">打她屁股<div class="sub">额外循环打屁股动画</div></div>
+  <div class="opt blue">上她</div>
+</div></div>
+<div class="box-head" style="background:#c0392b;">9.10.3 决定：佩妮想玩肛交</div><div class="box-body">
+  <div class="opt blue">和佩妮肛交<div class="sub">延长色情场景加入肛交</div></div>
+  <div class="opt gray">到此结束</div>
+</div></div>
+</div>
+
+<h3 class="section">9.11 - 圣诞晚餐</h3>
+<div class="box"><div class="box-head">9.11.1 决定：达莉娅兴奋地想让你尝她的饼干</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-dalia">路线</span></div>
+  <div class="opt gray">糟糕</div>
+  <div class="opt gray">还行</div>
+  <div class="opt blue">不可思议 <span class="badge b-dalia">+1</span></div>
+</div></div>
+<div class="box"><div class="box-head">9.11.2 结果：举杯</div><div class="box-body">在桌旁你正在攻略路线上的女孩会对你的祝酒反应更欣赏。</div></div>
+
+<h3 class="section">9.12 - 游戏大师</h3>
+<div class="box" style="background:#d5f5e3;border:1px solid var(--harem);">
+<div class="req" style="background:#abebc6;"><strong>前提：</strong><span class="badge b-harem">路线</span>（否则跳转到 ▶9.14）</div>
+
+<div class="box-head">9.12.1 目标</div><div class="box-body">
+  <p>最终这是你和达莉娅之间的比赛，其他人都不能赢。理想路线目标是在游戏结束后解锁三人行色情场景（9.13）。要做到这一点，你必须在最后一轮之前与达莉娅的分差不超过300点，然后在最后一轮让她赢（9.12.17）。要保持在300分以内，你既不能碾压达莉娅也不能被她碾压，你必须保持平衡。</p>
+  <p>标出的选择展示了一条可靠的建议路线，虽然没有真正"正确"的玩法，只要你保持在300分差距内就行。不过有两个坏选择会让你损失好感点，注意！</p>
+  <div class="box-body">
+    <span class="badge b-outfit">服装16</span>
+    <span class="badge b-outfit">服装11</span>
+    <span class="badge b-outfit">服装15</span>
+    <span class="badge b-outfit">服装19</span>
+  </div>
+</div></div>
+
+<div class="box-head">9.12.2 结果：月经推迟</div><div class="box-body">
+  <p><strong>如果：</strong>你开启了怀孕功能（1.1.1）且你在机车疯狂中内射了佩妮（7.13.1）</p>
+  <p><strong>那么：</strong>佩妮会谈论她月经推迟了。</p>
+  <p>如果<span class="badge b-alex">路线</span>上，亚历克斯也会提到同样的事。</p>
+</div></div>
+
+<div class="box-head">9.12.3 第1轮：翘臀皇家或酥胸之日</div><div class="box-body">
+  <div class="opt gray">翘臀皇家<div class="sub">达莉娅分数 +100</div></div>
+  <div class="opt blue">酥胸之日<div class="sub">你可以选佩妮或南希；被选女孩获得 +100 分。</div></div>
+</div></div>
+
+<div class="box-head">9.12.4 第2轮：极速回合</div><div class="box-body">主角 +10分，南希 +100分</div></div>
+
+<div class="box-head">9.12.5 第3轮： Lore Lore 之地</div><div class="box-body">
+  <p>给黑客们还没命名的Eternum服务器命名。要打败达莉娅你得命名5个服务器，然后主角 +200分。如果你搞砸了，达莉娅拿走蛋糕：达莉娅 +200分。建议路线是故意输，如果你决定竞争并赢，确保达莉娅之后能追上你！</p>
+  <p>如果你想这轮赢，以下是所有可能命名的服务器：</p>
+  <table>
+  <tr><td>西里拉尔</td><td>明阳</td><td>红鲱鱼</td><td>扎拉之月</td></tr>
+  <tr><td>新世界</td><td>罪恶城</td><td>奥吉吉亚</td><td>萨图恩平原</td></tr>
+  <tr><td>埃卡巴</td><td>新维加斯</td><td>海湾</td><td>米卡尔</td></tr>
+  <tr><td>不朽之名</td><td>阿哥拉</td><td>天堂王国</td><td>斯蒂克斯</td></tr>
+  <tr><td>战猪</td><td>洛克菲勒</td><td>杂草遍地</td><td>世界树</td></tr>
+  <tr><td>仙女座</td><td>边境小径</td><td>阿特兰蒂斯</td><td>古迪尔</td></tr>
+  <tr><td>国王谷</td><td></td><td>德纳里亚平原</td><td></td></tr>
+  </table>
+</div></div>
+
+<div class="box-head">9.12.6 第4轮：语音游戏</div><div class="box-body">南希 +100分</div></div>
+<div class="box-head">9.12.7 第5轮：核心粉碎</div><div class="box-body">达莉娅 +100分</div></div>
+
+<div class="box-head">9.12.8 第6轮："鲜肉"还是"吻或不吻"</div><div class="box-body">
+  <div class="opt gray">鲜肉<div class="sub">佩妮 +100分<br>如果<span class="badge b-penny">路线</span>上，佩妮会提出给你看胸。如果你同意可以看到一些肌肤，但<span class="badge b-penny">-1</span>。所以这次你最好忍住。</div></div>
+  <div class="opt blue">吻或不吻<div class="sub">如果你猜对是亚历克斯：主角 +100分（建议路线）<br>否则：达莉娅 +100分，其他人也都 +100分</div></div>
+</div></div>
+
+<div class="box-head">9.12.9 第7轮：小而强大</div><div class="box-body">亚历克斯 +100分</div></div>
+<div class="box-head">9.12.10 第8轮：头号通缉三明治</div><div class="box-body">主角 +100分，亚历克斯 +100分
+  <div class="opt gray">南希</div>
+  <div class="opt blue">达莉娅</div>
+  <div class="opt gray">佩内洛普</div>
+</div></div>
+
+<div class="box-head">9.12.11 第9轮：烧吧宝贝烧吧</div><div class="box-body">主角 +100分</div></div>
+<div class="box-head">9.12.12 第10轮：电影哑剧</div><div class="box-body">达莉娅 +100分，佩妮 +100分</div></div>
+
+<div class="box-head">9.12.13 第11轮：定位或贿赂我吧宝贝</div><div class="box-body">
+  <div class="opt gray">定位<div class="sub">你可以让达莉娅吻你的嘴唇或你的鸡巴。<br>如果你选嘴唇且<span class="badge b-dalia">路线</span>：<br>达莉娅 +100分，但也 <span class="badge b-dalia">-1</span> 若 <span class="badge b-dalia">路线</span><br>否则：主角 +100分</div></div>
+  <div class="opt blue">贿赂我吧宝贝<div class="sub">你可以给任何人 +100分，包括你自己（主角 +100）。但如果你试图给达莉娅，她会拒绝接受，所以没人得分。建议路线是你先给达莉娅分。</div></div>
+</div></div>
+
+<div class="box-head">9.12.14 第12轮：尺寸很重要</div><div class="box-body">
+  <p>如果<span class="badge b-alex">路线</span>上：亚历克斯 +100分</p>
+  <p>否则：主角 +100分</p>
+</div></div>
+
+<div class="box-head">9.12.15 第13轮：末日骰子</div><div class="box-body">主角 +30分，达莉娅 +30分</div></div>
+
+<div class="box-head">9.12.16 第14轮：罪人中的圣人</div><div class="box-body">
+  <p>如果<span class="badge b-alex">路线</span>上：亚历克斯会承认和你睡了。</p>
+  <p>然后，如果也在<span class="badge b-penny">路线</span>上：佩妮也会承认和你睡了。</p>
+  <p>然后，如果也在<span class="badge b-nancy">路线</span>上：南希也会承认和你睡了。</p>
+  <p>三个女孩中没有承认和你睡的（即使说谎）每人获得 +100分</p>
+  <p>如果亚历克斯承认和你睡了，即使你之前告诉佩妮你没有（9.9.6）：<span class="badge b-penny">-1</span></p>
+</div></div>
+
+<div class="box-head">9.12.17 结果：领先太多</div><div class="box-body">
+  <p><strong>如果：</strong>你和达莉娅仍然都能赢（你们分差在300分以内）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>佩妮会指出最后一轮硬币翻转不重要并提前宣布获胜者。如果发生这种情况你将看不到接下来的色情场景！跳转到 ▶9.14</p>
+</div></div>
+
+<div class="box-head">9.12.18 第15轮：混沌硬币</div><div class="box-body">
+  <div class="opt gray">正面（你赢）<div class="sub">跳转到 ▶9.14</div></div>
+  <div class="opt blue">反面（达莉娅赢）<div class="sub">你解锁接下来的色情场景</div></div>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">9.13 - 色情场景：三堂会审（<span class="badge b-dalia">达莉娅</span> & <span class="badge b-alex">亚历克斯</span>）</h3>
+<div class="box lewd-body"><div class="req" style="background:#f5b7b1;color:#333;"><strong>前提：</strong><span class="badge b-dalia">路线</span> 和 <span class="badge b-alex">路线</span></div></div>
+
+<h3 class="section">9.14 - 插桩行动</h3>
+<div class="box"><div class="box-head">9.14.1 决定：我们在男士楼层做生意吧！</div><div class="box-body">
+  <div class="opt gray">对</div>
+  <div class="opt blue">不对<div class="sub">面试点数 +1</div></div>
+</div></div>
+<div class="box"><div class="box-head">9.14.2 决定：什么更令人印象深刻？</div><div class="box-body">
+  <div class="opt blue">四十分钟<div class="sub">面试点数 +1</div></div>
+  <div class="opt gray">一百分钟</div>
+</div></div>
+<div class="box"><div class="box-head">9.14.3 决定：想喝一杯吗？</div><div class="box-body">
+  <div class="opt gray">威士忌</div>
+  <div class="opt gray">白兰地</div>
+  <div class="opt blue">不用了谢谢<div class="sub">面试点数 +1</div></div>
+</div></div>
+<div class="box"><div class="box-head">9.14.4 决定：你为什么最终来到尤利西斯？</div><div class="box-body">
+  <div class="opt blue">金钱<div class="sub">面试点数 +1</div></div>
+  <div class="opt blue">名声<div class="sub">面试点数 +1</div></div>
+  <div class="opt gray">帮助世界</div>
+</div></div>
+<div class="box"><div class="box-head">9.14.5 决定：你来之前认识鲍威尔吗？</div><div class="box-body">
+  <div class="opt blue">认识<div class="sub">面试点数 +1</div></div>
+  <div class="opt gray">不认识</div>
+</div></div>
+<div class="box"><div class="box-head">9.14.6 决定：你怎么看威廉·巴多？</div><div class="box-body">
+  <div class="opt gray">他是最棒的</div>
+  <div class="opt blue">他很可怕<div class="sub">面试点数 +1</div></div>
+</div></div>
+<div class="box"><div class="box-head">9.14.7 决定：160的40%的25%是多少？</div><div class="box-body">
+  <div class="opt blue">16<div class="sub">面试点数 +1</div></div>
+  <div class="opt gray">24</div>
+  <div class="opt gray">32</div>
+  <div class="opt gray">40</div>
+</div></div>
+<div class="box"><div class="box-head">9.14.8 结果：停电</div><div class="box-body">
+  <p><strong>如果：</strong>你至少有5面试点数</p>
+  <p><strong>那么：</strong>鲍威尔离开办公室，你成功黑入他的PC！</p>
+  <p>另外 <span class="badge b-luna">+1</span> 若 <span class="badge b-luna">路线</span>（延迟）</p>
+  <hr>
+  <p><strong>否则：</strong>鲍威尔不会离开办公室，你的任务失败。不过有传言说你的团队可以通过其他方式获得访问权限。</p>
+</div></div>
+
+<h3 class="section">9.15 - 卡斯卡迪亚快车</h3>
+<div class="box">
+<div class="req" style="background:#ccc;"><strong>前提：</strong><span class="badge b-luna">路线</span>（否则跳到章节结尾）</div>
+<div class="box-body">如果你还没有卢娜目前为止所有可解锁的<span class="badge b-outfit">服装</span>，现在全部解锁。（这可能是为了修复那些在早期游戏版本中无法获得全部服装的玩家存档的bug。）</div>
+
+<div class="box-head">9.15.1 决定：卢娜该摘下手套吗？</div><div class="box-body">
+  <div class="opt blue">摘下来 <span class="badge b-luna">+1</span> 以及之后的额外场景和更多好感点机会！</div>
+  <div class="opt gray">戴着</div>
+</div></div>
+
+<div class="box-head">9.15.2 买些饮料？</div><div class="box-body">
+  <div class="req"><strong>前提：</strong><span class="badge b-eternal">≥11</span></div>
+  <div class="opt blue">给卢娜买点东西 <span class="badge b-eternal">-12</span> <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">算了</div>
+</div></div>
+
+<div class="box-head">9.15.3 结果：没有手套</div><div class="box-body">
+  <p><strong>如果：</strong>你鼓励卢娜摘手套（9.15.1）</p>
+  <p><strong>那么：</strong>继续</p>
+  <hr>
+  <p><strong>否则：</strong>跳转到 ▶9.15.7</p>
+</div></div>
+
+<div class="box-head">9.15.4 决定：看电影时牵着卢娜的手吗？</div><div class="box-body">
+  <div class="opt blue">牵她的手 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">不牵</div>
+</div></div>
+
+<div class="box-head">9.15.5 决定：卢娜看到了陌生人的未来</div><div class="box-body">
+  <div class="opt gray">算了<div class="sub">跳转到 ▶9.15.7</div></div>
+  <div class="opt blue">试图阻止那个幻象发生</div>
+  <div class="opt gray">报警<div class="sub">跳转到 ▶9.15.7</div></div>
+</div></div>
+
+<div class="box-head">9.15.6 决定：卢娜成功改变了命运</div><div class="box-body">
+  <div class="opt blue">吻她 <span class="badge b-luna">+1</span></div>
+  <div class="opt gray">别逼她</div>
+</div></div>
+
+<div class="box-head">9.15.7 小贴士：给卢娜拍照</div><div class="box-body">
+  <p>如果你狂按快门，至少拍21张：<span class="badge b-luna">+1</span></p>
+  <p>（目前有bug，你实际上拿不到这个点数）</p>
+</div></div>
+</div>
+
+<h3 class="section lewd-head" style="background:#8b1a1a;color:#fff;padding:10px 16px;border-radius:6px;margin:20px 0 10px;">9.16 - 色情场景：超自然活动 <span class="badge b-luna">卢娜</span></h3>
+<div class="box lewd-body">
+<div class="box-head" style="background:#c0392b;">9.16.1 决定：继续？</div><div class="box-body">
+  <div class="opt blue">来第二轮<div class="sub">延长场景</div></div>
+  <div class="opt gray">到此为止</div>
+</div></div>
+</div>
+
+<h2 class="chapter">片尾</h2>
+<p>你已经看完了所有已知内容。<a href="#">跳回顶部。</a></p>
+<p>每当Eternum发布新的公开版本，我会同时上传更新版攻略！本攻略适用于Eternum 0.9.5；你可以在<a href="#">这里</a>下载更新版本。</p>
+<p><strong>作者：</strong>Tanxui</p>
+<p><strong>中文翻译：</strong>豆包</p>
+<p>本文档基于Caribdis制作的Eternum，本文档中所有图片均来自游戏。</p>
+<p><strong>慷慨反馈者：</strong>Baman, GMM1, eggrik, Alex, Max, Crimson Ghoul, Coorexz</p>
+
+</div>
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
